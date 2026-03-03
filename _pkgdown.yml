@@ -1,0 +1,17 @@
+url: https://christopherkenny.github.io/wf/
+
+template:
+  bootstrap: 5
+
+reference:
+  - title: Skills
+    desc: Install and manage AI agent skills.
+    contents:
+      - add_skill
+      - check_skills
+      - find_skill
+      - init_skill
+      - list_skills
+      - remove_skill
+      - skill_path
+      - update_skills

@@ -1,0 +1,150 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = '#>',
+  fig.path = 'man/figures/README-',
+  out.width = '100%'
+)
+```
+
+# wf
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`wf` is an R package for managing AI coding agent **skills**.
+Skills are reusable instruction sets that extend what agents, like Claude Code, can do in your projects.
+
+A skill is a directory containing a `SKILL.md` file with YAML frontmatter and markdown instructions.
+Skills live in a conventional location for each agent (e.g., `.claude/skills/` for Claude Code) and can be shared, version controlled, and discovered on GitHub.
+
+## Installation
+
+```r
+# install.packages('pak')
+pak::pak('christopherkenny/wf')
+```
+
+## Getting started
+
+### Tell `wf` which agent you use
+
+Most users work with a single agent. Set `WF_AGENT` in your `.Renviron` once
+and every `wf` function will pick it up automatically:
+
+```r
+usethis::edit_r_environ()
+```
+
+Then add:
+
+```r
+WF_AGENT='claude_code'
+```
+
+Supported agents: `'claude_code'` (alias: `'claude'`), `'openclaw'`, `'codex'`, `'cursor'`, `'gemini_cli'`, `'github_copilot'`.
+
+If `WF_AGENT` is not set, wf scans the current directory for a recognized agent config folder (`.claude`, `.cursor`, etc.) and falls back to `'claude_code'` if none is found.
+
+### Find the skills directory for your agent
+
+```{r skill_path}
+library(wf)
+
+skill_path('claude_code', 'project') # project-local
+skill_path('claude_code', 'global') # user-global
+skill_path() # auto-detected from WF_AGENT or directory
+```
+
+## Installing skills
+
+Install a skill from GitHub using its `owner/repo` shorthand or a full URL:
+
+```r
+add_skill('some-user/some-skill', skill_path())
+```
+
+Install from a local directory (useful for skills you are developing):
+
+```r
+add_skill('path/to/my-skill', skill_path())
+```
+
+## Listing installed skills
+
+```{r list_skills}
+list_skills(skill_path('claude_code', 'project'))
+```
+
+## Checking for updates
+
+```{r check_skills}
+check_skills(skill_path('claude_code', 'project'))
+```
+
+## Updating skills
+
+```r
+update_skills(skill_path())
+```
+
+## Removing a skill
+
+```r
+remove_skill('skill-name', skill_path(), force = TRUE)
+```
+
+## Finding skills on GitHub
+
+Repositories tagged with the `claude-skill` topic are discoverable via
+`find_skill()`:
+
+```r
+find_skill()               # all skills
+find_skill('typescript')   # filtered by keyword
+```
+
+## Creating a new skill
+
+Scaffold a new skill directory with a template `SKILL.md`:
+
+```{r init_skill}
+tmp <- tempfile()
+init_skill('my-skill', tmp)
+```
+
+The generated `SKILL.md` looks like this:
+
+```yaml
+---
+name: my-skill
+description: >
+  What this skill does and when to use it.
+---
+
+# My skill
+
+Add your skill instructions here.
+```
+
+Fill in the description and instructions, then install it with `add_skill()`.
+
+## Project vs. global skills
+
+Each agent supports two scopes:
+
+| Scope | Location | Use case |
+|-------|----------|----------|
+| `'project'` | `.agent/skills/` in the project root | Commit alongside your code; scoped to this project |
+| `'global'` | `~/.agent/skills/` in the home directory | Available in every project on this machine |
+
+```r
+# Install a skill globally
+add_skill('some-user/some-skill', skill_path(scope = 'global'))
+```

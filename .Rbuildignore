@@ -1,3 +1,6 @@
 ^wf\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^\.claude$
+^README\.Rmd$
+^_pkgdown\.yml$

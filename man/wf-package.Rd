@@ -11,7 +11,7 @@ Manage skills for large language model coding agents. Supports installing skills
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://christopherkenny.github.io/wf}
+  \item \url{https://christophertkenny.com/wf}
   \item \url{https://github.com/christopherkenny/wf}
   \item Report bugs at \url{https://github.com/christopherkenny/wf/issues}
 }

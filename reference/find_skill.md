@@ -54,18 +54,18 @@ find_skill()
 #> 16            blockrun-agent-wallet
 #> 17                        codex-kkp
 #> 18                Agentic-SEO-Skill
-#> 19    claude-skill-prompt-architect
-#> 20              claude-skill-reddit
+#> 19              claude-skill-reddit
+#> 20    claude-skill-prompt-architect
 #> 21            claude-code-aso-skill
 #> 22          creative-director-skill
 #> 23          dataforseo-skill-claude
 #> 24              EdgeKnowledge_Skill
 #> 25 linkedin-article-publisher-skill
-#> 26                 product-spec-kit
-#> 27           claude-ai-music-skills
+#> 26           claude-ai-music-skills
+#> 27                 product-spec-kit
 #> 28               odin-claude-plugin
 #> 29                   fastlane-skill
-#> 30                     the-antislop
+#> 30                   crawl4ai-skill
 #>                                                                                                                                                                                                                                                                                                                                            description
 #> 1                                                                                                                                                                         A CLAUDE.md Generator and Maintenance tool for for Claude Code to create high-quality CLAUDE.md instruction files — aligned with Anthropic’s best practices for Claude Code.
 #> 2  AEO Automation Framework for Claude Code One-click, beginner friendly automation for GitHub. Includes a dedicated fleet of AEO sub-agents handling planning, execution, reports, actionable items, and executive summaries. Trigger work instantly with AEO slash-commands. Fully integrated as a Claude Code Skill and usable across Claude AI App
@@ -85,18 +85,18 @@ find_skill()
 #> 16                                                                                                                                                                                                                   Give AI agents a wallet to pay for GPT, Grok, DALL-E, and 30+ models. No API keys needed. Works with Claude Code and Antigravity.
 #> 17                                                                                                                                                                                                              A Claude Code Plugin that enables seamless integration with Codex AI Agent for code analysis, implementation, and collaboration tasks.
 #> 18                                                                                                                                                                       An LLM-first SEO analysis skill for Antigravity, Codex, Claude with 12 specialized sub-skills, 6 specialist agents, and optional utility scripts used as evidence collectors.
-#> 19                                                                                                                                                                           Claude Code skill that transforms vague prompts into structured, expert-level prompts using 7 research-backed   frameworks (CO-STAR, RISEN, RISE, TIDD-EC, RTF, CoT, CoD)
-#> 20                                                                                                                                                                                                                Claude Code skills for Reddit automation (AppleScript + Chrome). Build karma, post to subreddits — undetectable by anti-bot systems.
+#> 19                                                                                                                                                                                                                Claude Code skills for Reddit automation (AppleScript + Chrome). Build karma, post to subreddits — undetectable by anti-bot systems.
+#> 20                                                                                                                                                                           Claude Code skill that transforms vague prompts into structured, expert-level prompts using 7 research-backed   frameworks (CO-STAR, RISEN, RISE, TIDD-EC, RTF, CoT, CoD)
 #> 21                                                                                                                                                                                                                                   🚀 Optimize App Store visibility with AI agents in the Claude Code framework for enhanced performance and growth.
 #> 22                                                                                                                                          AI Creative Director skill for Claude, GPT, Gemini — 20+ methodologies (SIT, TRIZ, Bisociation, SCAMPER), Cannes-calibrated scoring, recursive refinement. Insight → Ideation → Evaluation → Presentation.
 #> 23                                                                                                                                                                                                                                                                                DataForSEO API skill for Claude Code - Complete SEO data integration
 #> 24                                                                                                                                                                     AI-powered edge knowledge mining from underground forums. Deep crawls Reddit, BlackHatWorld,   GreyHatMafia with browser automation, visual analysis, and structured reporting.
 #> 25                                                                                                                                                                                                                                                                                                       Claude Skill that publish on LinkedIn article
-#> 26                                                                                                                                                                                                                                          Leverage AI to create, refine, and maintain your product specifications. Made to be used in LLMs and IDEs.
-#> 27                                                                                                                                                                                                                                                                        Human + AI music production workflow for Suno - skills, templates, and tools
+#> 26                                                                                                                                                                                                                                                                        Human + AI music production workflow for Suno - skills, templates, and tools
+#> 27                                                                                                                                                                                                                                          Leverage AI to create, refine, and maintain your product specifications. Made to be used in LLMs and IDEs.
 #> 28                                                                                                                                                                                                                                                   ODIN [for Claude Code as a plugin] - Outline Driven development approach for agentic INtelligence
 #> 29                                                                                                                                                                                                                                                     AI skill to setup and use fastlane to automate building and releasing your iOS and Android apps
-#> 30                                                                                                                                                                                                                                A Claude Code skill that detects and fixes AI-generated writing patterns. 35+ patterns, tiered scoring, editor mode.
+#> 30                                                                                                                                    Web scraping skill for Claude AI. Crawl websites, extract structured data with CSS/LLM strategies, handle dynamic JavaScript content. Built on crawl4ai with complete SDK reference, example scripts, and tests.
 #>                   owner
 #> 1        alirezarezvani
 #> 2        alirezarezvani
@@ -116,18 +116,18 @@ find_skill()
 #> 16           BlockRunAI
 #> 17         ForteScarlet
 #> 18        Bhanunamikaze
-#> 19              ckelsoe
-#> 20               PHY041
+#> 19               PHY041
+#> 20              ckelsoe
 #> 21               wsbs20
 #> 22                smixs
 #> 23       nikhilbhansali
 #> 24         1596941391qq
 #> 25             iamzifei
-#> 26             diegoeis
-#> 27 bitwize-music-studio
+#> 26 bitwize-music-studio
+#> 27             diegoeis
 #> 28        OutlineDriven
 #> 29       greenstevester
-#> 30  aplaceforallmystuff
+#> 30          brettdavies
 #>                                                               url stars
 #> 1                   https://github.com/alirezarezvani/ClaudeForge   289
 #> 2         https://github.com/alirezarezvani/claude-code-aso-skill   232
@@ -147,18 +147,18 @@ find_skill()
 #> 16            https://github.com/BlockRunAI/blockrun-agent-wallet    23
 #> 17                      https://github.com/ForteScarlet/codex-kkp    23
 #> 18             https://github.com/Bhanunamikaze/Agentic-SEO-Skill    21
-#> 19       https://github.com/ckelsoe/claude-skill-prompt-architect    20
-#> 20                  https://github.com/PHY041/claude-skill-reddit    20
+#> 19                  https://github.com/PHY041/claude-skill-reddit    20
+#> 20       https://github.com/ckelsoe/claude-skill-prompt-architect    20
 #> 21                https://github.com/wsbs20/claude-code-aso-skill    20
 #> 22               https://github.com/smixs/creative-director-skill    19
 #> 23      https://github.com/nikhilbhansali/dataforseo-skill-claude    19
 #> 24            https://github.com/1596941391qq/EdgeKnowledge_Skill    15
 #> 25   https://github.com/iamzifei/linkedin-article-publisher-skill    13
-#> 26                   https://github.com/diegoeis/product-spec-kit    12
-#> 27 https://github.com/bitwize-music-studio/claude-ai-music-skills    12
+#> 26 https://github.com/bitwize-music-studio/claude-ai-music-skills    12
+#> 27                   https://github.com/diegoeis/product-spec-kit    12
 #> 28            https://github.com/OutlineDriven/odin-claude-plugin    11
 #> 29               https://github.com/greenstevester/fastlane-skill    10
-#> 30            https://github.com/aplaceforallmystuff/the-antislop     9
+#> 30                  https://github.com/brettdavies/crawl4ai-skill     9
 find_skill('typescript')
 #>                    name
 #> 1  bluesky_claude_skill

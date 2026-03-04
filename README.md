@@ -92,7 +92,7 @@ Search GitHub for community skills tagged with `claude-skill`:
 
 ``` r
 find_skill()               # all skills
-find_skill('typescript')   # filtered by keyword
+find_skill('quarto')   # filtered by keyword
 ```
 
 Scaffold a new skill with a template `SKILL.md`:
@@ -101,5 +101,5 @@ Scaffold a new skill with a template `SKILL.md`:
 tmp <- tempfile()
 init_skill('my-skill', tmp)
 #> Created skill "my-skill" at
-#> 'C:/Users/chris/AppData/Local/Temp/RtmpQhsbhY/fileffcc5853c05/my-skill'.
+#> 'C:/Users/chris/AppData/Local/Temp/Rtmp46ykC1/file6c34785820d3/my-skill'.
 ```

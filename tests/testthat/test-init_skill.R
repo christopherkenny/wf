@@ -20,7 +20,7 @@ test_that('init_skill errors if skill directory already exists', {
   expect_snapshot(
     init_skill('my-skill', tmp),
     error = TRUE,
-    transform = normalize_snap_paths
+    transform = snap_replace(fs::path(tmp, 'my-skill'))
   )
 })
 

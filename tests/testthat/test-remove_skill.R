@@ -53,6 +53,6 @@ test_that('remove_skill errors if skill not installed', {
   expect_snapshot(
     remove_skill('nonexistent', tmp, force = TRUE),
     error = TRUE,
-    transform = normalize_snap_paths
+    transform = snap_replace(tmp)
   )
 })

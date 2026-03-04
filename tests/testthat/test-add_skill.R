@@ -53,7 +53,7 @@ test_that('add_skill errors if skill already installed without overwrite', {
   expect_snapshot(
     add_skill(fixture, dest_dir),
     error = TRUE,
-    transform = normalize_snap_paths
+    transform = snap_replace(fs::path(dest_dir, 'my-skill'))
   )
 })
 
@@ -73,7 +73,7 @@ test_that('add_skill errors if local source does not exist', {
   expect_snapshot(
     add_skill(fs::path(tmp, 'nonexistent'), fs::path(tmp, 'skills')),
     error = TRUE,
-    transform = normalize_snap_paths
+    transform = snap_replace(fs::path(tmp, 'nonexistent'))
   )
 })
 
@@ -85,7 +85,7 @@ test_that('add_skill errors if source has no SKILL.md', {
   expect_snapshot(
     add_skill(empty_dir, fs::path(tmp, 'skills')),
     error = TRUE,
-    transform = normalize_snap_paths
+    transform = snap_replace(empty_dir)
   )
 })
 

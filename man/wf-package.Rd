@@ -6,6 +6,8 @@
 \alias{wf-package}
 \title{wf: Artificial Intelligence Workflow Tools}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Manage skills for large language model coding agents. Supports installing skills from GitHub or local directories, tracking versions in a lock file, and keeping installations current. Installations can be scoped to a single project or shared globally across projects.
 }
 \seealso{

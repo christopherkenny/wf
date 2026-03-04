@@ -1,10 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# wf
+# wf <a href="https://christopherkenny.github.io/wf/"><img src="man/figures/logo.png" align="right" height="139" alt="wf website" /></a>
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/christopherkenny/wf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christopherkenny/wf/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `wf` manages skills for AI coding agents. Skills are reusable
@@ -101,5 +102,5 @@ Scaffold a new skill with a template `SKILL.md`:
 tmp <- tempfile()
 init_skill('my-skill', tmp)
 #> Created skill "my-skill" at
-#> 'C:/Users/chris/AppData/Local/Temp/Rtmp46ykC1/file6c34785820d3/my-skill'.
+#> 'C:/Users/chris/AppData/Local/Temp/RtmpwnuOag/file618c77657df2/my-skill'.
 ```

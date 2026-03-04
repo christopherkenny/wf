@@ -42,7 +42,7 @@ writeLines(
 )
 tmp <- tempfile()
 add_skill(src, tmp)
-#> Installed skill "example" to /tmp/RtmpksiIF9/file19d74d54cd3b/example.
+#> Installed skill "example" to /tmp/RtmpDH8Q3B/file19db5fbcda61/example.
 remove_skill('example', tmp, force = TRUE)
-#> Removed skill "example" from /tmp/RtmpksiIF9/file19d74d54cd3b.
+#> Removed skill "example" from /tmp/RtmpDH8Q3B/file19db5fbcda61.
 ```

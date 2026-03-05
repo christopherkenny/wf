@@ -25,6 +25,11 @@ skill_paths <- list(
   )
 )
 
+skill_topics <- c(
+  'claude-skill', 'cursor-skill', 'codex-skill',
+  'gemini-skill', 'copilot-skill', 'ai-coding-skill'
+)
+
 lock_file <- '.skill-lock.json'
 
 agent_aliases <- list(claude = 'claude_code')
@@ -140,24 +145,17 @@ write_lock <- function(path, lock) {
 # Download a skill from GitHub by owner/repo; returns path to extracted skill dir.
 # If path is non-NULL, navigates into that subdirectory of the archive.
 gh_download_skill <- function(owner, repo, path = NULL) {
-  url <- paste0(
-    'https://api.github.com/repos/', owner, '/', repo, '/zipball/HEAD'
-  )
   tmp_zip <- fs::file_temp(ext = 'zip')
   tmp_dir <- fs::dir_create(fs::file_temp())
 
-  resp <- httr2::request(url) |>
-    httr2::req_headers(Accept = 'application/vnd.github+json') |>
-    httr2::req_error(is_error = \(resp) FALSE) |>
-    httr2::req_perform()
+  gh::gh(
+    '/repos/{owner}/{repo}/zipball/HEAD',
+    owner = owner,
+    repo = repo,
+    .destfile = tmp_zip,
+    .overwrite = TRUE
+  )
 
-  if (httr2::resp_status(resp) >= 400) {
-    cli::cli_abort(
-      'Failed to download skill from GitHub ({owner}/{repo}): HTTP {httr2::resp_status(resp)}.'
-    )
-  }
-
-  writeBin(httr2::resp_body_raw(resp), tmp_zip)
   utils::unzip(tmp_zip, exdir = tmp_dir)
   fs::file_delete(tmp_zip)
 
@@ -182,36 +180,15 @@ gh_download_skill <- function(owner, repo, path = NULL) {
 
 # Get the latest commit SHA for owner/repo; returns a character string
 gh_latest_sha <- function(owner, repo) {
-  url <- paste0(
-    'https://api.github.com/repos/', owner, '/', repo, '/commits/HEAD'
+  resp <- gh::gh(
+    '/repos/{owner}/{repo}/commits/HEAD',
+    owner = owner,
+    repo = repo
   )
-  resp <- httr2::request(url) |>
-    httr2::req_headers(Accept = 'application/vnd.github+json') |>
-    httr2::req_error(is_error = \(resp) FALSE) |>
-    httr2::req_perform()
-
-  if (httr2::resp_status(resp) >= 400) {
-    cli::cli_abort(
-      'Failed to get latest SHA for {owner}/{repo}: HTTP {httr2::resp_status(resp)}.'
-    )
-  }
-
-  httr2::resp_body_json(resp)$sha
+  resp$sha
 }
 
 # Search GitHub repositories; returns parsed JSON body as a list
 gh_search_repos <- function(q, per_page = 30) {
-  resp <- httr2::request('https://api.github.com/search/repositories') |>
-    httr2::req_url_query(q = q, per_page = per_page) |>
-    httr2::req_headers(Accept = 'application/vnd.github+json') |>
-    httr2::req_error(is_error = \(resp) FALSE) |>
-    httr2::req_perform()
-
-  if (httr2::resp_status(resp) >= 400) {
-    cli::cli_abort(
-      'GitHub search failed with HTTP {httr2::resp_status(resp)}.'
-    )
-  }
-
-  httr2::resp_body_json(resp)
+  gh::gh('/search/repositories', q = q, per_page = per_page)
 }

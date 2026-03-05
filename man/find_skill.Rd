@@ -7,8 +7,7 @@
 find_skill(query = NULL)
 }
 \arguments{
-\item{query}{Optional keyword to narrow the search. If \code{NULL}, all
-repositories with the \code{claude-skill} topic are returned.}
+\item{query}{Keyword to search for.}
 }
 \value{
 A data frame with columns:
@@ -21,12 +20,12 @@ A data frame with columns:
 }
 }
 \description{
-Searches GitHub for repositories tagged with the \code{claude-skill} topic,
-optionally filtered by a keyword query.
+Searches GitHub for repositories tagged with a skill topic and matching
+a keyword query. Searches across all supported agent topic conventions
+(e.g. \code{claude-skill}, \code{cursor-skill}).
 }
 \examples{
-\donttest{
-find_skill()
-find_skill('typescript')
-}
+\dontshow{if (attr(curlGetHeaders('https://api.github.com'), 'status') == 200L) withAutoprint(\{ # examplesIf}
+find_skill('rstats')
+\dontshow{\}) # examplesIf}
 }

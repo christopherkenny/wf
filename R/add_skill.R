@@ -39,10 +39,7 @@ add_skill <- function(source, path = skill_path(), skill = NULL, overwrite = FAL
       gh$path <- paste0('skills/', skill)
     }
     skill_dir <- gh_download_skill(gh$owner, gh$repo, gh$path)
-    sha <- tryCatch(
-      gh_latest_sha(gh$owner, gh$repo),
-      error = function(e) NULL
-    )
+    sha <- gh_latest_sha(gh$owner, gh$repo)
     lock_source <- if (is.null(gh$path)) {
       paste0('https://github.com/', gh$owner, '/', gh$repo)
     } else {

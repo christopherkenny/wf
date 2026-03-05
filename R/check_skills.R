@@ -39,18 +39,16 @@ check_skills <- function(path = skill_path()) {
       sha_val
     }
     if (identical(entry$type, 'github') && !is.null(entry$source)) {
-      gh <- tryCatch(
-        parse_gh_source(entry$source),
-        error = function(e) NULL
+      gh <- parse_gh_source(entry$source)
+      latest_sha <- tryCatch(
+        gh_latest_sha(gh$owner, gh$repo),
+        error = function(e) {
+          cli::cli_warn(
+            'Could not fetch latest SHA for {.val {name}}: {conditionMessage(e)}'
+          )
+          NA_character_
+        }
       )
-      latest_sha <- if (!is.null(gh)) {
-        tryCatch(
-          gh_latest_sha(gh$owner, gh$repo),
-          error = function(e) NA_character_
-        )
-      } else {
-        NA_character_
-      }
     } else {
       latest_sha <- NA_character_
     }

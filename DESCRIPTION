@@ -22,7 +22,7 @@ RoxygenNote: 7.3.3
 Imports:
     cli (>= 3.6.0),
     fs,
-    httr2 (>= 1.0.0),
+    gh,
     jsonlite,
     rlang (>= 1.1.0),
     yaml

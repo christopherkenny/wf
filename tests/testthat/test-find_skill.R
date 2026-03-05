@@ -28,8 +28,12 @@ test_that('find_skill returns correct columns', {
       make_gh_search_response(list(make_gh_item()))
     }
   )
-  result <- find_skill()
+  result <- find_skill('test-skill')
   expect_named(result, c('name', 'description', 'owner', 'url', 'stars'))
+})
+
+test_that('find_skill errors without query', {
+  expect_snapshot(find_skill(), error = TRUE)
 })
 
 test_that('find_skill returns empty data frame when no results', {
@@ -64,5 +68,5 @@ test_that('find_skill errors on network failure', {
       cli::cli_abort('network error')
     }
   )
-  expect_snapshot(find_skill(), error = TRUE)
+  expect_snapshot(find_skill('rstats'), error = TRUE)
 })

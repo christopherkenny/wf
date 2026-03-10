@@ -35,6 +35,8 @@
 <h2 class="pkg-version" data-toc-text="0.0.1" id="wf-001">wf 0.0.1<a class="anchor" aria-label="anchor" href="#wf-001"></a></h2>
 <ul><li>
 <code><a href="../reference/add_skill.html">add_skill()</a></code>, <code><a href="../reference/check_skills.html">check_skills()</a></code>, <code><a href="../reference/find_skill.html">find_skill()</a></code>, <code><a href="../reference/init_skill.html">init_skill()</a></code>, <code><a href="../reference/list_skills.html">list_skills()</a></code>, <code><a href="../reference/remove_skill.html">remove_skill()</a></code>, and <code><a href="../reference/update_skills.html">update_skills()</a></code> are new functions for managing AI agent skills.</li>
+<li>
+<code><a href="../reference/add_skill.html">add_skill()</a></code>, <code><a href="../reference/check_skills.html">check_skills()</a></code>, <code><a href="../reference/list_skills.html">list_skills()</a></code>, <code><a href="../reference/remove_skill.html">remove_skill()</a></code>, and <code><a href="../reference/update_skills.html">update_skills()</a></code> now default <code>path</code> to <code>NULL</code>. When <code>NULL</code>, the path is resolved from the <code>WF_AGENT</code> environment variable, or by an interactive prompt listing any detected agent directories. Passing a known agent name (e.g., <code>"github_copilot"</code>) as <code>path</code> is now also supported as a shorthand for that agent’s conventional project-scope path.</li>
 <li>First version of <code><a href="../reference/skill_path.html">skill_path()</a></code> is includes support for paths used by Claude Code, OpenClaw, Codex, Cursor, Gemini CLI, and GitHub Copilot.</li>
 </ul></div>
   </main></div>

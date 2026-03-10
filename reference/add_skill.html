@@ -41,7 +41,7 @@ directory.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">source</span>, path <span class="op">=</span> <span class="fu"><a href="skill_path.html">skill_path</a></span><span class="op">(</span><span class="op">)</span>, skill <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">source</span>, path <span class="op">=</span> <span class="cn">NULL</span>, skill <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -58,9 +58,15 @@ directory.</p>
 
 
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
-<dd><p>The skills directory to install into. Defaults to
-<code><a href="skill_path.html">skill_path()</a></code>, which resolves the agent from <code>WF_AGENT</code>, a directory
-scan, or falls back to <code>"claude_code"</code>.</p></dd>
+<dd><p>The skills directory to install into. Can be one of:</p><ul><li><p>A known agent name such as <code>"claude_code"</code>, <code>"cursor"</code>, or
+<code>"github_copilot"</code> (see <code><a href="skill_path.html">skill_path()</a></code> for the full list) to use that
+agent's conventional project-scope path.</p></li>
+<li><p>A character string giving the directory path directly.</p></li>
+<li><p><code>NULL</code> (the default), in which case the path is resolved from the
+<code>WF_AGENT</code> environment variable, or by prompting in interactive
+sessions. Set <code>WF_AGENT</code> in your <code>.Renviron</code> (e.g. with
+<code>usethis::edit_r_environ()</code>) to avoid the prompt.</p></li>
+</ul></dd>
 
 
 <dt id="arg-skill">skill<a class="anchor" aria-label="anchor" href="#arg-skill"></a></dt>
@@ -90,7 +96,7 @@ is already installed. Set to <code>TRUE</code> to replace it.</p></dd>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">src</span>, <span class="st">'SKILL.md'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">src</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed skill <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/RtmpdP4Y9A/file19426b59f4cc/example</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed skill <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/RtmphMG3Qe/file19ca6e5d1af5/example</span>.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -6,7 +6,7 @@ skills directory.
 ## Usage
 
 ``` r
-add_skill(source, path = skill_path(), skill = NULL, overwrite = FALSE)
+add_skill(source, path = NULL, skill = NULL, overwrite = FALSE)
 ```
 
 ## Arguments
@@ -27,10 +27,20 @@ add_skill(source, path = skill_path(), skill = NULL, overwrite = FALSE)
 
 - path:
 
-  The skills directory to install into. Defaults to
-  [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md),
-  which resolves the agent from `WF_AGENT`, a directory scan, or falls
-  back to `"claude_code"`.
+  The skills directory to install into. Can be one of:
+
+  - A known agent name such as `"claude_code"`, `"cursor"`, or
+    `"github_copilot"` (see
+    [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+    for the full list) to use that agent's conventional project-scope
+    path.
+
+  - A character string giving the directory path directly.
+
+  - `NULL` (the default), in which case the path is resolved from the
+    `WF_AGENT` environment variable, or by prompting in interactive
+    sessions. Set `WF_AGENT` in your `.Renviron` (e.g. with
+    `usethis::edit_r_environ()`) to avoid the prompt.
 
 - skill:
 
@@ -59,5 +69,5 @@ writeLines(
   file.path(src, 'SKILL.md')
 )
 add_skill(src, tempfile())
-#> Installed skill "example" to /tmp/RtmpdP4Y9A/file19426b59f4cc/example.
+#> Installed skill "example" to /tmp/RtmphMG3Qe/file19ca6e5d1af5/example.
 ```

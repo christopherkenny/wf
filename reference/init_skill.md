@@ -20,9 +20,11 @@ init_skill(name, path)
 - path:
 
   Directory in which to create the skill. The skill directory itself
-  will be `path/name`. Use
+  will be `path/name`. Can be a known agent name such as `"claude_code"`
+  or `"github_copilot"` to use that agent's conventional project-scope
+  path (see
   [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
-  to get the conventional path for a given agent.
+  for the full list).
 
 ## Value
 
@@ -32,5 +34,5 @@ The path to the new skill directory, invisibly.
 
 ``` r
 init_skill('my-skill', tempfile())
-#> Created skill "my-skill" at /tmp/RtmpdP4Y9A/file19427cedb249/my-skill.
+#> Created skill "my-skill" at /tmp/RtmphMG3Qe/file19cab629a0f/my-skill.
 ```

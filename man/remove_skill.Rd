@@ -4,14 +4,23 @@
 \alias{remove_skill}
 \title{Remove an installed skill}
 \usage{
-remove_skill(name, path = skill_path(), force = FALSE)
+remove_skill(name, path = NULL, force = FALSE)
 }
 \arguments{
 \item{name}{The name of the skill to remove.}
 
-\item{path}{The skills directory where the skill is installed. Defaults to
-\code{\link[=skill_path]{skill_path()}}, which resolves the agent from \code{WF_AGENT}, a directory
-scan, or falls back to \code{"claude_code"}.}
+\item{path}{The skills directory where the skill is installed. Can be one
+of:
+\itemize{
+\item A known agent name such as \code{"claude_code"}, \code{"cursor"}, or
+\code{"github_copilot"} (see \code{\link[=skill_path]{skill_path()}} for the full list) to use that
+agent's conventional project-scope path.
+\item A character string giving the directory path directly.
+\item \code{NULL} (the default), in which case the path is resolved from the
+\code{WF_AGENT} environment variable, or by prompting in interactive
+sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
+\code{\link[usethis:edit]{usethis::edit_r_environ()}}) to avoid the prompt.
+}}
 
 \item{force}{If \code{FALSE} (the default), prompts for confirmation in
 interactive sessions. Set to \code{TRUE} to skip the prompt.}

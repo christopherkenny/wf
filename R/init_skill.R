@@ -7,8 +7,9 @@
 #'   single hyphens (no consecutive `--`), and cannot start or end with a
 #'   hyphen. Consider using a gerund form (e.g. `"parsing-logs"`).
 #' @param path Directory in which to create the skill. The skill directory
-#'   itself will be `path/name`. Use [skill_path()] to get the conventional
-#'   path for a given agent.
+#'   itself will be `path/name`. Can be a known agent name such as
+#'   `"claude_code"` or `"github_copilot"` to use that agent's conventional
+#'   project-scope path (see [skill_path()] for the full list).
 #'
 #' @return The path to the new skill directory, invisibly.
 #' @export
@@ -17,6 +18,7 @@
 #' init_skill('my-skill', tempfile())
 init_skill <- function(name, path) {
   check_skill_name(name)
+  path <- resolve_path(path)
   skill_dir <- fs::path(path, name)
   if (fs::dir_exists(skill_dir)) {
     cli::cli_abort(

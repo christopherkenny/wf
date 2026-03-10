@@ -4,12 +4,20 @@
 \alias{check_skills}
 \title{Check installed skills for available updates}
 \usage{
-check_skills(path = skill_path())
+check_skills(path = NULL)
 }
 \arguments{
-\item{path}{The skills directory to check. Defaults to \code{\link[=skill_path]{skill_path()}},
-which resolves the agent from \code{WF_AGENT}, a directory scan, or falls
-back to \code{"claude_code"}.}
+\item{path}{The skills directory to check. Can be one of:
+\itemize{
+\item A known agent name such as \code{"claude_code"}, \code{"cursor"}, or
+\code{"github_copilot"} (see \code{\link[=skill_path]{skill_path()}} for the full list) to use that
+agent's conventional project-scope path.
+\item A character string giving the directory path directly.
+\item \code{NULL} (the default), in which case the path is resolved from the
+\code{WF_AGENT} environment variable, or by prompting in interactive
+sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
+\code{\link[usethis:edit]{usethis::edit_r_environ()}}) to avoid the prompt.
+}}
 }
 \value{
 A data frame with columns:

@@ -12,8 +12,9 @@ single hyphens (no consecutive \verb{--}), and cannot start or end with a
 hyphen. Consider using a gerund form (e.g. \code{"parsing-logs"}).}
 
 \item{path}{Directory in which to create the skill. The skill directory
-itself will be \code{path/name}. Use \code{\link[=skill_path]{skill_path()}} to get the conventional
-path for a given agent.}
+itself will be \code{path/name}. Can be a known agent name such as
+\code{"claude_code"} or \code{"github_copilot"} to use that agent's conventional
+project-scope path (see \code{\link[=skill_path]{skill_path()}} for the full list).}
 }
 \value{
 The path to the new skill directory, invisibly.

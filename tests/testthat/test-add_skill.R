@@ -96,6 +96,17 @@ test_that('add_skill returns path invisibly', {
   expect_invisible(add_skill(fixture, fs::path(tmp, 'skills')))
 })
 
+test_that('add_skill accepts agent name shorthand as path', {
+  tmp <- withr::local_tempdir()
+  src <- withr::local_tempdir()
+  fixture <- make_fixture_skill(src)
+  withr::with_dir(tmp, {
+    result <- add_skill(fixture, 'claude_code')
+    expect_identical(result, fs::path('.claude/skills', 'my-skill'))
+    expect_true(fs::dir_exists(fs::path(tmp, '.claude/skills/my-skill')))
+  })
+})
+
 test_that('parse_gh_source extracts owner and repo from shorthand', {
   result <- wf:::parse_gh_source('owner/repo')
   expect_identical(result$owner, 'owner')

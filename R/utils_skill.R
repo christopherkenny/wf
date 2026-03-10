@@ -51,6 +51,56 @@ detect_agent <- function() {
   found[[1]]
 }
 
+# Resolve a `path` argument to a concrete skills directory path.
+# - If path is a known agent name (or alias), returns the project-scope path.
+# - If path is NULL, checks WF_AGENT, then prompts interactively, then aborts.
+# - Otherwise returns path unchanged.
+resolve_path <- function(path) {
+  if (!is.null(path)) {
+    agent_norm <- agent_aliases[[path]] %||% path
+    if (agent_norm %in% names(skill_paths)) {
+      return(skill_paths[[agent_norm]][['project']])
+    }
+    return(path)
+  }
+
+  env_agent <- Sys.getenv('WF_AGENT', unset = '')
+  if (nzchar(env_agent)) {
+    return(skill_path(env_agent))
+  }
+
+  if (rlang::is_interactive()) {
+    found <- names(agent_indicators)[fs::dir_exists(agent_indicators)]
+    n <- length(found)
+    if (n > 0) {
+      items <- c(
+        paste0(seq_len(n), '. ', agent_indicators[found], ' (', found, ')'),
+        paste0(n + 1L, '. None of these')
+      )
+      cli::cli_inform(
+        c(
+          '!' = 'No {.arg path} set. Detected agent director{?y/ies}:',
+          setNames(items, rep(' ', n + 1L))
+        )
+      )
+      answer <- readline('Enter selection: ')
+      idx <- suppressWarnings(as.integer(trimws(answer)))
+      if (!is.na(idx) && idx >= 1L && idx <= n) {
+        return(skill_paths[[found[[idx]]]][['project']])
+      }
+    }
+  }
+
+  cli::cli_abort(
+    c(
+      'Cannot determine a skills directory.',
+      'i' = 'Set {.envvar WF_AGENT} to one of {.or {.val {names(skill_paths)}}}.',
+      'i' = 'Use {.run usethis::edit_r_environ()} to open {.file .Renviron}.',
+      'i' = 'Or supply {.arg path} directly.'
+    )
+  )
+}
+
 # Classify a skill source as "github" or "local"
 parse_source <- function(source) {
   if (grepl('^https?://github\\.com/|^https?://gitlab\\.com/', source)) {

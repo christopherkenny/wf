@@ -24,3 +24,14 @@
       ! `agent` must be one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", or "github_copilot".
       x Got "unknown_agent".
 
+# resolve_path aborts when path is NULL and no env var set
+
+    Code
+      wf:::resolve_path(NULL)
+    Condition
+      Error in `wf:::resolve_path()`:
+      ! Cannot determine a skills directory.
+      i Set `WF_AGENT` to one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", or "github_copilot".
+      i Use `usethis::edit_r_environ()` to open '.Renviron'.
+      i Or supply `path` directly.
+

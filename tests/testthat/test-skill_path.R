@@ -5,12 +5,14 @@ test_that('skill_path returns correct project paths', {
   expect_identical(skill_path('cursor', 'project'), '.cursor/skills')
   expect_identical(skill_path('gemini_cli', 'project'), '.gemini/skills')
   expect_identical(skill_path('github_copilot', 'project'), '.copilot/skills')
+  expect_identical(skill_path('posit_ai', 'project'), '.positai/skills')
 })
 
 test_that('skill_path returns correct global paths', {
   expect_identical(skill_path('claude_code', 'global'), '~/.claude/skills')
   expect_identical(skill_path('cursor', 'global'), '~/.cursor/skills')
   expect_identical(skill_path('github_copilot', 'global'), '~/.copilot/skills')
+  expect_identical(skill_path('posit_ai', 'global'), '~/.positai/skills')
 })
 
 test_that('skill_path defaults to project scope', {
@@ -28,6 +30,11 @@ test_that('skill_path errors on unknown scope', {
 test_that('"claude" is an alias for claude_code', {
   expect_identical(skill_path('claude', 'project'), '.claude/skills')
   expect_identical(skill_path('claude', 'global'), '~/.claude/skills')
+})
+
+test_that('"posit" is an alias for posit_ai', {
+  expect_identical(skill_path('posit', 'project'), '.positai/skills')
+  expect_identical(skill_path('posit', 'global'), '~/.positai/skills')
 })
 
 test_that('skill_path detects agent from directory', {
@@ -87,10 +94,12 @@ test_that('resolve_path returns project path for known agent name', {
   expect_identical(wf:::resolve_path('claude_code'), '.claude/skills')
   expect_identical(wf:::resolve_path('github_copilot'), '.copilot/skills')
   expect_identical(wf:::resolve_path('cursor'), '.cursor/skills')
+  expect_identical(wf:::resolve_path('posit_ai'), '.positai/skills')
 })
 
 test_that('resolve_path handles agent aliases', {
   expect_identical(wf:::resolve_path('claude'), '.claude/skills')
+  expect_identical(wf:::resolve_path('posit'), '.positai/skills')
 })
 
 test_that('resolve_path returns literal path for unknown string', {

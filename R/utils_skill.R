@@ -22,6 +22,10 @@ skill_paths <- list(
   github_copilot = list(
     project = '.copilot/skills',
     global = '~/.copilot/skills'
+  ),
+  posit_ai = list(
+    project = '.positai/skills',
+    global = '~/.positai/skills'
   )
 )
 
@@ -32,7 +36,7 @@ skill_topics <- c(
 
 lock_file <- '.skill-lock.json'
 
-agent_aliases <- list(claude = 'claude_code')
+agent_aliases <- list(claude = 'claude_code', posit = 'posit_ai')
 
 agent_indicators <- c(
   claude_code    = '.claude',
@@ -40,7 +44,8 @@ agent_indicators <- c(
   codex          = '.codex',
   cursor         = '.cursor',
   gemini_cli     = '.gemini',
-  github_copilot = '.copilot'
+  github_copilot = '.copilot',
+  posit_ai       = '.positai'
 )
 
 detect_agent <- function() {

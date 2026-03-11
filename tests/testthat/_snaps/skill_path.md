@@ -4,7 +4,7 @@
       skill_path("unknown_agent")
     Condition
       Error in `skill_path()`:
-      ! `agent` must be one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", or "github_copilot".
+      ! `agent` must be one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", "github_copilot", or "posit_ai".
       x Got "unknown_agent".
 
 # skill_path errors on unknown scope
@@ -21,7 +21,7 @@
       skill_path()
     Condition
       Error in `skill_path()`:
-      ! `agent` must be one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", or "github_copilot".
+      ! `agent` must be one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", "github_copilot", or "posit_ai".
       x Got "unknown_agent".
 
 # resolve_path aborts when path is NULL and no env var set
@@ -31,7 +31,7 @@
     Condition
       Error in `wf:::resolve_path()`:
       ! Cannot determine a skills directory.
-      i Set `WF_AGENT` to one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", or "github_copilot".
+      i Set `WF_AGENT` to one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", "github_copilot", or "posit_ai".
       i Use `usethis::edit_r_environ()` to open '.Renviron'.
       i Or supply `path` directly.
 

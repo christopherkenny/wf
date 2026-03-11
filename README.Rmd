@@ -83,9 +83,8 @@ update_skills()
 
 Search GitHub for community skills tagged with `claude-skill`:
 
-```r
-find_skill()               # all skills
-find_skill('quarto')   # filtered by keyword
+```{r find_skill}
+find_skill('quarto')
 ```
 
 Scaffold a new skill with a template `SKILL.md`:

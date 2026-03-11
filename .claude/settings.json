@@ -21,7 +21,8 @@
       "WebFetch(domain:cran.r-project.org)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(Rscript -e \"styler.quote::style_pkg\\(\\)\")"
+      "Bash(Rscript -e \"styler.quote::style_pkg\\(\\)\")",
+      "Bash(Rscript -e \"urlchecker::url_check\\(\\)\")"
     ],
     "deny": [
       "Read(.Renviron)",

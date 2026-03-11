@@ -28,7 +28,8 @@ WF_AGENT='claude_code'
 ```
 
 Supported agents: `'claude_code'` (alias: `'claude'`), `'openclaw'`,
-`'codex'`, `'cursor'`, `'gemini_cli'`, `'github_copilot'`.
+`'codex'`, `'cursor'`, `'gemini_cli'`, `'github_copilot'`, `'posit_ai'`
+(alias: `'posit'`).
 
 Skills can be scoped to a project (`.agent/skills/`) or installed
 globally (`~/.agent/skills/`):

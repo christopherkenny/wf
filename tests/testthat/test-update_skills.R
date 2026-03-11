@@ -1,20 +1,26 @@
 make_lock <- function(path, entries) {
   fs::dir_create(path, recurse = TRUE)
-  jsonlite::write_json(entries, fs::path(path, '.skill-lock.json'),
-    auto_unbox = TRUE, pretty = TRUE
+  jsonlite::write_json(
+    entries,
+    fs::path(path, '.skill-lock.json'),
+    auto_unbox = TRUE,
+    pretty = TRUE
   )
 }
 
 test_that('update_skills calls add_skill for each skill with an update', {
   tmp <- withr::local_tempdir()
-  make_lock(tmp, list(
-    `skill-a` = list(
-      source = 'https://github.com/owner/skill-a',
-      type = 'github',
-      sha = 'old123',
-      installed_at = '2026-01-01T00:00:00Z'
+  make_lock(
+    tmp,
+    list(
+      `skill-a` = list(
+        source = 'https://github.com/owner/skill-a',
+        type = 'github',
+        sha = 'old123',
+        installed_at = '2026-01-01T00:00:00Z'
+      )
     )
-  ))
+  )
 
   called_sources <- character()
   local_mocked_bindings(

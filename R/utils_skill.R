@@ -30,22 +30,30 @@ skill_paths <- list(
 )
 
 skill_topics <- c(
-  'claude-skill', 'cursor-skill', 'codex-skill',
-  'gemini-skill', 'copilot-skill', 'ai-coding-skill'
+  'claude-skill',
+  'cursor-skill',
+  'codex-skill',
+  'gemini-skill',
+  'copilot-skill',
+  'ai-coding-skill'
 )
 
 lock_file <- '.skill-lock.json'
 
-agent_aliases <- list(claude = 'claude_code', posit = 'posit_ai')
+agent_aliases <- list(
+  claude = 'claude_code',
+  copilot = 'github_copilot',
+  posit = 'posit_ai'
+)
 
 agent_indicators <- c(
-  claude_code    = '.claude',
-  openclaw       = '.openclaw',
-  codex          = '.codex',
-  cursor         = '.cursor',
-  gemini_cli     = '.gemini',
+  claude_code = '.claude',
+  openclaw = '.openclaw',
+  codex = '.codex',
+  cursor = '.cursor',
+  gemini_cli = '.gemini',
   github_copilot = '.copilot',
-  posit_ai       = '.positai'
+  posit_ai = '.positai'
 )
 
 detect_agent <- function() {
@@ -85,7 +93,7 @@ resolve_path <- function(path) {
       cli::cli_inform(
         c(
           '!' = 'No {.arg path} set. Detected agent director{?y/ies}:',
-          setNames(items, rep(' ', n + 1L))
+          stats::setNames(items, rep(' ', n + 1L))
         )
       )
       answer <- readline('Enter selection: ')

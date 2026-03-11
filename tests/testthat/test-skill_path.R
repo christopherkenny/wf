@@ -32,6 +32,11 @@ test_that('"claude" is an alias for claude_code', {
   expect_identical(skill_path('claude', 'global'), '~/.claude/skills')
 })
 
+test_that('"copilot" is an alias for github_copilot', {
+  expect_identical(skill_path('copilot', 'project'), '.copilot/skills')
+  expect_identical(skill_path('copilot', 'global'), '~/.copilot/skills')
+})
+
 test_that('"posit" is an alias for posit_ai', {
   expect_identical(skill_path('posit', 'project'), '.positai/skills')
   expect_identical(skill_path('posit', 'global'), '~/.positai/skills')
@@ -99,6 +104,7 @@ test_that('resolve_path returns project path for known agent name', {
 
 test_that('resolve_path handles agent aliases', {
   expect_identical(wf:::resolve_path('claude'), '.claude/skills')
+  expect_identical(wf:::resolve_path('copilot'), '.copilot/skills')
   expect_identical(wf:::resolve_path('posit'), '.positai/skills')
 })
 

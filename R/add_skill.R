@@ -51,8 +51,12 @@ add_skill <- function(source, path = NULL, skill = NULL, overwrite = FALSE) {
       paste0('https://github.com/', gh$owner, '/', gh$repo)
     } else {
       paste0(
-        'https://github.com/', gh$owner, '/', gh$repo,
-        '/tree/HEAD/', gh$path
+        'https://github.com/',
+        gh$owner,
+        '/',
+        gh$repo,
+        '/tree/HEAD/',
+        gh$path
       )
     }
   } else {
@@ -89,7 +93,9 @@ add_skill <- function(source, path = NULL, skill = NULL, overwrite = FALSE) {
     type = type,
     installed_at = format(Sys.time(), '%Y-%m-%dT%H:%M:%SZ', tz = 'UTC')
   )
-  if (!is.null(sha)) entry$sha <- sha
+  if (!is.null(sha)) {
+    entry$sha <- sha
+  }
   lock[[name]] <- entry
   write_lock(path, lock)
 

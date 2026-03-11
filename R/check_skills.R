@@ -40,7 +40,9 @@ check_skills <- function(path = NULL) {
   rows <- lapply(names(lock), function(name) {
     entry <- lock[[name]]
     sha_val <- entry$sha
-    installed_sha <- if (is.null(sha_val) || length(sha_val) == 0 || !is.character(sha_val)) {
+    installed_sha <- if (
+      is.null(sha_val) || length(sha_val) == 0 || !is.character(sha_val)
+    ) {
       NA_character_
     } else {
       sha_val

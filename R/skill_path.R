@@ -6,7 +6,8 @@
 #'
 #' @param agent One of `"claude_code"` (or its alias `"claude"`),
 #'   `"openclaw"`, `"codex"`, `"cursor"`, `"gemini_cli"`,
-#'   `"github_copilot"`, or `"posit_ai"` (or its alias `"posit"`). If
+#'   `"github_copilot"` (or its alias `"copilot"`), or `"posit_ai"` (or its
+#'   alias `"posit"`). If
 #'   `NULL` (the default), the agent is resolved in
 #'   order: (1) the `WF_AGENT` environment variable, (2) a scan of the current
 #'   working directory for a recognised agent config folder (`.claude`,
@@ -23,6 +24,8 @@
 #' @examples
 #' skill_path('claude_code', 'project')
 #' skill_path('claude', 'project') # alias for claude_code
+#' skill_path('github_copilot', 'project')
+#' skill_path('copilot', 'project') # alias for github_copilot
 #' skill_path('posit_ai', 'project')
 #' skill_path('posit', 'project') # alias for posit_ai
 #' skill_path('cursor', 'global')

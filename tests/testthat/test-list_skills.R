@@ -1,4 +1,8 @@
-make_fixture_skill <- function(dir, name = 'my-skill', description = 'A test skill.') {
+make_fixture_skill <- function(
+  dir,
+  name = 'my-skill',
+  description = 'A test skill.'
+) {
   skill_dir <- fs::path(dir, name)
   fs::dir_create(skill_dir)
   writeLines(

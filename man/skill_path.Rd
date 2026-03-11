@@ -9,7 +9,8 @@ skill_path(agent = NULL, scope = c("project", "global"))
 \arguments{
 \item{agent}{One of \code{"claude_code"} (or its alias \code{"claude"}),
 \code{"openclaw"}, \code{"codex"}, \code{"cursor"}, \code{"gemini_cli"},
-\code{"github_copilot"}, or \code{"posit_ai"} (or its alias \code{"posit"}). If
+\code{"github_copilot"} (or its alias \code{"copilot"}), or \code{"posit_ai"} (or its
+alias \code{"posit"}). If
 \code{NULL} (the default), the agent is resolved in
 order: (1) the \code{WF_AGENT} environment variable, (2) a scan of the current
 working directory for a recognised agent config folder (\code{.claude},
@@ -32,6 +33,8 @@ directory). Use \code{\link[base:path.expand]{base::path.expand()}} if you need 
 \examples{
 skill_path('claude_code', 'project')
 skill_path('claude', 'project') # alias for claude_code
+skill_path('github_copilot', 'project')
+skill_path('copilot', 'project') # alias for github_copilot
 skill_path('posit_ai', 'project')
 skill_path('posit', 'project') # alias for posit_ai
 skill_path('cursor', 'global')

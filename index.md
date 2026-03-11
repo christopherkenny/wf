@@ -28,8 +28,8 @@ WF_AGENT='claude_code'
 ```
 
 Supported agents: `'claude_code'` (alias: `'claude'`), `'openclaw'`,
-`'codex'`, `'cursor'`, `'gemini_cli'`, `'github_copilot'`, `'posit_ai'`
-(alias: `'posit'`).
+`'codex'`, `'cursor'`, `'gemini_cli'`, `'github_copilot'` (alias:
+`'copilot'`), `'posit_ai'` (alias: `'posit'`).
 
 Skills can be scoped to a project (`.agent/skills/`) or installed
 globally (`~/.agent/skills/`):
@@ -95,5 +95,5 @@ Scaffold a new skill with a template `SKILL.md`:
 tmp <- tempfile()
 init_skill('my-skill', tmp)
 #> Created skill "my-skill" at
-#> 'C:/Users/chris/AppData/Local/Temp/RtmpwnuOag/file618c77657df2/my-skill'.
+#> 'C:/Users/chris/AppData/Local/Temp/Rtmp2tcpxX/file7af05103d6c/my-skill'.
 ```

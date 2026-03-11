@@ -38,6 +38,8 @@
 <li>
 <code><a href="../reference/add_skill.html">add_skill()</a></code>, <code><a href="../reference/check_skills.html">check_skills()</a></code>, <code><a href="../reference/list_skills.html">list_skills()</a></code>, <code><a href="../reference/remove_skill.html">remove_skill()</a></code>, and <code><a href="../reference/update_skills.html">update_skills()</a></code> now default <code>path</code> to <code>NULL</code>. When <code>NULL</code>, the path is resolved from the <code>WF_AGENT</code> environment variable, or by an interactive prompt listing any detected agent directories. Passing a known agent name (e.g., <code>"github_copilot"</code>) as <code>path</code> is now also supported as a shorthand for that agent’s conventional project-scope path.</li>
 <li>
+<code><a href="../reference/skill_path.html">skill_path()</a></code> now supports a <code>"copilot"</code> alias for <code>"github_copilot"</code>.</li>
+<li>
 <code><a href="../reference/skill_path.html">skill_path()</a></code> now supports Posit AI (<code>"posit_ai"</code>, alias <code>"posit"</code>) with base directory <code>.positai</code>.</li>
 </ul></div>
   </main></div>

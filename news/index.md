@@ -23,5 +23,7 @@
   (e.g., `"github_copilot"`) as `path` is now also supported as a
   shorthand for that agent’s conventional project-scope path.
 - [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+  now supports a `"copilot"` alias for `"github_copilot"`.
+- [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
   now supports Posit AI (`"posit_ai"`, alias `"posit"`) with base
   directory `.positai`.

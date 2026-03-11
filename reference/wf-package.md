@@ -9,7 +9,7 @@ scoped to a single project or shared globally across projects.
 
 Useful links:
 
-- <https://christophertkenny.com/wf>
+- <https://christophertkenny.com/wf/>
 
 - <https://github.com/christopherkenny/wf>
 

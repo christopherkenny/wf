@@ -17,13 +17,13 @@ skill_path(agent = NULL, scope = c("project", "global"))
 - agent:
 
   One of `"claude_code"` (or its alias `"claude"`), `"openclaw"`,
-  `"codex"`, `"cursor"`, `"gemini_cli"`, or `"github_copilot"`. If
-  `NULL` (the default), the agent is resolved in order: (1) the
-  `WF_AGENT` environment variable, (2) a scan of the current working
-  directory for a recognised agent config folder (`.claude`, `.cursor`,
-  etc.), and (3) a final fallback to `"claude_code"`. Set `WF_AGENT` in
-  your `.Renviron` (e.g. with `usethis::edit_r_environ()`) to avoid
-  passing `agent` every time.
+  `"codex"`, `"cursor"`, `"gemini_cli"`, `"github_copilot"`, or
+  `"posit_ai"` (or its alias `"posit"`). If `NULL` (the default), the
+  agent is resolved in order: (1) the `WF_AGENT` environment
+  variable, (2) a scan of the current working directory for a recognised
+  agent config folder (`.claude`, `.cursor`, etc.), and (3) a final
+  fallback to `"claude_code"`. Set `WF_AGENT` in your `.Renviron` (e.g.
+  with `usethis::edit_r_environ()`) to avoid passing `agent` every time.
 
 - scope:
 
@@ -42,6 +42,10 @@ skill_path('claude_code', 'project')
 #> [1] ".claude/skills"
 skill_path('claude', 'project') # alias for claude_code
 #> [1] ".claude/skills"
+skill_path('posit_ai', 'project')
+#> [1] ".positai/skills"
+skill_path('posit', 'project') # alias for posit_ai
+#> [1] ".positai/skills"
 skill_path('cursor', 'global')
 #> [1] "~/.cursor/skills"
 skill_path() # auto-detects from WF_AGENT, dir scan, or falls back to claude_code

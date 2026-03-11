@@ -53,8 +53,9 @@ directory). Use <code><a href="https://rdrr.io/r/base/path.expand.html" class="e
 
 <dl><dt id="arg-agent">agent<a class="anchor" aria-label="anchor" href="#arg-agent"></a></dt>
 <dd><p>One of <code>"claude_code"</code> (or its alias <code>"claude"</code>),
-<code>"openclaw"</code>, <code>"codex"</code>, <code>"cursor"</code>, <code>"gemini_cli"</code>, or
-<code>"github_copilot"</code>. If <code>NULL</code> (the default), the agent is resolved in
+<code>"openclaw"</code>, <code>"codex"</code>, <code>"cursor"</code>, <code>"gemini_cli"</code>,
+<code>"github_copilot"</code>, or <code>"posit_ai"</code> (or its alias <code>"posit"</code>). If
+<code>NULL</code> (the default), the agent is resolved in
 order: (1) the <code>WF_AGENT</code> environment variable, (2) a scan of the current
 working directory for a recognised agent config folder (<code>.claude</code>,
 <code>.cursor</code>, etc.), and (3) a final fallback to <code>"claude_code"</code>. Set
@@ -79,6 +80,10 @@ path in the user's home directory, available across all projects).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ".claude/skills"</span>
 <span class="r-in"><span><span class="fu">skill_path</span><span class="op">(</span><span class="st">'claude'</span>, <span class="st">'project'</span><span class="op">)</span> <span class="co"># alias for claude_code</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ".claude/skills"</span>
+<span class="r-in"><span><span class="fu">skill_path</span><span class="op">(</span><span class="st">'posit_ai'</span>, <span class="st">'project'</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ".positai/skills"</span>
+<span class="r-in"><span><span class="fu">skill_path</span><span class="op">(</span><span class="st">'posit'</span>, <span class="st">'project'</span><span class="op">)</span> <span class="co"># alias for posit_ai</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ".positai/skills"</span>
 <span class="r-in"><span><span class="fu">skill_path</span><span class="op">(</span><span class="st">'cursor'</span>, <span class="st">'global'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "~/.cursor/skills"</span>
 <span class="r-in"><span><span class="fu">skill_path</span><span class="op">(</span><span class="op">)</span> <span class="co"># auto-detects from WF_AGENT, dir scan, or falls back to claude_code</span></span></span>

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# wf <a href="https://christopherkenny.github.io/wf/"><img src="man/figures/logo.png" align="right" height="139" alt="wf website" /></a>
+# wf <a href="https://christophertkenny.com/wf/"><img src="man/figures/logo.png" align="right" height="139" alt="wf website" /></a>
 
 <!-- badges: start -->
 

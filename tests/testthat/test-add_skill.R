@@ -134,6 +134,15 @@ test_that('parse_gh_source extracts path from subdirectory URL', {
   expect_identical(result$path, 'skills/proofread')
 })
 
+test_that('parse_gh_source extracts path from direct repo URL with path', {
+  result <- wf:::parse_gh_source(
+    'https://github.com/posit-dev/skills/r-lib/cran-extrachecks'
+  )
+  expect_identical(result$owner, 'posit-dev')
+  expect_identical(result$repo, 'skills')
+  expect_identical(result$path, 'r-lib/cran-extrachecks')
+})
+
 test_that('add_skill skill arg resolves to skills/ subdirectory', {
   tmp <- withr::local_tempdir()
   src <- withr::local_tempdir()

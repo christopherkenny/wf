@@ -140,6 +140,9 @@ parse_gh_source <- function(source) {
     # /tree/{branch}/{path...} → extract path
     if (length(parts) >= 5 && parts[[3]] == 'tree') {
       path <- paste(parts[5:length(parts)], collapse = '/')
+    } else if (length(parts) > 2) {
+      # Direct path appended to repo URL without /tree/branch/ segment
+      path <- paste(parts[3:length(parts)], collapse = '/')
     } else {
       path <- NULL
     }

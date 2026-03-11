@@ -65,17 +65,26 @@ List, check, and update installed skills:
 ``` r
 list_skills()
 #>                                                           name
+#> .claude/skills/cran-extrachecks               cran-extrachecks
 #> .claude/skills/tidy-argument-checking              types-check
 #> .claude/skills/tidy-deprecate-function tidy-deprecate-function
-#>                                                                                                                                                                                                                                                             description
-#> .claude/skills/tidy-argument-checking  Validate function inputs in R using a standalone file of check_* functions. Use when writing exported R functions that need input validation, reviewing existing validation code, or when creating new input validation helpers.
-#> .claude/skills/tidy-deprecate-function                    Guide for deprecating R functions/arguments. Use when a user asks to deprecate a function or parameter, including adding lifecycle warnings, updating documentation, adding NEWS entries, and updating tests.
-#>                                        source installed_at
-#> .claude/skills/tidy-argument-checking    <NA>         <NA>
-#> .claude/skills/tidy-deprecate-function   <NA>         <NA>
+#>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         description
+#> .claude/skills/cran-extrachecks        Prepare R packages for CRAN submission by checking for common ad-hoc requirements not caught by devtools::check(). Use when: (1) Preparing a package for first CRAN release, (2) Preparing a package update for CRAN resubmission, (3) Reviewing a package to ensure CRAN compliance, (4) Responding to CRAN reviewer feedback. Covers documentation requirements, DESCRIPTION field standards, URL validation, examples, and administrative requirements.\n
+#> .claude/skills/tidy-argument-checking                                                                                                                                                                                                                              Validate function inputs in R using a standalone file of check_* functions. Use when writing exported R functions that need input validation, reviewing existing validation code, or when creating new input validation helpers.
+#> .claude/skills/tidy-deprecate-function                                                                                                                                                                                                                                                Guide for deprecating R functions/arguments. Use when a user asks to deprecate a function or parameter, including adding lifecycle warnings, updating documentation, adding NEWS entries, and updating tests.
+#>                                                                                                      source
+#> .claude/skills/cran-extrachecks        https://github.com/posit-dev/skills/tree/HEAD/r-lib/cran-extrachecks
+#> .claude/skills/tidy-argument-checking                                                                  <NA>
+#> .claude/skills/tidy-deprecate-function                                                                 <NA>
+#>                                                installed_at
+#> .claude/skills/cran-extrachecks        2026-03-11T13:56:50Z
+#> .claude/skills/tidy-argument-checking                  <NA>
+#> .claude/skills/tidy-deprecate-function                 <NA>
 check_skills()
-#> [1] name             installed_sha    latest_sha       update_available
-#> <0 rows> (or 0-length row.names)
+#>               name                            installed_sha
+#> 1 cran-extrachecks bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5
+#>                                 latest_sha update_available
+#> 1 bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5            FALSE
 update_skills()
 #> All skills are up to date.
 ```
@@ -85,8 +94,9 @@ update_skills()
 Search GitHub for community skills tagged with `claude-skill`:
 
 ``` r
-find_skill()               # all skills
-find_skill('quarto')   # filtered by keyword
+find_skill('quarto')
+#> [1] name        description owner       url         stars      
+#> <0 rows> (or 0-length row.names)
 ```
 
 Scaffold a new skill with a template `SKILL.md`:
@@ -95,5 +105,5 @@ Scaffold a new skill with a template `SKILL.md`:
 tmp <- tempfile()
 init_skill('my-skill', tmp)
 #> Created skill "my-skill" at
-#> 'C:/Users/chris/AppData/Local/Temp/Rtmp2tcpxX/file7af05103d6c/my-skill'.
+#> 'C:/Users/chris/AppData/Local/Temp/Rtmpc5HWGM/file63946507204f/my-skill'.
 ```

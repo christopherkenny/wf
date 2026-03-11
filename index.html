@@ -97,17 +97,26 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/list_skills.html">list_skills</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                                                           name</span></span>
+<span><span class="co">#&gt; .claude/skills/cran-extrachecks               cran-extrachecks</span></span>
 <span><span class="co">#&gt; .claude/skills/tidy-argument-checking              types-check</span></span>
 <span><span class="co">#&gt; .claude/skills/tidy-deprecate-function tidy-deprecate-function</span></span>
-<span><span class="co">#&gt;                                                                                                                                                                                                                                                             description</span></span>
-<span><span class="co">#&gt; .claude/skills/tidy-argument-checking  Validate function inputs in R using a standalone file of check_* functions. Use when writing exported R functions that need input validation, reviewing existing validation code, or when creating new input validation helpers.</span></span>
-<span><span class="co">#&gt; .claude/skills/tidy-deprecate-function                    Guide for deprecating R functions/arguments. Use when a user asks to deprecate a function or parameter, including adding lifecycle warnings, updating documentation, adding NEWS entries, and updating tests.</span></span>
-<span><span class="co">#&gt;                                        source installed_at</span></span>
-<span><span class="co">#&gt; .claude/skills/tidy-argument-checking    &lt;NA&gt;         &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; .claude/skills/tidy-deprecate-function   &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         description</span></span>
+<span><span class="co">#&gt; .claude/skills/cran-extrachecks        Prepare R packages for CRAN submission by checking for common ad-hoc requirements not caught by devtools::check(). Use when: (1) Preparing a package for first CRAN release, (2) Preparing a package update for CRAN resubmission, (3) Reviewing a package to ensure CRAN compliance, (4) Responding to CRAN reviewer feedback. Covers documentation requirements, DESCRIPTION field standards, URL validation, examples, and administrative requirements.\n</span></span>
+<span><span class="co">#&gt; .claude/skills/tidy-argument-checking                                                                                                                                                                                                                              Validate function inputs in R using a standalone file of check_* functions. Use when writing exported R functions that need input validation, reviewing existing validation code, or when creating new input validation helpers.</span></span>
+<span><span class="co">#&gt; .claude/skills/tidy-deprecate-function                                                                                                                                                                                                                                                Guide for deprecating R functions/arguments. Use when a user asks to deprecate a function or parameter, including adding lifecycle warnings, updating documentation, adding NEWS entries, and updating tests.</span></span>
+<span><span class="co">#&gt;                                                                                                      source</span></span>
+<span><span class="co">#&gt; .claude/skills/cran-extrachecks        https://github.com/posit-dev/skills/tree/HEAD/r-lib/cran-extrachecks</span></span>
+<span><span class="co">#&gt; .claude/skills/tidy-argument-checking                                                                  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; .claude/skills/tidy-deprecate-function                                                                 &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;                                                installed_at</span></span>
+<span><span class="co">#&gt; .claude/skills/cran-extrachecks        2026-03-11T13:56:50Z</span></span>
+<span><span class="co">#&gt; .claude/skills/tidy-argument-checking                  &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; .claude/skills/tidy-deprecate-function                 &lt;NA&gt;</span></span>
 <span><span class="fu"><a href="reference/check_skills.html">check_skills</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] name             installed_sha    latest_sha       update_available</span></span>
-<span><span class="co">#&gt; &lt;0 rows&gt; (or 0-length row.names)</span></span>
+<span><span class="co">#&gt;               name                            installed_sha</span></span>
+<span><span class="co">#&gt; 1 cran-extrachecks bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5</span></span>
+<span><span class="co">#&gt;                                 latest_sha update_available</span></span>
+<span><span class="co">#&gt; 1 bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5            FALSE</span></span>
 <span><span class="fu"><a href="reference/update_skills.html">update_skills</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; All skills are up to date.</span></span></code></pre></div>
 </div>
@@ -116,14 +125,15 @@
 </h2>
 <p>Search GitHub for community skills tagged with <code>claude-skill</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/find_skill.html">find_skill</a></span><span class="op">(</span><span class="op">)</span>               <span class="co"># all skills</span></span>
-<span><span class="fu"><a href="reference/find_skill.html">find_skill</a></span><span class="op">(</span><span class="st">'quarto'</span><span class="op">)</span>   <span class="co"># filtered by keyword</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/find_skill.html">find_skill</a></span><span class="op">(</span><span class="st">'quarto'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] name        description owner       url         stars      </span></span>
+<span><span class="co">#&gt; &lt;0 rows&gt; (or 0-length row.names)</span></span></code></pre></div>
 <p>Scaffold a new skill with a template <code>SKILL.md</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/init_skill.html">init_skill</a></span><span class="op">(</span><span class="st">'my-skill'</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created skill "my-skill" at</span></span>
-<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/Rtmp2tcpxX/file7af05103d6c/my-skill'.</span></span></code></pre></div>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/Rtmpc5HWGM/file63946507204f/my-skill'.</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

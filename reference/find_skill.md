@@ -33,7 +33,9 @@ A data frame with columns:
 ## Examples
 
 ``` r
-find_skill('rstats')
+# \donttest{
+  find_skill('rstats')
 #> [1] name        description owner       url         stars      
 #> <0 rows> (or 0-length row.names)
+# }
 ```

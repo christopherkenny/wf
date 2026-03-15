@@ -1,8 +1,8 @@
 # wf: Artificial Intelligence Workflow Tools
 
 Manage skills for large language model coding agents. Supports
-installing skills from GitHub or local directories, tracking versions in
-a lock file, and keeping installations current. Installations can be
+installing skills from 'GitHub' or local directories, tracking versions
+in a lock file, and keeping installations current. Installations can be
 scoped to a single project or shared globally across projects.
 
 ## See also

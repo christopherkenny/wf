@@ -3,8 +3,8 @@
 Returns the conventional directory path where skills for a given agent
 are stored. The path is not expanded (i.e., `~` is not resolved to the
 home directory). Use
-[`base::path.expand()`](https://rdrr.io/r/base/path.expand.html) if you
-need an absolute path.
+[`fs::path_expand()`](https://fs.r-lib.org/reference/path_expand.html)
+if you need an absolute path.
 
 ## Usage
 

@@ -2,7 +2,7 @@
 #'
 #' Returns the conventional directory path where skills for a given agent are
 #' stored. The path is not expanded (i.e., `~` is not resolved to the home
-#' directory). Use [base::path.expand()] if you need an absolute path.
+#' directory). Use [fs::path_expand()] if you need an absolute path.
 #'
 #' @param agent One of `"claude_code"` (or its alias `"claude"`),
 #'   `"openclaw"`, `"codex"`, `"cursor"`, `"gemini_cli"`,

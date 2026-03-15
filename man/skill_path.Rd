@@ -28,7 +28,7 @@ A length-1 character vector giving the conventional skill path.
 \description{
 Returns the conventional directory path where skills for a given agent are
 stored. The path is not expanded (i.e., \code{~} is not resolved to the home
-directory). Use \code{\link[base:path.expand]{base::path.expand()}} if you need an absolute path.
+directory). Use \code{\link[fs:path_expand]{fs::path_expand()}} if you need an absolute path.
 }
 \examples{
 skill_path('claude_code', 'project')

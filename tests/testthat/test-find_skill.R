@@ -32,6 +32,19 @@ test_that('find_skill returns correct columns', {
   expect_named(result, c('name', 'description', 'owner', 'url', 'stars'))
 })
 
+test_that('find_skill queries each skill topic separately', {
+  captured_qs <- character()
+  local_mocked_bindings(
+    gh_search_repos = function(q, per_page) {
+      captured_qs <<- c(captured_qs, q)
+      make_gh_search_response()
+    }
+  )
+  find_skill('quarto')
+  expect_identical(length(captured_qs), length(skill_topics))
+  expect_true(all(grepl('^quarto topic:', captured_qs)))
+})
+
 test_that('find_skill errors without query', {
   expect_snapshot(find_skill(), error = TRUE)
 })

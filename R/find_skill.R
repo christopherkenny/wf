@@ -17,13 +17,23 @@
 #' @examplesIf attr(curlGetHeaders('https://api.github.com'), 'status') == 200L
 #' find_skill('rstats')
 find_skill <- function(query = NULL) {
-  topics <- paste(paste0('topic:', skill_topics), collapse = ' OR ')
   if (is.null(query) || !nzchar(query)) {
     cli::cli_abort('{.arg query} must not be missing.')
   }
-  q <- paste0(query, ' (', topics, ')')
-
-  items <- gh_search_repos(q)$items
+  # GitHub search does not support OR between topic: qualifiers, so we run
+  # one query per skill topic and deduplicate results by URL.
+  items <- list()
+  seen <- character()
+  for (topic in skill_topics) {
+    q <- paste(query, paste0('topic:', topic))
+    new_items <- gh_search_repos(q)$items
+    for (item in new_items) {
+      if (!item$html_url %in% seen) {
+        seen <- c(seen, item$html_url)
+        items <- c(items, list(item))
+      }
+    }
+  }
 
   if (length(items) == 0) {
     return(data.frame(

@@ -103,8 +103,10 @@ Search GitHub for community skills tagged with `claude-skill`:
 
 ``` r
 find_skill('quarto')
-#> [1] name        description owner       url         stars      
-#> <0 rows> (or 0-length row.names)
+#>     name                                  description            owner
+#> 1 skills [WIP] Claude Skills for Political Scientists christopherkenny
+#>                                          url stars
+#> 1 https://github.com/christopherkenny/skills     3
 ```
 
 Scaffold a new skill with a template `SKILL.md`:
@@ -113,5 +115,5 @@ Scaffold a new skill with a template `SKILL.md`:
 tmp <- tempfile()
 init_skill('my-skill', tmp)
 #> Created skill "my-skill" at
-#> 'C:/Users/chris/AppData/Local/Temp/Rtmpc5HWGM/file63946507204f/my-skill'.
+#> 'C:/Users/chris/AppData/Local/Temp/RtmpgfUC99/file69c48977e8/my-skill'.
 ```

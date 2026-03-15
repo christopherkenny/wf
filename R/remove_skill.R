@@ -28,7 +28,7 @@
 #'   file.path(src, 'SKILL.md')
 #' )
 #' tmp <- tempfile()
-#' add_skill(src, tmp)
+#' add_skill(src, path = tmp)
 #' remove_skill('example', tmp, force = TRUE)
 remove_skill <- function(name, path = NULL, force = FALSE) {
   path <- resolve_path(path)

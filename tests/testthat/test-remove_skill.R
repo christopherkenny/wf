@@ -22,7 +22,7 @@ test_that('remove_skill deletes the skill directory', {
   src <- withr::local_tempdir()
   fixture <- make_fixture_skill(src)
   dest_dir <- fs::path(tmp, 'skills')
-  add_skill(fixture, dest_dir)
+  add_skill(fixture, path = dest_dir)
 
   remove_skill('my-skill', dest_dir, force = TRUE)
 
@@ -34,7 +34,7 @@ test_that('remove_skill updates the lock file', {
   src <- withr::local_tempdir()
   fixture <- make_fixture_skill(src)
   dest_dir <- fs::path(tmp, 'skills')
-  add_skill(fixture, dest_dir)
+  add_skill(fixture, path = dest_dir)
 
   remove_skill('my-skill', dest_dir, force = TRUE)
 
@@ -47,7 +47,7 @@ test_that('remove_skill returns name invisibly', {
   src <- withr::local_tempdir()
   fixture <- make_fixture_skill(src)
   dest_dir <- fs::path(tmp, 'skills')
-  add_skill(fixture, dest_dir)
+  add_skill(fixture, path = dest_dir)
 
   expect_invisible(remove_skill('my-skill', dest_dir, force = TRUE))
 })

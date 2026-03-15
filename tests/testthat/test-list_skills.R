@@ -45,7 +45,7 @@ test_that('list_skills includes source and installed_at from lock', {
   src <- withr::local_tempdir()
   fixture <- make_fixture_skill(src)
   dest_dir <- fs::path(tmp, 'skills')
-  add_skill(fixture, dest_dir)
+  add_skill(fixture, path = dest_dir)
 
   result <- list_skills(dest_dir)
   expect_identical(nrow(result), 1L)

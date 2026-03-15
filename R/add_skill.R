@@ -9,6 +9,11 @@
 #'     `"https://github.com/owner/repo/tree/main/path/to/skill"`.
 #'   - A GitHub shorthand, e.g. `"owner/repo"`.
 #'   - A local directory path containing a `SKILL.md` file.
+#' @param skill For multi-skill repositories that store skills under a
+#'   `skills/` subdirectory, the name of the skill to install, e.g.
+#'   `skill = "proofread"`. When supplied, the skill is read from
+#'   `skills/<skill>` within the repository. Ignored when `source` already
+#'   points to a specific subdirectory via `/tree/...`.
 #' @param path The skills directory to install into. Can be one of:
 #'   - A known agent name such as `"claude_code"`, `"cursor"`, or
 #'     `"github_copilot"` (see [skill_path()] for the full list) to use that
@@ -18,11 +23,6 @@
 #'     `WF_AGENT` environment variable, or by prompting in interactive
 #'     sessions. Set `WF_AGENT` in your `.Renviron` (e.g. with
 #'     [usethis::edit_r_environ()]) to avoid the prompt.
-#' @param skill For multi-skill repositories that store skills under a
-#'   `skills/` subdirectory, the name of the skill to install, e.g.
-#'   `skill = "proofread"`. When supplied, the skill is read from
-#'   `skills/<skill>` within the repository. Ignored when `source` already
-#'   points to a specific subdirectory via `/tree/...`.
 #' @param overwrite If `FALSE` (the default), an error is raised if the skill
 #'   is already installed. Set to `TRUE` to replace it.
 #'
@@ -36,8 +36,8 @@
 #'   c('---', 'name: example', 'description: An example skill.', '---'),
 #'   file.path(src, 'SKILL.md')
 #' )
-#' add_skill(src, tempfile())
-add_skill <- function(source, path = NULL, skill = NULL, overwrite = FALSE) {
+#' add_skill(src, path = tempfile())
+add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
   path <- resolve_path(path)
   type <- parse_source(source)
   if (type == 'github') {

@@ -4,7 +4,7 @@
       find_skill()
     Condition
       Error in `find_skill()`:
-      ! `query` must not be missing.
+      ! `query` is absent but must be supplied.
 
 # find_skill errors on network failure
 

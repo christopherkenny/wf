@@ -31,7 +31,7 @@ update_skills <- function(path = NULL) {
   lock <- read_lock(path)
   for (name in to_update) {
     source <- lock[[name]]$source
-    add_skill(source, path, overwrite = TRUE)
+    add_skill(source, path = path, overwrite = TRUE)
   }
 
   invisible(to_update)

@@ -4,7 +4,7 @@
 \alias{add_skill}
 \title{Install a skill}
 \usage{
-add_skill(source, path = NULL, skill = NULL, overwrite = FALSE)
+add_skill(source, skill = NULL, path = NULL, overwrite = FALSE)
 }
 \arguments{
 \item{source}{One of:
@@ -15,6 +15,12 @@ add_skill(source, path = NULL, skill = NULL, overwrite = FALSE)
 \item A GitHub shorthand, e.g. \code{"owner/repo"}.
 \item A local directory path containing a \code{SKILL.md} file.
 }}
+
+\item{skill}{For multi-skill repositories that store skills under a
+\verb{skills/} subdirectory, the name of the skill to install, e.g.
+\code{skill = "proofread"}. When supplied, the skill is read from
+\verb{skills/<skill>} within the repository. Ignored when \code{source} already
+points to a specific subdirectory via \verb{/tree/...}.}
 
 \item{path}{The skills directory to install into. Can be one of:
 \itemize{
@@ -27,12 +33,6 @@ agent's conventional project-scope path.
 sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
 \code{\link[usethis:edit]{usethis::edit_r_environ()}}) to avoid the prompt.
 }}
-
-\item{skill}{For multi-skill repositories that store skills under a
-\verb{skills/} subdirectory, the name of the skill to install, e.g.
-\code{skill = "proofread"}. When supplied, the skill is read from
-\verb{skills/<skill>} within the repository. Ignored when \code{source} already
-points to a specific subdirectory via \verb{/tree/...}.}
 
 \item{overwrite}{If \code{FALSE} (the default), an error is raised if the skill
 is already installed. Set to \code{TRUE} to replace it.}
@@ -51,5 +51,5 @@ writeLines(
   c('---', 'name: example', 'description: An example skill.', '---'),
   file.path(src, 'SKILL.md')
 )
-add_skill(src, tempfile())
+add_skill(src, path = tempfile())
 }

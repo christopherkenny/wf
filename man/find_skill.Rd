@@ -4,7 +4,7 @@
 \alias{find_skill}
 \title{Search for skills on GitHub}
 \usage{
-find_skill(query = NULL)
+find_skill(query)
 }
 \arguments{
 \item{query}{Keyword to search for.}

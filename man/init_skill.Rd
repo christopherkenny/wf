@@ -4,7 +4,7 @@
 \alias{init_skill}
 \title{Create a new skill template}
 \usage{
-init_skill(name, path)
+init_skill(name, path = NULL)
 }
 \arguments{
 \item{name}{Skill name. Must be 1-64 characters, lowercase alphanumeric with
@@ -12,9 +12,17 @@ single hyphens (no consecutive \verb{--}), and cannot start or end with a
 hyphen. Consider using a gerund form (e.g. \code{"parsing-logs"}).}
 
 \item{path}{Directory in which to create the skill. The skill directory
-itself will be \code{path/name}. Can be a known agent name such as
-\code{"claude_code"} or \code{"github_copilot"} to use that agent's conventional
-project-scope path (see \code{\link[=skill_path]{skill_path()}} for the full list).}
+itself will be \code{path/name}. Can be one of:
+\itemize{
+\item A known agent name such as \code{"claude_code"} or \code{"github_copilot"} to
+use that agent's conventional project-scope path (see \code{\link[=skill_path]{skill_path()}}
+for the full list).
+\item A character string giving the directory path directly.
+\item \code{NULL} (the default), in which case the path is resolved from the
+\code{WF_AGENT} environment variable, or by prompting in interactive
+sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
+\code{\link[usethis:edit]{usethis::edit_r_environ()}}) to avoid the prompt.
+}}
 }
 \value{
 The path to the new skill directory, invisibly.

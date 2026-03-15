@@ -16,9 +16,10 @@
 #'
 #' @examplesIf attr(curlGetHeaders('https://api.github.com'), 'status') == 200L
 #' find_skill('rstats')
-find_skill <- function(query = NULL) {
-  if (is.null(query) || !nzchar(query)) {
-    cli::cli_abort('{.arg query} must not be missing.')
+find_skill <- function(query) {
+  rlang::check_required(query)
+  if (!nzchar(query)) {
+    cli::cli_abort('{.arg query} must not be empty.')
   }
   # GitHub search does not support OR between topic: qualifiers, so we run
   # one query per skill topic and deduplicate results by URL.

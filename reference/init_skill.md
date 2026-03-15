@@ -34,5 +34,5 @@ The path to the new skill directory, invisibly.
 
 ``` r
 init_skill('my-skill', tempfile())
-#> Created skill "my-skill" at /tmp/RtmpT1kEDL/file1c70237856fc/my-skill.
+#> Created skill "my-skill" at /tmp/RtmpsniAwH/file1b9515073552/my-skill.
 ```

@@ -126,14 +126,16 @@
 <p>Search GitHub for community skills tagged with <code>claude-skill</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/find_skill.html">find_skill</a></span><span class="op">(</span><span class="st">'quarto'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] name        description owner       url         stars      </span></span>
-<span><span class="co">#&gt; &lt;0 rows&gt; (or 0-length row.names)</span></span></code></pre></div>
+<span><span class="co">#&gt;     name                                  description            owner</span></span>
+<span><span class="co">#&gt; 1 skills [WIP] Claude Skills for Political Scientists christopherkenny</span></span>
+<span><span class="co">#&gt;                                          url stars</span></span>
+<span><span class="co">#&gt; 1 https://github.com/christopherkenny/skills     3</span></span></code></pre></div>
 <p>Scaffold a new skill with a template <code>SKILL.md</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/init_skill.html">init_skill</a></span><span class="op">(</span><span class="st">'my-skill'</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created skill "my-skill" at</span></span>
-<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/Rtmpc5HWGM/file63946507204f/my-skill'.</span></span></code></pre></div>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpgfUC99/file69c48977e8/my-skill'.</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

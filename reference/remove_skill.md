@@ -51,8 +51,8 @@ writeLines(
   file.path(src, 'SKILL.md')
 )
 tmp <- tempfile()
-add_skill(src, tmp)
-#> Installed skill "example" to /tmp/RtmpsniAwH/file1b95278ab72b/example.
+add_skill(src, path = tmp)
+#> Installed skill "example" to /tmp/RtmpOKMrZj/file1b8470fc58ab/example.
 remove_skill('example', tmp, force = TRUE)
-#> Removed skill "example" from /tmp/RtmpsniAwH/file1b95278ab72b.
+#> Removed skill "example" from /tmp/RtmpOKMrZj/file1b8470fc58ab.
 ```

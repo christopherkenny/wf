@@ -7,7 +7,7 @@ a keyword query. Searches across all supported agent topic conventions
 ## Usage
 
 ``` r
-find_skill(query = NULL)
+find_skill(query)
 ```
 
 ## Arguments

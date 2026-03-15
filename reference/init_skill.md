@@ -6,7 +6,7 @@ Creates a new skill directory at `path/name/` containing a template
 ## Usage
 
 ``` r
-init_skill(name, path)
+init_skill(name, path = NULL)
 ```
 
 ## Arguments
@@ -20,11 +20,19 @@ init_skill(name, path)
 - path:
 
   Directory in which to create the skill. The skill directory itself
-  will be `path/name`. Can be a known agent name such as `"claude_code"`
-  or `"github_copilot"` to use that agent's conventional project-scope
-  path (see
-  [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
-  for the full list).
+  will be `path/name`. Can be one of:
+
+  - A known agent name such as `"claude_code"` or `"github_copilot"` to
+    use that agent's conventional project-scope path (see
+    [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+    for the full list).
+
+  - A character string giving the directory path directly.
+
+  - `NULL` (the default), in which case the path is resolved from the
+    `WF_AGENT` environment variable, or by prompting in interactive
+    sessions. Set `WF_AGENT` in your `.Renviron` (e.g. with
+    `usethis::edit_r_environ()`) to avoid the prompt.
 
 ## Value
 
@@ -34,5 +42,5 @@ The path to the new skill directory, invisibly.
 
 ``` r
 init_skill('my-skill', tempfile())
-#> Created skill "my-skill" at /tmp/RtmpsniAwH/file1b9515073552/my-skill.
+#> Created skill "my-skill" at /tmp/RtmpOKMrZj/file1b844ef6d270/my-skill.
 ```

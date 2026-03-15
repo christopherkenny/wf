@@ -41,7 +41,7 @@ directory.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">source</span>, path <span class="op">=</span> <span class="cn">NULL</span>, skill <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">source</span>, skill <span class="op">=</span> <span class="cn">NULL</span>, path <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -57,6 +57,14 @@ directory.</p>
 </ul></dd>
 
 
+<dt id="arg-skill">skill<a class="anchor" aria-label="anchor" href="#arg-skill"></a></dt>
+<dd><p>For multi-skill repositories that store skills under a
+<code>skills/</code> subdirectory, the name of the skill to install, e.g.
+<code>skill = "proofread"</code>. When supplied, the skill is read from
+<code>skills/&lt;skill&gt;</code> within the repository. Ignored when <code>source</code> already
+points to a specific subdirectory via <code>/tree/...</code>.</p></dd>
+
+
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
 <dd><p>The skills directory to install into. Can be one of:</p><ul><li><p>A known agent name such as <code>"claude_code"</code>, <code>"cursor"</code>, or
 <code>"github_copilot"</code> (see <code><a href="skill_path.html">skill_path()</a></code> for the full list) to use that
@@ -67,14 +75,6 @@ agent's conventional project-scope path.</p></li>
 sessions. Set <code>WF_AGENT</code> in your <code>.Renviron</code> (e.g. with
 <code>usethis::edit_r_environ()</code>) to avoid the prompt.</p></li>
 </ul></dd>
-
-
-<dt id="arg-skill">skill<a class="anchor" aria-label="anchor" href="#arg-skill"></a></dt>
-<dd><p>For multi-skill repositories that store skills under a
-<code>skills/</code> subdirectory, the name of the skill to install, e.g.
-<code>skill = "proofread"</code>. When supplied, the skill is read from
-<code>skills/&lt;skill&gt;</code> within the repository. Ignored when <code>source</code> already
-points to a specific subdirectory via <code>/tree/...</code>.</p></dd>
 
 
 <dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
@@ -95,8 +95,8 @@ is already installed. Set to <code>TRUE</code> to replace it.</p></dd>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'---'</span>, <span class="st">'name: example'</span>, <span class="st">'description: An example skill.'</span>, <span class="st">'---'</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">src</span>, <span class="st">'SKILL.md'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">src</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed skill <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/RtmpsniAwH/file1b957bd0f0cc/example</span>.</span>
+<span class="r-in"><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">src</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed skill <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/RtmpOKMrZj/file1b842416f2c2/example</span>.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

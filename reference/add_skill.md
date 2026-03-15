@@ -6,7 +6,7 @@ skills directory.
 ## Usage
 
 ``` r
-add_skill(source, path = NULL, skill = NULL, overwrite = FALSE)
+add_skill(source, skill = NULL, path = NULL, overwrite = FALSE)
 ```
 
 ## Arguments
@@ -25,6 +25,14 @@ add_skill(source, path = NULL, skill = NULL, overwrite = FALSE)
 
   - A local directory path containing a `SKILL.md` file.
 
+- skill:
+
+  For multi-skill repositories that store skills under a `skills/`
+  subdirectory, the name of the skill to install, e.g.
+  `skill = "proofread"`. When supplied, the skill is read from
+  `skills/<skill>` within the repository. Ignored when `source` already
+  points to a specific subdirectory via `/tree/...`.
+
 - path:
 
   The skills directory to install into. Can be one of:
@@ -41,14 +49,6 @@ add_skill(source, path = NULL, skill = NULL, overwrite = FALSE)
     `WF_AGENT` environment variable, or by prompting in interactive
     sessions. Set `WF_AGENT` in your `.Renviron` (e.g. with
     `usethis::edit_r_environ()`) to avoid the prompt.
-
-- skill:
-
-  For multi-skill repositories that store skills under a `skills/`
-  subdirectory, the name of the skill to install, e.g.
-  `skill = "proofread"`. When supplied, the skill is read from
-  `skills/<skill>` within the repository. Ignored when `source` already
-  points to a specific subdirectory via `/tree/...`.
 
 - overwrite:
 
@@ -68,6 +68,6 @@ writeLines(
   c('---', 'name: example', 'description: An example skill.', '---'),
   file.path(src, 'SKILL.md')
 )
-add_skill(src, tempfile())
-#> Installed skill "example" to /tmp/RtmpsniAwH/file1b957bd0f0cc/example.
+add_skill(src, path = tempfile())
+#> Installed skill "example" to /tmp/RtmpOKMrZj/file1b842416f2c2/example.
 ```

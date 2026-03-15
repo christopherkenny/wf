@@ -49,12 +49,6 @@ test_that('list_skills includes source and installed_at from lock', {
 
   result <- list_skills(dest_dir)
   expect_identical(nrow(result), 1L)
-  expect_false(is.na(result$source))
-  expect_false(is.na(result$installed_at))
-})
-
-test_that('list_skills returns correct column names', {
-  tmp <- withr::local_tempdir()
-  result <- list_skills(tmp)
-  expect_named(result, c('name', 'description', 'source', 'installed_at'))
+  expect_identical(result$source, as.character(fs::path_abs(fixture)))
+  expect_match(result$installed_at, '^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$')
 })

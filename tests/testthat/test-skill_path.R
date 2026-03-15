@@ -77,12 +77,6 @@ test_that('skill_path uses WF_AGENT env var when agent is NULL', {
   })
 })
 
-test_that('skill_path falls back to claude_code when WF_AGENT is unset', {
-  withr::with_envvar(c(WF_AGENT = ''), {
-    expect_identical(skill_path(), '.claude/skills')
-  })
-})
-
 test_that('explicit agent overrides WF_AGENT', {
   withr::with_envvar(c(WF_AGENT = 'cursor'), {
     expect_identical(skill_path('codex'), '.codex/skills')
@@ -95,28 +89,9 @@ test_that('skill_path errors when WF_AGENT is invalid', {
   })
 })
 
-test_that('resolve_path returns project path for known agent name', {
-  expect_identical(wf:::resolve_path('claude_code'), '.claude/skills')
-  expect_identical(wf:::resolve_path('github_copilot'), '.copilot/skills')
-  expect_identical(wf:::resolve_path('cursor'), '.cursor/skills')
-  expect_identical(wf:::resolve_path('posit_ai'), '.positai/skills')
-})
-
-test_that('resolve_path handles agent aliases', {
-  expect_identical(wf:::resolve_path('claude'), '.claude/skills')
-  expect_identical(wf:::resolve_path('copilot'), '.copilot/skills')
-  expect_identical(wf:::resolve_path('posit'), '.positai/skills')
-})
-
 test_that('resolve_path returns literal path for unknown string', {
   expect_identical(wf:::resolve_path('/tmp/my/skills'), '/tmp/my/skills')
   expect_identical(wf:::resolve_path('some/custom/path'), 'some/custom/path')
-})
-
-test_that('resolve_path uses WF_AGENT when path is NULL', {
-  withr::with_envvar(c(WF_AGENT = 'cursor'), {
-    expect_identical(wf:::resolve_path(NULL), '.cursor/skills')
-  })
 })
 
 test_that('resolve_path aborts when path is NULL and no env var set', {

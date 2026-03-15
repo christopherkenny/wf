@@ -36,7 +36,7 @@ test_that('check_skills detects update available when SHAs differ', {
   )
   result <- check_skills(tmp)
   expect_identical(nrow(result), 1L)
-  expect_true(result$update_available)
+  expect_identical(result$update_available, TRUE)
   expect_identical(result$installed_sha, 'abc123')
   expect_identical(result$latest_sha, 'def456')
 })
@@ -58,7 +58,7 @@ test_that('check_skills reports no update when SHAs match', {
     gh_latest_sha = function(owner, repo) 'abc123'
   )
   result <- check_skills(tmp)
-  expect_false(result$update_available)
+  expect_identical(result$update_available, FALSE)
 })
 
 test_that('check_skills marks local skills as not updatable', {
@@ -75,6 +75,6 @@ test_that('check_skills marks local skills as not updatable', {
     )
   )
   result <- check_skills(tmp)
-  expect_false(result$update_available)
-  expect_true(is.na(result$latest_sha))
+  expect_identical(result$update_available, FALSE)
+  expect_identical(result$latest_sha, NA_character_)
 })

@@ -22,7 +22,6 @@ test_that('update_skills calls add_skill for each skill with an update', {
     )
   )
 
-  called_sources <- character()
   local_mocked_bindings(
     check_skills = function(path) {
       data.frame(
@@ -34,19 +33,17 @@ test_that('update_skills calls add_skill for each skill with an update', {
       )
     },
     add_skill = function(source, path, overwrite) {
-      called_sources <<- c(called_sources, source)
+      expect_identical(source, 'https://github.com/owner/skill-a')
       invisible(fs::path(path, 'skill-a'))
     }
   )
 
   result <- update_skills(tmp)
   expect_identical(result, 'skill-a')
-  expect_identical(called_sources, 'https://github.com/owner/skill-a')
 })
 
 test_that('update_skills does not call add_skill when all are up to date', {
   tmp <- withr::local_tempdir()
-  add_skill_called <- FALSE
   local_mocked_bindings(
     check_skills = function(path) {
       data.frame(
@@ -58,12 +55,11 @@ test_that('update_skills does not call add_skill when all are up to date', {
       )
     },
     add_skill = function(source, path, overwrite) {
-      add_skill_called <<- TRUE
+      stop('add_skill should not be called when all skills are up to date')
     }
   )
 
   result <- update_skills(tmp)
-  expect_false(add_skill_called)
   expect_identical(result, character())
 })
 

@@ -43,7 +43,7 @@ test_that('add_skill writes lock file', {
   add_skill(fixture, path = dest_dir)
 
   lock <- jsonlite::read_json(fs::path(dest_dir, '.skill-lock.json'))
-  expect_true('my-skill' %in% names(lock))
+  expect_identical(names(lock), 'my-skill')
   expect_identical(lock[['my-skill']]$type, 'local')
 })
 

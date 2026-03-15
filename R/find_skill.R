@@ -15,7 +15,9 @@
 #' @export
 #'
 #' @examplesIf attr(curlGetHeaders('https://api.github.com'), 'status') == 200L
-#' find_skill('rstats')
+#' \donttest{
+#'   find_skill('rstats')
+#' }
 find_skill <- function(query) {
   rlang::check_required(query)
   if (!nzchar(query)) {

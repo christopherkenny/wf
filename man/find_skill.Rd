@@ -26,6 +26,8 @@ a keyword query. Searches across all supported agent topic conventions
 }
 \examples{
 \dontshow{if (attr(curlGetHeaders('https://api.github.com'), 'status') == 200L) withAutoprint(\{ # examplesIf}
-find_skill('rstats')
+\donttest{
+  find_skill('rstats')
+}
 \dontshow{\}) # examplesIf}
 }

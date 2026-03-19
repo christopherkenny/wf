@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/christopherkenny/wf/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/christopherkenny/wf/blob/v0.0.1/DESCRIPTION)
 
 Kenny C (2026). *wf: Artificial Intelligence Workflow Tools*. R package
 version 0.0.1, <https://christophertkenny.com/wf/>.

@@ -2,6 +2,8 @@
 
 ## wf 0.0.1
 
+CRAN release: 2026-03-19
+
 - [`add_skill()`](https://christopherkenny.github.io/wf/reference/add_skill.md),
   [`check_skills()`](https://christopherkenny.github.io/wf/reference/check_skills.md),
   [`find_skill()`](https://christopherkenny.github.io/wf/reference/find_skill.md),

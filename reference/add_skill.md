@@ -69,5 +69,5 @@ writeLines(
   file.path(src, 'SKILL.md')
 )
 add_skill(src, path = tempfile())
-#> Installed skill "example" to /tmp/RtmpfpxO5G/file1be173ccf8a4/example.
+#> Installed skill "example" to /tmp/Rtmpk3hOe6/file1c436be274ff/example.
 ```

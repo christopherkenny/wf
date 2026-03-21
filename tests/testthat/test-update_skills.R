@@ -1,8 +1,9 @@
 make_lock <- function(path, entries) {
-  fs::dir_create(path, recurse = TRUE)
+  root <- fs::path_dir(path)
+  fs::dir_create(root, recurse = TRUE)
   jsonlite::write_json(
-    entries,
-    fs::path(path, '.skill-lock.json'),
+    list(skills = entries),
+    fs::path(root, '.wf-lock.json'),
     auto_unbox = TRUE,
     pretty = TRUE
   )

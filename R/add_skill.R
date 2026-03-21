@@ -14,17 +14,8 @@
 #'   `skill = "proofread"`. When supplied, the skill is read from
 #'   `skills/<skill>` within the repository. Ignored when `source` already
 #'   points to a specific subdirectory via `/tree/...`.
-#' @param path The skills directory to install into. Can be one of:
-#'   - A known agent name such as `"claude_code"`, `"cursor"`, or
-#'     `"github_copilot"` (see [skill_path()] for the full list) to use that
-#'     agent's conventional project-scope path.
-#'   - A character string giving the directory path directly.
-#'   - `NULL` (the default), in which case the path is resolved from the
-#'     `WF_AGENT` environment variable, or by prompting in interactive
-#'     sessions. Set `WF_AGENT` in your `.Renviron` (e.g. with
-#'     [usethis::edit_r_environ()]) to avoid the prompt.
-#' @param overwrite If `FALSE` (the default), an error is raised if the skill
-#'   is already installed. Set to `TRUE` to replace it.
+#' @param path `r roxy_path('skill', 'skill_path')`
+#' @param overwrite `r roxy_overwrite('skill')`
 #'
 #' @return The path to the installed skill directory, invisibly.
 #' @export
@@ -38,27 +29,25 @@
 #' )
 #' add_skill(src, path = tempfile())
 add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
-  path <- resolve_path(path)
+  path <- resolve_skill_path(path)
   type <- parse_source(source)
   if (type == 'github') {
     gh <- parse_gh_source(source)
     if (!is.null(skill) && is.null(gh$path)) {
       gh$path <- paste0('skills/', skill)
     }
-    skill_dir <- gh_download_skill(gh$owner, gh$repo, gh$path)
-    sha <- gh_latest_sha(gh$owner, gh$repo)
-    lock_source <- if (is.null(gh$path)) {
-      paste0('https://github.com/', gh$owner, '/', gh$repo)
+    repo_root <- gh_download(gh$owner, gh$repo)
+    skill_dir <- if (!is.null(gh$path)) {
+      inner <- fs::path(repo_root, gh$path)
+      if (!fs::dir_exists(inner)) {
+        cli::cli_abort('Path {.path {gh$path}} not found in {gh$owner}/{gh$repo}.')
+      }
+      inner
     } else {
-      paste0(
-        'https://github.com/',
-        gh$owner,
-        '/',
-        gh$repo,
-        '/tree/HEAD/',
-        gh$path
-      )
+      repo_root
     }
+    sha <- gh_latest_sha(gh$owner, gh$repo)
+    lock_source <- make_gh_lock_source(gh)
   } else {
     skill_dir <- source
     if (!fs::dir_exists(skill_dir)) {
@@ -87,7 +76,7 @@ add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
   fs::dir_create(path, recurse = TRUE)
   fs::dir_copy(skill_dir, dest)
 
-  lock <- read_lock(path)
+  lock <- read_lock(path, skill_lock_section)
   entry <- list(
     source = lock_source,
     type = type,
@@ -97,7 +86,7 @@ add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
     entry$sha <- sha
   }
   lock[[name]] <- entry
-  write_lock(path, lock)
+  write_lock(path, lock, skill_lock_section)
 
   cli::cli_inform('Installed skill {.val {name}} to {.path {dest}}.')
   invisible(dest)

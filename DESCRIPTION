@@ -1,6 +1,6 @@
 Package: wf
 Title: Artificial Intelligence Workflow Tools
-Version: 0.0.1
+Version: 0.1.0
 Authors@R:
     person(given = "Christopher T.",
            family = "Kenny",

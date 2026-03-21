@@ -89,16 +89,16 @@ test_that('skill_path errors when WF_AGENT is invalid', {
   })
 })
 
-test_that('resolve_path returns literal path for unknown string', {
-  expect_identical(wf:::resolve_path('/tmp/my/skills'), '/tmp/my/skills')
-  expect_identical(wf:::resolve_path('some/custom/path'), 'some/custom/path')
+test_that('resolve_skill_path returns literal path for unknown string', {
+  expect_identical(wf:::resolve_skill_path('/tmp/my/skills'), '/tmp/my/skills')
+  expect_identical(wf:::resolve_skill_path('some/custom/path'), 'some/custom/path')
 })
 
-test_that('resolve_path aborts when path is NULL and no env var set', {
+test_that('resolve_skill_path aborts when path is NULL and no env var set', {
   tmp <- withr::local_tempdir()
   withr::with_dir(tmp, {
     withr::with_envvar(c(WF_AGENT = ''), {
-      expect_snapshot(wf:::resolve_path(NULL), error = TRUE)
+      expect_snapshot(wf:::resolve_skill_path(NULL), error = TRUE)
     })
   })
 })

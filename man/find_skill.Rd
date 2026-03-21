@@ -25,9 +25,8 @@ a keyword query. Searches across all supported agent topic conventions
 (e.g. \code{claude-skill}, \code{cursor-skill}).
 }
 \examples{
-\dontshow{if (attr(curlGetHeaders('https://api.github.com'), 'status') == 200L) withAutoprint(\{ # examplesIf}
-\donttest{
-  find_skill('rstats')
+\dontrun{
+# Requires GitHub API access; may fail due to rate limiting
+find_skill('rstats')
 }
-\dontshow{\}) # examplesIf}
 }

@@ -20,11 +20,25 @@ Sys.setenv(WF_AGENT = 'claude_code')
 [![R-CMD-check](https://github.com/christopherkenny/wf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christopherkenny/wf/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`wf` manages skills for AI coding agents.
-Skills are reusable instruction sets that extend what an agent can do.
-They live in a conventional directory for each agent (e.g., `.claude/skills/` for Claude Code) and can be installed from GitHub or a local path.
+`wf` manages the building blocks of AI coding agents: skills, agents, rules, and hooks.
+Each type lives in a conventional directory (e.g. `.claude/skills/` for Claude Code skills) and can be installed from GitHub or a local path, then tracked and updated through a lock file.
+
+| Type | Directory | Description |
+|------|-----------|-------------|
+| Skills | `.claude/skills/` | Reusable instruction sets that extend what an agent can do |
+| Agents | `.claude/agents/` | Custom subagent definitions with their own system prompts |
+| Rules | `.claude/rules/` | Coding guidelines applied automatically to every session |
+| Hooks | `.claude/hooks/` | Lifecycle scripts that run on agent events (e.g. pre-tool-use) |
 
 ## Installation
+
+To install the stable version on CRAN:
+
+```r
+install.package('wf')
+```
+
+To install the development version:
 
 ```r
 # install.packages('pak')
@@ -47,17 +61,20 @@ WF_AGENT='claude_code'
 
 Supported agents: `'claude_code'` (alias: `'claude'`), `'openclaw'`, `'codex'`, `'cursor'`, `'gemini_cli'`, `'github_copilot'` (alias: `'copilot'`), `'posit_ai'` (alias: `'posit'`).
 
-Skills can be scoped to a project (`.agent/skills/`) or installed globally (`~/.agent/skills/`):
+Each type has its own `*_path()` function for looking up the conventional directory:
 
-```{r skill_path}
+```{r paths}
 library(wf)
 
-skill_path('claude_code', 'project') # project-local
-skill_path('claude_code', 'global') # user-global
-skill_path() # auto-detected from WF_AGENT or directory
+skill_path('claude_code', 'project')
+agent_path('claude_code', 'project')
+rule_path('claude_code', 'project')
+hook_path('claude_code', 'project')
 ```
 
-## Example
+All path functions also accept `scope = 'global'` for user-wide installation, and auto-detect the agent from `WF_AGENT` when called without arguments.
+
+## Skills
 
 Install a skill from GitHub using its `owner/repo` shorthand or a full URL:
 
@@ -65,7 +82,7 @@ Install a skill from GitHub using its `owner/repo` shorthand or a full URL:
 add_skill('some-user/some-skill')
 ```
 
-For repos that bundle multiple skills, use the `skill` argument:
+For repos that bundle multiple skills under a `skills/` subdirectory, use the `skill` argument:
 
 ```r
 add_skill('some-user/skills', skill = 'proofread')
@@ -79,17 +96,71 @@ check_skills()
 update_skills()
 ```
 
-## Finding and creating skills
+Search GitHub for community skills or scaffold a new one:
 
-Search GitHub for community skills tagged with `claude-skill`:
-
-```{r find_skill}
+```{r find_init_skill}
 find_skill('quarto')
-```
 
-Scaffold a new skill with a template `SKILL.md`:
-
-```{r init_skill}
 tmp <- tempfile()
 init_skill('my-skill', tmp)
+```
+
+## Agents
+
+Custom subagents are single `.md` files with YAML frontmatter. Install one from GitHub:
+
+```r
+add_agent('some-user/some-agent')
+```
+
+For multi-agent repos, use the `agent` argument:
+
+```r
+add_agent('some-user/agents', agent = 'code-reviewer')
+```
+
+Create a local template to get started:
+
+```{r init_agent}
+tmp <- tempfile()
+init_agent('my-agent', tmp)
+```
+
+## Rules
+
+Rules are Markdown files that set coding guidelines for every session. Install from GitHub:
+
+```r
+add_rule('some-user/some-rule')
+```
+
+Create a local template:
+
+```{r init_rule}
+tmp <- tempfile()
+init_rule('my-rule', tmp)
+```
+
+## Hooks
+
+Hooks are executable scripts (`.sh`, `.R`, etc.) that run on agent lifecycle events.
+Installing a hook copies the script to `.claude/hooks/` and registers it in `settings.json`.
+
+```r
+add_hook('some-user/some-hook', event = 'PreToolUse')
+```
+
+To register a bare command without installing a script file:
+
+```r
+register_hook('PreToolUse', 'echo hello')
+```
+
+List registered hooks or create a new script template:
+
+```{r init_hook}
+list_hooks()
+
+tmp <- tempfile()
+init_hook('my-hook', tmp)
 ```

@@ -11,10 +11,9 @@
     Code
       init_skill("My-Skill", tmp)
     Condition
-      Error in `check_skill_name()`:
-      ! `name` must be lowercase alphanumeric with single hyphens.
+      Error in `check_item_name()`:
+      ! `name` must be lowercase alphanumeric with hyphens.
       i It cannot start or end with a hyphen.
-      i It cannot contain consecutive hyphens.
       x Got "My-Skill".
 
 ---
@@ -22,10 +21,9 @@
     Code
       init_skill("-bad", tmp)
     Condition
-      Error in `check_skill_name()`:
-      ! `name` must be lowercase alphanumeric with single hyphens.
+      Error in `check_item_name()`:
+      ! `name` must be lowercase alphanumeric with hyphens.
       i It cannot start or end with a hyphen.
-      i It cannot contain consecutive hyphens.
       x Got "-bad".
 
 ---
@@ -33,10 +31,9 @@
     Code
       init_skill("bad-", tmp)
     Condition
-      Error in `check_skill_name()`:
-      ! `name` must be lowercase alphanumeric with single hyphens.
+      Error in `check_item_name()`:
+      ! `name` must be lowercase alphanumeric with hyphens.
       i It cannot start or end with a hyphen.
-      i It cannot contain consecutive hyphens.
       x Got "bad-".
 
 ---
@@ -44,7 +41,7 @@
     Code
       init_skill("bad--name", tmp)
     Condition
-      Error in `check_skill_name()`:
+      Error in `check_item_name()`:
       ! `name` cannot contain consecutive hyphens.
       x Got "bad--name".
 
@@ -53,6 +50,6 @@
     Code
       init_skill("", tmp)
     Condition
-      Error in `check_skill_name()`:
+      Error in `check_item_name()`:
       ! `name` must be between 1 and 64 characters, not 0.
 

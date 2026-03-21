@@ -31,20 +31,6 @@
 #' skill_path('cursor', 'global')
 #' skill_path() # auto-detects from WF_AGENT, dir scan, or falls back to claude_code
 skill_path <- function(agent = NULL, scope = c('project', 'global')) {
-  agent <- agent %||% Sys.getenv('WF_AGENT', unset = '')
-  if (!nzchar(agent)) {
-    agent <- detect_agent() %||% 'claude_code'
-  }
-  agent <- agent_aliases[[agent]] %||% agent
   scope <- rlang::arg_match(scope)
-  agents <- names(skill_paths)
-  if (!agent %in% agents) {
-    cli::cli_abort(
-      c(
-        '{.arg agent} must be one of {.or {.val {agents}}}.',
-        'x' = 'Got {.val {agent}}.'
-      )
-    )
-  }
-  skill_paths[[agent]][[scope]]
+  get_scope_path(agent, scope, skill_paths)
 }

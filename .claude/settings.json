@@ -22,7 +22,9 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(Rscript -e \"styler.quote::style_pkg\\(\\)\")",
-      "Bash(Rscript -e \"urlchecker::url_check\\(\\)\")"
+      "Bash(Rscript -e \"urlchecker::url_check\\(\\)\")",
+      "Bash(Rscript -e \"devtools::document\\(\\)\")",
+      "Bash(Rscript -e \"devtools::test\\(\\)\")"
     ],
     "deny": [
       "Read(.Renviron)",

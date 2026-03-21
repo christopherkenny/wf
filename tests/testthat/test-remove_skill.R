@@ -38,7 +38,7 @@ test_that('remove_skill updates the lock file', {
 
   remove_skill('my-skill', dest_dir, force = TRUE)
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.skill-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$skills
   expect_false('my-skill' %in% names(lock))
 })
 

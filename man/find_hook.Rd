@@ -25,7 +25,8 @@ a keyword query. Searches across all supported hook topic conventions
 (e.g. \code{claude-hook}, \code{cursor-hook}).
 }
 \examples{
-\dontshow{if (tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)) withAutoprint(\{ # examplesIf}
+\dontrun{
+# Requires GitHub API access; may fail due to rate limiting
 find_hook('linting')
-\dontshow{\}) # examplesIf}
+}
 }

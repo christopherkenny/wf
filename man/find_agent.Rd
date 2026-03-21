@@ -25,7 +25,8 @@ a keyword query. Searches across all supported agent topic conventions
 (e.g. \code{claude-agent}, \code{cursor-agent}).
 }
 \examples{
-\dontshow{if (tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)) withAutoprint(\{ # examplesIf}
+\dontrun{
+# Requires GitHub API access; may fail due to rate limiting
 find_agent('code-review')
-\dontshow{\}) # examplesIf}
+}
 }

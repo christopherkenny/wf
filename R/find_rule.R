@@ -14,8 +14,11 @@
 #'   - `stars`: number of GitHub stars.
 #' @export
 #'
-#' @examplesIf tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)
+#' @examples
+#' \dontrun{
+#' # Requires GitHub API access; may fail due to rate limiting
 #' find_rule('testing')
+#' }
 find_rule <- function(query) {
   find_gh_items(query, rule_topics)
 }

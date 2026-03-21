@@ -153,14 +153,19 @@ migrate_lock <- function(path) {
   migrated <- character()
   for (section in names(old_files)) {
     old_file <- old_files[[section]]
-    if (!fs::file_exists(old_file)) next
+    if (!fs::file_exists(old_file)) {
+      next
+    }
     entries <- jsonlite::read_json(old_file)
-    if (length(entries) == 0) next
+    if (length(entries) == 0) {
+      next
+    }
     write_lock(fs::path(path, section), entries, section)
     migrated <- c(migrated, section)
-    cli::cli_inform(
-      'Migrated {length(entries)} {section} entr{?y/ies} from {.path {old_file}}.'
-    )
+    cli::cli_inform(c(
+      'Migrated {length(entries)} {section} entr{?y/ies} from {.path {old_file}}.',
+      'i' = 'You can safely delete {.path {old_file}}.'
+    ))
   }
 
   if (length(migrated) == 0) {

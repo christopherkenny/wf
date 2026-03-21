@@ -14,7 +14,7 @@
 #'   - `stars`: number of GitHub stars.
 #' @export
 #'
-#' @examplesIf attr(curlGetHeaders('https://api.github.com'), 'status') == 200L
+#' @examplesIf tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)
 #' \donttest{
 #' find_agent('code-review')
 #' }

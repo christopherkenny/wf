@@ -25,7 +25,7 @@ a keyword query. Searches across all supported hook topic conventions
 (e.g. \code{claude-hook}, \code{cursor-hook}).
 }
 \examples{
-\dontshow{if (attr(curlGetHeaders('https://api.github.com'), 'status') == 200L) withAutoprint(\{ # examplesIf}
+\dontshow{if (tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)) withAutoprint(\{ # examplesIf}
 \donttest{
 find_hook('linting')
 }

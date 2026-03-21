@@ -1,42 +1,6 @@
-rule_paths <- list(
-  claude_code = list(
-    project = '.claude/rules',
-    global = '~/.claude/rules'
-  ),
-  openclaw = list(
-    project = '.openclaw/rules',
-    global = '~/.openclaw/rules'
-  ),
-  codex = list(
-    project = '.codex/rules',
-    global = '~/.codex/rules'
-  ),
-  cursor = list(
-    project = '.cursor/rules',
-    global = '~/.cursor/rules'
-  ),
-  gemini_cli = list(
-    project = '.gemini/rules',
-    global = '~/.gemini/rules'
-  ),
-  github_copilot = list(
-    project = '.copilot/rules',
-    global = '~/.copilot/rules'
-  ),
-  posit_ai = list(
-    project = '.positai/rules',
-    global = '~/.positai/rules'
-  )
-)
+rule_paths <- make_scope_paths('rules')
 
-rule_topics <- c(
-  'claude-rule',
-  'cursor-rule',
-  'codex-rule',
-  'gemini-rule',
-  'copilot-rule',
-  'ai-coding-rule'
-)
+rule_topics <- make_topics('rule')
 
 rule_lock_section <- 'rules'
 

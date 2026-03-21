@@ -40,15 +40,16 @@ is read from \verb{hooks/<hook>.<ext>} within the repository. Ignored when
 hook, e.g. \code{"Bash|Edit"}. When \code{NULL} (the default), the hook applies
 to all tool calls for the event.}
 
-\item{path}{The hooks directory to install into. Can be one of:
+\item{path}{The hooks directory. Can be one of:
 \itemize{
-\item A known coding agent name such as \code{"claude_code"}, \code{"cursor"}, or
-\code{"github_copilot"} (see \code{\link[=hook_path]{hook_path()}} for the full list) to use that
-agent's conventional project-scope path.
+\item A known coding agent name such as \code{'claude_code'}, \code{'cursor'}, or
+\code{'github_copilot'} (see \code{\link[=hook_path]{hook_path()}} for the full list) to use
+that agent's conventional project-scope path.
 \item A character string giving the directory path directly.
 \item \code{NULL} (the default), in which case the path is resolved from the
 \code{WF_AGENT} environment variable, or by prompting in interactive
-sessions.
+sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
+\code{\link[usethis:edit]{usethis::edit_r_environ()}}) to avoid the prompt.
 }}
 
 \item{settings}{Path to the \code{settings.json} file where the hook will be
@@ -56,8 +57,7 @@ registered. When \code{NULL} (the default), defaults to
 \code{settings.json} in the parent directory of \code{path} (e.g. if \code{path} is
 \code{.claude/hooks}, uses \code{.claude/settings.json}).}
 
-\item{overwrite}{If \code{FALSE} (the default), an error is raised if the hook
-script is already installed. Set to \code{TRUE} to replace it.}
+\item{overwrite}{If \code{FALSE} (the default), an error is raised if the hook is already installed. Set to \code{TRUE} to replace it.}
 
 \item{timeout}{Optional timeout in seconds for the hook command.}
 

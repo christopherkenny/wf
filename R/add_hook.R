@@ -21,20 +21,12 @@
 #'   `"PostToolUse"` events) used to filter which tool calls trigger the
 #'   hook, e.g. `"Bash|Edit"`. When `NULL` (the default), the hook applies
 #'   to all tool calls for the event.
-#' @param path The hooks directory to install into. Can be one of:
-#'   - A known coding agent name such as `"claude_code"`, `"cursor"`, or
-#'     `"github_copilot"` (see [hook_path()] for the full list) to use that
-#'     agent's conventional project-scope path.
-#'   - A character string giving the directory path directly.
-#'   - `NULL` (the default), in which case the path is resolved from the
-#'     `WF_AGENT` environment variable, or by prompting in interactive
-#'     sessions.
+#' @param path `r roxy_path('hook', 'hook_path')`
 #' @param settings Path to the `settings.json` file where the hook will be
 #'   registered. When `NULL` (the default), defaults to
 #'   `settings.json` in the parent directory of `path` (e.g. if `path` is
 #'   `.claude/hooks`, uses `.claude/settings.json`).
-#' @param overwrite If `FALSE` (the default), an error is raised if the hook
-#'   script is already installed. Set to `TRUE` to replace it.
+#' @param overwrite `r roxy_overwrite('hook')`
 #' @param timeout Optional timeout in seconds for the hook command.
 #' @param async If `TRUE`, the hook runs asynchronously. Default is `FALSE`.
 #'

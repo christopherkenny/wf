@@ -4,18 +4,8 @@
 #' file.
 #'
 #' @param name The name of the rule to remove (without the `.md` extension).
-#' @param path The rules directory where the rule is installed. Can be one
-#'   of:
-#'   - A known coding agent name such as `"claude_code"`, `"cursor"`, or
-#'     `"github_copilot"` (see [rule_path()] for the full list) to use that
-#'     agent's conventional project-scope path.
-#'   - A character string giving the directory path directly.
-#'   - `NULL` (the default), in which case the path is resolved from the
-#'     `WF_AGENT` environment variable, or by prompting in interactive
-#'     sessions. Set `WF_AGENT` in your `.Renviron` (e.g. with
-#'     [usethis::edit_r_environ()]) to avoid the prompt.
-#' @param force If `FALSE` (the default), prompts for confirmation in
-#'   interactive sessions. Set to `TRUE` to skip the prompt.
+#' @param path `r roxy_path('rule', 'rule_path')`
+#' @param force `r roxy_force()`
 #'
 #' @return The name of the removed rule, invisibly.
 #' @export

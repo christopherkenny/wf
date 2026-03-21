@@ -1,42 +1,6 @@
-agent_paths <- list(
-  claude_code = list(
-    project = '.claude/agents',
-    global = '~/.claude/agents'
-  ),
-  openclaw = list(
-    project = '.openclaw/agents',
-    global = '~/.openclaw/agents'
-  ),
-  codex = list(
-    project = '.codex/agents',
-    global = '~/.codex/agents'
-  ),
-  cursor = list(
-    project = '.cursor/agents',
-    global = '~/.cursor/agents'
-  ),
-  gemini_cli = list(
-    project = '.gemini/agents',
-    global = '~/.gemini/agents'
-  ),
-  github_copilot = list(
-    project = '.copilot/agents',
-    global = '~/.copilot/agents'
-  ),
-  posit_ai = list(
-    project = '.positai/agents',
-    global = '~/.positai/agents'
-  )
-)
+agent_paths <- make_scope_paths('agents')
 
-agent_topics <- c(
-  'claude-agent',
-  'cursor-agent',
-  'codex-agent',
-  'gemini-agent',
-  'copilot-agent',
-  'ai-coding-agent'
-)
+agent_topics <- make_topics('agent')
 
 agent_lock_section <- 'agents'
 

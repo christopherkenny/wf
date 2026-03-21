@@ -22,11 +22,11 @@ extension), e.g. \code{rule = "testing"}. When supplied, the rule is read
 from \verb{rules/<rule>.md} within the repository. Ignored when \code{source}
 already points to a specific path via \verb{/tree/...}.}
 
-\item{path}{The rules directory to install into. Can be one of:
+\item{path}{The rules directory. Can be one of:
 \itemize{
-\item A known coding agent name such as \code{"claude_code"}, \code{"cursor"}, or
-\code{"github_copilot"} (see \code{\link[=rule_path]{rule_path()}} for the full list) to use that
-agent's conventional project-scope path.
+\item A known coding agent name such as \code{'claude_code'}, \code{'cursor'}, or
+\code{'github_copilot'} (see \code{\link[=rule_path]{rule_path()}} for the full list) to use
+that agent's conventional project-scope path.
 \item A character string giving the directory path directly.
 \item \code{NULL} (the default), in which case the path is resolved from the
 \code{WF_AGENT} environment variable, or by prompting in interactive
@@ -34,8 +34,7 @@ sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
 \code{\link[usethis:edit]{usethis::edit_r_environ()}}) to avoid the prompt.
 }}
 
-\item{overwrite}{If \code{FALSE} (the default), an error is raised if the rule
-is already installed. Set to \code{TRUE} to replace it.}
+\item{overwrite}{If \code{FALSE} (the default), an error is raised if the rule is already installed. Set to \code{TRUE} to replace it.}
 }
 \value{
 The path to the installed rule file, invisibly.

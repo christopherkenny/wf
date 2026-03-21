@@ -16,17 +16,8 @@
 #'   extension), e.g. `rule = "testing"`. When supplied, the rule is read
 #'   from `rules/<rule>.md` within the repository. Ignored when `source`
 #'   already points to a specific path via `/tree/...`.
-#' @param path The rules directory to install into. Can be one of:
-#'   - A known coding agent name such as `"claude_code"`, `"cursor"`, or
-#'     `"github_copilot"` (see [rule_path()] for the full list) to use that
-#'     agent's conventional project-scope path.
-#'   - A character string giving the directory path directly.
-#'   - `NULL` (the default), in which case the path is resolved from the
-#'     `WF_AGENT` environment variable, or by prompting in interactive
-#'     sessions. Set `WF_AGENT` in your `.Renviron` (e.g. with
-#'     [usethis::edit_r_environ()]) to avoid the prompt.
-#' @param overwrite If `FALSE` (the default), an error is raised if the rule
-#'   is already installed. Set to `TRUE` to replace it.
+#' @param path `r roxy_path('rule', 'rule_path')`
+#' @param overwrite `r roxy_overwrite('rule')`
 #'
 #' @return The path to the installed rule file, invisibly.
 #' @export

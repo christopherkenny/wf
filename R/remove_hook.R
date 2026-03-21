@@ -5,20 +5,11 @@
 #'
 #' @param name The name of the hook to remove (the script filename stem,
 #'   e.g. `"lint-staged"` for `lint-staged.sh`).
-#' @param path The hooks directory where the hook is installed. Can be one
-#'   of:
-#'   - A known coding agent name such as `"claude_code"`, `"cursor"`, or
-#'     `"github_copilot"` (see [hook_path()] for the full list) to use that
-#'     agent's conventional project-scope path.
-#'   - A character string giving the directory path directly.
-#'   - `NULL` (the default), in which case the path is resolved from the
-#'     `WF_AGENT` environment variable, or by prompting in interactive
-#'     sessions.
+#' @param path `r roxy_path('hook', 'hook_path')`
 #' @param settings Path to the `settings.json` file where the hook is
 #'   registered. When `NULL` (the default), defaults to `settings.json` in
 #'   the parent directory of `path`.
-#' @param force If `FALSE` (the default), prompts for confirmation in
-#'   interactive sessions. Set to `TRUE` to skip the prompt.
+#' @param force `r roxy_force()`
 #'
 #' @return The name of the removed hook, invisibly.
 #' @export

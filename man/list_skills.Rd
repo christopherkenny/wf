@@ -7,11 +7,11 @@
 list_skills(path = NULL)
 }
 \arguments{
-\item{path}{The skills directory to inspect. Can be one of:
+\item{path}{The skills directory. Can be one of:
 \itemize{
-\item A known agent name such as \code{"claude_code"}, \code{"cursor"}, or
-\code{"github_copilot"} (see \code{\link[=skill_path]{skill_path()}} for the full list) to use that
-agent's conventional project-scope path.
+\item A known coding agent name such as \code{'claude_code'}, \code{'cursor'}, or
+\code{'github_copilot'} (see \code{\link[=skill_path]{skill_path()}} for the full list) to use
+that agent's conventional project-scope path.
 \item A character string giving the directory path directly.
 \item \code{NULL} (the default), in which case the path is resolved from the
 \code{WF_AGENT} environment variable, or by prompting in interactive
@@ -22,8 +22,8 @@ sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
 \value{
 A data frame with columns:
 \itemize{
-\item \code{name}: skill name from \code{SKILL.md} frontmatter.
-\item \code{description}: skill description from \code{SKILL.md} frontmatter.
+\item \code{name}: skill name from frontmatter (or filename stem).
+\item \code{description}: skill description from frontmatter.
 \item \code{source}: the source URL or local path the skill was installed from.
 \item \code{installed_at}: ISO 8601 timestamp of when the skill was installed.
 }

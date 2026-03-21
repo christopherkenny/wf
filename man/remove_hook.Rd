@@ -10,24 +10,23 @@ remove_hook(name, path = NULL, settings = NULL, force = FALSE)
 \item{name}{The name of the hook to remove (the script filename stem,
 e.g. \code{"lint-staged"} for \code{lint-staged.sh}).}
 
-\item{path}{The hooks directory where the hook is installed. Can be one
-of:
+\item{path}{The hooks directory. Can be one of:
 \itemize{
-\item A known coding agent name such as \code{"claude_code"}, \code{"cursor"}, or
-\code{"github_copilot"} (see \code{\link[=hook_path]{hook_path()}} for the full list) to use that
-agent's conventional project-scope path.
+\item A known coding agent name such as \code{'claude_code'}, \code{'cursor'}, or
+\code{'github_copilot'} (see \code{\link[=hook_path]{hook_path()}} for the full list) to use
+that agent's conventional project-scope path.
 \item A character string giving the directory path directly.
 \item \code{NULL} (the default), in which case the path is resolved from the
 \code{WF_AGENT} environment variable, or by prompting in interactive
-sessions.
+sessions. Set \code{WF_AGENT} in your \code{.Renviron} (e.g. with
+\code{\link[usethis:edit]{usethis::edit_r_environ()}}) to avoid the prompt.
 }}
 
 \item{settings}{Path to the \code{settings.json} file where the hook is
 registered. When \code{NULL} (the default), defaults to \code{settings.json} in
 the parent directory of \code{path}.}
 
-\item{force}{If \code{FALSE} (the default), prompts for confirmation in
-interactive sessions. Set to \code{TRUE} to skip the prompt.}
+\item{force}{If \code{FALSE} (the default), prompts for confirmation in interactive sessions. Set to \code{TRUE} to skip the prompt.}
 }
 \value{
 The name of the removed hook, invisibly.

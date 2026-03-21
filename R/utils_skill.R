@@ -1,42 +1,6 @@
-skill_paths <- list(
-  claude_code = list(
-    project = '.claude/skills',
-    global = '~/.claude/skills'
-  ),
-  openclaw = list(
-    project = '.openclaw/skills',
-    global = '~/.openclaw/skills'
-  ),
-  codex = list(
-    project = '.codex/skills',
-    global = '~/.codex/skills'
-  ),
-  cursor = list(
-    project = '.cursor/skills',
-    global = '~/.cursor/skills'
-  ),
-  gemini_cli = list(
-    project = '.gemini/skills',
-    global = '~/.gemini/skills'
-  ),
-  github_copilot = list(
-    project = '.copilot/skills',
-    global = '~/.copilot/skills'
-  ),
-  posit_ai = list(
-    project = '.positai/skills',
-    global = '~/.positai/skills'
-  )
-)
+skill_paths <- make_scope_paths('skills')
 
-skill_topics <- c(
-  'claude-skill',
-  'cursor-skill',
-  'codex-skill',
-  'gemini-skill',
-  'copilot-skill',
-  'ai-coding-skill'
-)
+skill_topics <- make_topics('skill')
 
 skill_lock_section <- 'skills'
 

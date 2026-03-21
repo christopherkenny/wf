@@ -1,50 +1,6 @@
-hook_settings_paths <- list(
-  claude_code = list(
-    project = '.claude/settings.json',
-    local = '.claude/settings.local.json',
-    global = '~/.claude/settings.json'
-  ),
-  openclaw = list(
-    project = '.openclaw/settings.json',
-    local = '.openclaw/settings.local.json',
-    global = '~/.openclaw/settings.json'
-  ),
-  codex = list(
-    project = '.codex/settings.json',
-    local = '.codex/settings.local.json',
-    global = '~/.codex/settings.json'
-  ),
-  cursor = list(
-    project = '.cursor/settings.json',
-    local = '.cursor/settings.local.json',
-    global = '~/.cursor/settings.json'
-  ),
-  gemini_cli = list(
-    project = '.gemini/settings.json',
-    local = '.gemini/settings.local.json',
-    global = '~/.gemini/settings.json'
-  ),
-  github_copilot = list(
-    project = '.copilot/settings.json',
-    local = '.copilot/settings.local.json',
-    global = '~/.copilot/settings.json'
-  ),
-  posit_ai = list(
-    project = '.positai/settings.json',
-    local = '.positai/settings.local.json',
-    global = '~/.positai/settings.json'
-  )
-)
+hook_settings_paths <- make_settings_paths()
 
-hook_paths <- list(
-  claude_code = list(project = '.claude/hooks', global = '~/.claude/hooks'),
-  openclaw = list(project = '.openclaw/hooks', global = '~/.openclaw/hooks'),
-  codex = list(project = '.codex/hooks', global = '~/.codex/hooks'),
-  cursor = list(project = '.cursor/hooks', global = '~/.cursor/hooks'),
-  gemini_cli = list(project = '.gemini/hooks', global = '~/.gemini/hooks'),
-  github_copilot = list(project = '.copilot/hooks', global = '~/.copilot/hooks'),
-  posit_ai = list(project = '.positai/hooks', global = '~/.positai/hooks')
-)
+hook_paths <- make_scope_paths('hooks')
 
 hook_lock_section <- 'hooks'
 

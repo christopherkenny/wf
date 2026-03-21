@@ -14,6 +14,28 @@ agent_indicators <- c(
   posit_ai = '.positai'
 )
 
+# Generate {project = '<pfx>/<sub>', global = '~/<pfx>/<sub>'} for all agents
+make_scope_paths <- function(subdir) {
+  lapply(agent_indicators, \(pfx) list(
+    project = paste0(pfx, '/', subdir),
+    global = paste0('~/', pfx, '/', subdir)
+  ))
+}
+
+# Generate {project, local, global} settings paths for all agents
+make_settings_paths <- function() {
+  lapply(agent_indicators, \(pfx) list(
+    project = paste0(pfx, '/settings.json'),
+    local = paste0(pfx, '/settings.local.json'),
+    global = paste0('~/', pfx, '/settings.json')
+  ))
+}
+
+# Generate GitHub topic tags for an item type
+make_topics <- function(type) {
+  paste0(c('claude', 'cursor', 'codex', 'gemini', 'copilot', 'ai-coding'), '-', type)
+}
+
 detect_agent <- function() {
   found <- names(agent_indicators)[fs::dir_exists(agent_indicators)]
   if (length(found) == 0) {

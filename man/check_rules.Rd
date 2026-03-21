@@ -7,11 +7,11 @@
 check_rules(path = NULL)
 }
 \arguments{
-\item{path}{The rules directory to check. Can be one of:
+\item{path}{The rules directory. Can be one of:
 \itemize{
-\item A known coding agent name such as \code{"claude_code"}, \code{"cursor"}, or
-\code{"github_copilot"} (see \code{\link[=rule_path]{rule_path()}} for the full list) to use that
-agent's conventional project-scope path.
+\item A known coding agent name such as \code{'claude_code'}, \code{'cursor'}, or
+\code{'github_copilot'} (see \code{\link[=rule_path]{rule_path()}} for the full list) to use
+that agent's conventional project-scope path.
 \item A character string giving the directory path directly.
 \item \code{NULL} (the default), in which case the path is resolved from the
 \code{WF_AGENT} environment variable, or by prompting in interactive

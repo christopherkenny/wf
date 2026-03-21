@@ -31,7 +31,7 @@
 #' add_skill(src, path = tmp)
 #' remove_skill('example', tmp, force = TRUE)
 remove_skill <- function(name, path = NULL, force = FALSE) {
-  path <- resolve_path(path)
+  path <- resolve_skill_path(path)
   skill_dir <- fs::path(path, name)
   if (!fs::dir_exists(skill_dir)) {
     cli::cli_abort(
@@ -50,9 +50,9 @@ remove_skill <- function(name, path = NULL, force = FALSE) {
 
   fs::dir_delete(skill_dir)
 
-  lock <- read_lock(path)
+  lock <- read_lock(path, skill_lock_file)
   lock[[name]] <- NULL
-  write_lock(path, lock)
+  write_lock(path, lock, skill_lock_file)
 
   cli::cli_inform('Removed skill {.val {name}} from {.path {path}}.')
   invisible(name)

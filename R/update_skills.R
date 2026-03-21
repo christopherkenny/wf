@@ -19,7 +19,7 @@
 #' @examples
 #' update_skills(tempfile())
 update_skills <- function(path = NULL) {
-  path <- resolve_path(path)
+  path <- resolve_skill_path(path)
   status <- check_skills(path)
   to_update <- status[status$update_available, 'name']
 
@@ -28,7 +28,7 @@ update_skills <- function(path = NULL) {
     return(invisible(character()))
   }
 
-  lock <- read_lock(path)
+  lock <- read_lock(path, skill_lock_file)
   for (name in to_update) {
     source <- lock[[name]]$source
     add_skill(source, path = path, overwrite = TRUE)

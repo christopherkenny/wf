@@ -22,7 +22,7 @@
 #' @examples
 #' list_skills(tempfile())
 list_skills <- function(path = NULL) {
-  path <- resolve_path(path)
+  path <- resolve_skill_path(path)
   empty <- data.frame(
     name = character(),
     description = character(),
@@ -40,7 +40,7 @@ list_skills <- function(path = NULL) {
     return(empty)
   }
 
-  lock <- read_lock(path)
+  lock <- read_lock(path, skill_lock_file)
 
   rows <- lapply(dirs, function(d) {
     meta <- tryCatch(read_skill_meta(d), error = function(e) list())

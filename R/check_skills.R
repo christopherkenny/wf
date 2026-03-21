@@ -24,54 +24,6 @@
 #' @examples
 #' check_skills(tempfile())
 check_skills <- function(path = NULL) {
-  path <- resolve_path(path)
-  lock <- read_lock(path)
-
-  if (length(lock) == 0) {
-    return(data.frame(
-      name = character(),
-      installed_sha = character(),
-      latest_sha = character(),
-      update_available = logical(),
-      stringsAsFactors = FALSE
-    ))
-  }
-
-  rows <- lapply(names(lock), function(name) {
-    entry <- lock[[name]]
-    sha_val <- entry$sha
-    installed_sha <- if (
-      is.null(sha_val) || length(sha_val) == 0 || !is.character(sha_val)
-    ) {
-      NA_character_
-    } else {
-      sha_val
-    }
-    if (identical(entry$type, 'github') && !is.null(entry$source)) {
-      gh <- parse_gh_source(entry$source)
-      latest_sha <- tryCatch(
-        gh_latest_sha(gh$owner, gh$repo),
-        error = function(e) {
-          cli::cli_warn(
-            'Could not fetch latest SHA for {.val {name}}: {conditionMessage(e)}'
-          )
-          NA_character_
-        }
-      )
-    } else {
-      latest_sha <- NA_character_
-    }
-    update_available <- !is.na(installed_sha) &&
-      !is.na(latest_sha) &&
-      !identical(installed_sha, latest_sha)
-    data.frame(
-      name = name,
-      installed_sha = installed_sha,
-      latest_sha = latest_sha,
-      update_available = update_available,
-      stringsAsFactors = FALSE
-    )
-  })
-
-  do.call(rbind, rows)
+  path <- resolve_skill_path(path)
+  check_lock_items(read_lock(path, skill_lock_file))
 }

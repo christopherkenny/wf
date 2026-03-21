@@ -1,4 +1,4 @@
-url: https://christopherkenny.github.io/wf/
+url: https://christophertkenny.com/wf/
 
 template:
   bootstrap: 5
@@ -15,3 +15,38 @@ reference:
       - remove_skill
       - skill_path
       - update_skills
+  - title: Agents
+    desc: Install and manage custom subagents.
+    contents:
+      - add_agent
+      - agent_path
+      - check_agents
+      - find_agent
+      - init_agent
+      - list_agents
+      - remove_agent
+      - update_agents
+  - title: Rules
+    desc: Install and manage coding rules.
+    contents:
+      - add_rule
+      - check_rules
+      - find_rule
+      - init_rule
+      - list_rules
+      - remove_rule
+      - rule_path
+      - update_rules
+  - title: Hooks
+    desc: Install and manage lifecycle hook scripts.
+    contents:
+      - add_hook
+      - check_hooks
+      - find_hook
+      - hook_path
+      - init_hook
+      - list_hooks
+      - register_hook
+      - remove_hook
+      - settings_path
+      - update_hooks

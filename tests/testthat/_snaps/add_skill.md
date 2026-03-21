@@ -20,6 +20,6 @@
     Code
       add_skill(empty_dir, path = fs::path(tmp, "skills"))
     Condition
-      Error in `read_skill_meta()`:
-      ! No 'SKILL.md' found in '<path>'.
+      Error in `read_md_meta()`:
+      ! No file found at '<path>/SKILL.md'.
 

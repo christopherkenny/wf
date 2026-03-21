@@ -146,14 +146,12 @@ test_that('parse_gh_source extracts path from direct repo URL with path', {
 test_that('add_skill skill arg resolves to skills/ subdirectory', {
   tmp <- withr::local_tempdir()
   src <- withr::local_tempdir()
-  fixture <- make_fixture_skill(src)
+  # repo root must contain skills/my-skill/SKILL.md
+  make_fixture_skill(fs::path(src, 'skills'))
   dest_dir <- fs::path(tmp, 'skills')
 
   local_mocked_bindings(
-    gh_download_skill = function(owner, repo, path = NULL) {
-      expect_identical(path, 'skills/my-skill')
-      fixture
-    },
+    gh_download = function(owner, repo) src,
     gh_latest_sha = function(owner, repo) 'abc123'
   )
 
@@ -169,11 +167,12 @@ test_that('add_skill skill arg resolves to skills/ subdirectory', {
 test_that('add_skill installs from a GitHub subdirectory URL', {
   tmp <- withr::local_tempdir()
   src <- withr::local_tempdir()
-  fixture <- make_fixture_skill(src)
+  # repo root must contain skills/my-skill/SKILL.md
+  make_fixture_skill(fs::path(src, 'skills'))
   dest_dir <- fs::path(tmp, 'skills')
 
   local_mocked_bindings(
-    gh_download_skill = function(owner, repo, path = NULL) fixture,
+    gh_download = function(owner, repo) src,
     gh_latest_sha = function(owner, repo) 'abc123'
   )
 

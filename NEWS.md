@@ -1,3 +1,9 @@
+# wf 0.1.0
+
+* `add_agent()`, `agent_path()`, `check_agents()`, `find_agent()`, `init_agent()`, `list_agents()`, `remove_agent()`, and `update_agents()` are new functions for managing custom subagents stored in `.{agent}/agents/`.
+* `add_hook()` is a new function that installs a hook script file from GitHub or a local path into the agent's hooks directory and registers it in `settings.json`. `check_hooks()`, `find_hook()`, `hook_path()`, `init_hook()`, `list_hooks()`, `remove_hook()`, and `update_hooks()` round out the hooks lifecycle, mirroring the skills/agents/rules pattern. `hook_path()` returns the hooks directory (e.g. `.claude/hooks`), not the settings file. `register_hook()` is a new function that handles bare command registration in `settings.json` without installing a script file. `settings_path()` is a new function that returns the path to a coding agent's `settings.json`.
+* `add_rule()`, `check_rules()`, `find_rule()`, `init_rule()`, `list_rules()`, `remove_rule()`, `rule_path()`, and `update_rules()` are new functions for managing coding rules stored in `.{agent}/rules/`.
+
 # wf 0.0.1
 
 * `add_skill()`, `check_skills()`, `find_skill()`, `init_skill()`, `list_skills()`, `remove_skill()`, and `update_skills()` are new functions for managing AI agent skills.

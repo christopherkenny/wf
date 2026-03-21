@@ -23,8 +23,8 @@
 #' @examples
 #' init_skill('my-skill', tempfile())
 init_skill <- function(name, path = NULL) {
-  check_skill_name(name)
-  path <- resolve_path(path)
+  check_item_name(name)
+  path <- resolve_skill_path(path)
   skill_dir <- fs::path(path, name)
   if (fs::dir_exists(skill_dir)) {
     cli::cli_abort(
@@ -52,34 +52,4 @@ init_skill <- function(name, path = NULL) {
   )
   cli::cli_inform('Created skill {.val {name}} at {.path {skill_dir}}.')
   invisible(skill_dir)
-}
-
-check_skill_name <- function(name) {
-  if (!is.character(name) || length(name) != 1 || is.na(name)) {
-    cli::cli_abort('{.arg name} must be a single non-missing string.')
-  }
-  if (nchar(name) == 0 || nchar(name) > 64) {
-    cli::cli_abort(
-      '{.arg name} must be between 1 and 64 characters, not {nchar(name)}.'
-    )
-  }
-  if (!grepl('^[a-z0-9]([a-z0-9-]*[a-z0-9])?$', name)) {
-    cli::cli_abort(
-      c(
-        '{.arg name} must be lowercase alphanumeric with single hyphens.',
-        'i' = 'It cannot start or end with a hyphen.',
-        'i' = 'It cannot contain consecutive hyphens.',
-        'x' = 'Got {.val {name}}.'
-      )
-    )
-  }
-  if (grepl('--', name)) {
-    cli::cli_abort(
-      c(
-        '{.arg name} cannot contain consecutive hyphens.',
-        'x' = 'Got {.val {name}}.'
-      )
-    )
-  }
-  invisible(name)
 }

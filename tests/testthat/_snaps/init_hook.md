@@ -4,7 +4,7 @@
       init_hook("my-hook", tmp)
     Condition
       Error in `init_hook()`:
-      ! Hook file '<path>/my-hook.sh' already exists.
+      ! Hook file '<path>' already exists.
 
 # init_hook errors on invalid name
 

@@ -13,7 +13,7 @@ test_that('init_hook returns path invisibly', {
 test_that('init_hook errors if file already exists', {
   tmp <- withr::local_tempdir()
   init_hook('my-hook', tmp)
-  expect_snapshot(init_hook('my-hook', tmp), error = TRUE, transform = snap_replace(tmp))
+  expect_snapshot(init_hook('my-hook', tmp), error = TRUE, transform = snap_replace(fs::path(tmp, 'my-hook.sh')))
 })
 
 test_that('init_hook errors on invalid name', {

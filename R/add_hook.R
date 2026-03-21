@@ -110,7 +110,7 @@ add_hook <- function(
     path = settings_path
   )
 
-  lock <- read_lock(path, hook_lock_file)
+  lock <- read_lock(path, hook_lock_section)
   entry <- list(
     source = lock_source,
     type = type,
@@ -122,7 +122,7 @@ add_hook <- function(
     entry$sha <- sha
   }
   lock[[name]] <- entry
-  write_lock(path, lock, hook_lock_file)
+  write_lock(path, lock, hook_lock_section)
 
   cli::cli_inform('Installed hook {.val {name}} to {.path {dest}}.')
   invisible(dest)

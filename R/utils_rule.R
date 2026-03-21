@@ -38,7 +38,7 @@ rule_topics <- c(
   'ai-coding-rule'
 )
 
-rule_lock_file <- '.rule-lock.json'
+rule_lock_section <- 'rules'
 
 resolve_rule_path <- function(path) {
   resolve_path(path, rule_paths, 'rules')

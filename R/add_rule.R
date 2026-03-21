@@ -98,7 +98,7 @@ add_rule <- function(source, rule = NULL, path = NULL, overwrite = FALSE) {
   fs::dir_create(path, recurse = TRUE)
   fs::file_copy(rule_file, dest)
 
-  lock <- read_lock(path, rule_lock_file)
+  lock <- read_lock(path, rule_lock_section)
   entry <- list(
     source = lock_source,
     type = type,
@@ -108,7 +108,7 @@ add_rule <- function(source, rule = NULL, path = NULL, overwrite = FALSE) {
     entry$sha <- sha
   }
   lock[[name]] <- entry
-  write_lock(path, lock, rule_lock_file)
+  write_lock(path, lock, rule_lock_section)
 
   cli::cli_inform('Installed rule {.val {name}} to {.path {dest}}.')
   invisible(dest)

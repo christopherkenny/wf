@@ -1,0 +1,10 @@
+{
+  "skills": {
+    "cran-extrachecks": {
+      "source": "https://github.com/posit-dev/skills/tree/HEAD/r-lib/cran-extrachecks",
+      "type": "github",
+      "installed_at": "2026-03-11T13:56:50Z",
+      "sha": "bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5"
+    }
+  }
+}

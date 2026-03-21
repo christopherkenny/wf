@@ -37,7 +37,7 @@ test_that('add_rule writes lock file', {
 
   add_rule(fixture, path = dest_dir)
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.rule-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$rules
   expect_identical(names(lock), 'my-rule')
   expect_identical(lock[['my-rule']]$type, 'local')
 })
@@ -87,7 +87,7 @@ test_that('add_rule rule arg resolves to rules/ subdirectory', {
 
   add_rule('owner/repo', rule = 'my-rule', path = dest_dir)
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.rule-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$rules
   expect_identical(
     lock[['my-rule']]$source,
     'https://github.com/owner/repo/tree/HEAD/rules/my-rule.md'

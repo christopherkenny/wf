@@ -97,7 +97,7 @@ add_agent <- function(source, agent = NULL, path = NULL, overwrite = FALSE) {
   fs::dir_create(path, recurse = TRUE)
   fs::file_copy(agent_file, dest)
 
-  lock <- read_lock(path, agent_lock_file)
+  lock <- read_lock(path, agent_lock_section)
   entry <- list(
     source = lock_source,
     type = type,
@@ -107,7 +107,7 @@ add_agent <- function(source, agent = NULL, path = NULL, overwrite = FALSE) {
     entry$sha <- sha
   }
   lock[[name]] <- entry
-  write_lock(path, lock, agent_lock_file)
+  write_lock(path, lock, agent_lock_section)
 
   cli::cli_inform('Installed agent {.val {name}} to {.path {dest}}.')
   invisible(dest)

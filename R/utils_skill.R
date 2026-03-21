@@ -38,7 +38,7 @@ skill_topics <- c(
   'ai-coding-skill'
 )
 
-skill_lock_file <- '.skill-lock.json'
+skill_lock_section <- 'skills'
 
 resolve_skill_path <- function(path) {
   resolve_path(path, skill_paths, 'skills')

@@ -38,7 +38,7 @@ agent_topics <- c(
   'ai-coding-agent'
 )
 
-agent_lock_file <- '.agent-lock.json'
+agent_lock_section <- 'agents'
 
 resolve_agent_path <- function(path) {
   resolve_path(path, agent_paths, 'agents')

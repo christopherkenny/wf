@@ -42,7 +42,7 @@ test_that('add_skill writes lock file', {
 
   add_skill(fixture, path = dest_dir)
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.skill-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$skills
   expect_identical(names(lock), 'my-skill')
   expect_identical(lock[['my-skill']]$type, 'local')
 })
@@ -157,7 +157,7 @@ test_that('add_skill skill arg resolves to skills/ subdirectory', {
 
   add_skill('christopherkenny/skills', skill = 'my-skill', path = dest_dir)
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.skill-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$skills
   expect_identical(
     lock[['my-skill']]$source,
     'https://github.com/christopherkenny/skills/tree/HEAD/skills/my-skill'
@@ -181,7 +181,7 @@ test_that('add_skill installs from a GitHub subdirectory URL', {
     path = dest_dir
   )
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.skill-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$skills
   expect_identical(
     lock[['my-skill']]$source,
     'https://github.com/christopherkenny/skills/tree/HEAD/skills/my-skill'

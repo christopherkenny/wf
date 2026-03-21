@@ -1,8 +1,9 @@
 test_that('remove_hook deletes the script file', {
   src <- withr::local_tempfile(fileext = '.sh')
   writeLines(c('#!/bin/bash', 'echo hello'), src)
-  tmp <- withr::local_tempdir()
-  settings_file <- fs::path(tmp, 'settings.json')
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
+  settings_file <- fs::path(tmp_root, 'settings.json')
   name <- fs::path_ext_remove(fs::path_file(src))
 
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
@@ -14,8 +15,9 @@ test_that('remove_hook deletes the script file', {
 test_that('remove_hook removes the settings.json registration', {
   src <- withr::local_tempfile(fileext = '.sh')
   writeLines(c('#!/bin/bash', 'echo hello'), src)
-  tmp <- withr::local_tempdir()
-  settings_file <- fs::path(tmp, 'settings.json')
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
+  settings_file <- fs::path(tmp_root, 'settings.json')
   name <- fs::path_ext_remove(fs::path_file(src))
 
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
@@ -28,22 +30,24 @@ test_that('remove_hook removes the settings.json registration', {
 test_that('remove_hook updates lock file', {
   src <- withr::local_tempfile(fileext = '.sh')
   writeLines(c('#!/bin/bash', 'echo hello'), src)
-  tmp <- withr::local_tempdir()
-  settings_file <- fs::path(tmp, 'settings.json')
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
+  settings_file <- fs::path(tmp_root, 'settings.json')
   name <- fs::path_ext_remove(fs::path_file(src))
 
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
   remove_hook(name, path = tmp, settings = settings_file, force = TRUE)
 
-  lock <- wf:::read_lock(tmp, '.hook-lock.json')
+  lock <- wf:::read_lock(tmp, 'hooks')
   expect_null(lock[[name]])
 })
 
 test_that('remove_hook returns name invisibly', {
   src <- withr::local_tempfile(fileext = '.sh')
   writeLines(c('#!/bin/bash', 'echo done'), src)
-  tmp <- withr::local_tempdir()
-  settings_file <- fs::path(tmp, 'settings.json')
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
+  settings_file <- fs::path(tmp_root, 'settings.json')
   name <- fs::path_ext_remove(fs::path_file(src))
 
   add_hook(src, event = 'Stop', path = tmp, settings = settings_file)
@@ -53,7 +57,8 @@ test_that('remove_hook returns name invisibly', {
 })
 
 test_that('remove_hook errors if hook not installed', {
-  tmp <- withr::local_tempdir()
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
   expect_snapshot(
     remove_hook('ghost', path = tmp),
     error = TRUE,

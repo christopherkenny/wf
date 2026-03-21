@@ -25,5 +25,5 @@
 #' check_hooks(tempfile())
 check_hooks <- function(path = NULL) {
   path <- resolve_hook_path(path)
-  check_lock_items(read_lock(path, hook_lock_file))
+  check_lock_items(read_lock(path, hook_lock_section))
 }

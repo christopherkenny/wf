@@ -28,7 +28,7 @@ update_agents <- function(path = NULL) {
     return(invisible(character()))
   }
 
-  lock <- read_lock(path, agent_lock_file)
+  lock <- read_lock(path, agent_lock_section)
   for (name in to_update) {
     source <- lock[[name]]$source
     add_agent(source, path = path, overwrite = TRUE)

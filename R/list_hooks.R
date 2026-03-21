@@ -41,7 +41,7 @@ list_hooks <- function(
   tracked_commands <- character()
   if (!is.null(path)) {
     hook_dir <- resolve_hook_path(path)
-    lock <- read_lock(hook_dir, hook_lock_file)
+    lock <- read_lock(hook_dir, hook_lock_section)
     tracked_commands <- vapply(lock, `[[`, character(1), 'command')
   }
 

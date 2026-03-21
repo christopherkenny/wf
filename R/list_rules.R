@@ -40,7 +40,7 @@ list_rules <- function(path = NULL) {
     return(empty)
   }
 
-  lock <- read_lock(path, rule_lock_file)
+  lock <- read_lock(path, rule_lock_section)
 
   rows <- lapply(files, function(f) {
     meta <- tryCatch(read_md_meta(f), error = function(e) list())

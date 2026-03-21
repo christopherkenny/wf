@@ -22,7 +22,7 @@ test_that('remove_agent updates lock file', {
   add_agent(fs::path(src, 'my-agent.md'), path = tmp)
   remove_agent('my-agent', tmp, force = TRUE)
 
-  lock <- wf:::read_lock(tmp, '.agent-lock.json')
+  lock <- wf:::read_lock(tmp, 'agents')
   expect_null(lock[['my-agent']])
 })
 

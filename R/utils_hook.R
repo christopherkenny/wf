@@ -46,7 +46,7 @@ hook_paths <- list(
   posit_ai = list(project = '.positai/hooks', global = '~/.positai/hooks')
 )
 
-hook_lock_file <- '.hook-lock.json'
+hook_lock_section <- 'hooks'
 
 hook_events <- c(
   'PreToolUse', 'PostToolUse', 'UserPromptSubmit', 'Stop', 'SubagentStop'

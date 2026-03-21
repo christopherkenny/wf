@@ -49,9 +49,9 @@ remove_rule <- function(name, path = NULL, force = FALSE) {
 
   fs::file_delete(rule_file)
 
-  lock <- read_lock(path, rule_lock_file)
+  lock <- read_lock(path, rule_lock_section)
   lock[[name]] <- NULL
-  write_lock(path, lock, rule_lock_file)
+  write_lock(path, lock, rule_lock_section)
 
   cli::cli_inform('Removed rule {.val {name}} from {.path {path}}.')
   invisible(name)

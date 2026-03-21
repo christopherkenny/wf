@@ -37,7 +37,7 @@
 #' )
 remove_hook <- function(name, path = NULL, settings = NULL, force = FALSE) {
   path <- resolve_hook_path(path)
-  lock <- read_lock(path, hook_lock_file)
+  lock <- read_lock(path, hook_lock_section)
 
   if (is.null(lock[[name]])) {
     cli::cli_abort(
@@ -94,7 +94,7 @@ remove_hook <- function(name, path = NULL, settings = NULL, force = FALSE) {
   }
 
   lock[[name]] <- NULL
-  write_lock(path, lock, hook_lock_file)
+  write_lock(path, lock, hook_lock_section)
 
   cli::cli_inform('Removed hook {.val {name}} from {.path {path}}.')
   invisible(name)

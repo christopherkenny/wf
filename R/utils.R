@@ -121,25 +121,53 @@ parse_gh_source <- function(source) {
   }
 }
 
-# Read a lock file from a directory; returns a named list
-read_lock <- function(path, lock_file) {
-  lf <- fs::path(path, lock_file)
+# Read a section from the unified lock file; returns a named list
+read_lock <- function(path, section) {
+  lf <- fs::path(fs::path_dir(path), '.wf-lock.json')
   if (!fs::file_exists(lf)) {
     return(list())
   }
-  jsonlite::read_json(lf)
+  jsonlite::read_json(lf)[[section]] %||% list()
 }
 
-# Write a named list to a lock file in a directory
-write_lock <- function(path, lock, lock_file) {
-  fs::dir_create(path, recurse = TRUE)
-  jsonlite::write_json(
-    lock,
-    fs::path(path, lock_file),
-    auto_unbox = TRUE,
-    pretty = TRUE
+# Write a section to the unified lock file
+write_lock <- function(path, lock, section) {
+  root <- fs::path_dir(path)
+  lf <- fs::path(root, '.wf-lock.json')
+  full <- if (fs::file_exists(lf)) jsonlite::read_json(lf) else list()
+  full[[section]] <- lock
+  fs::dir_create(root, recurse = TRUE)
+  jsonlite::write_json(full, lf, auto_unbox = TRUE, pretty = TRUE)
+  invisible(lf)
+}
+
+# Migrate legacy per-type lock files into the unified .wf-lock.json
+migrate_lock <- function(path) {
+  old_files <- list(
+    skills = fs::path(path, 'skills', '.skill-lock.json'),
+    agents = fs::path(path, 'agents', '.agent-lock.json'),
+    hooks = fs::path(path, 'hooks', '.hook-lock.json'),
+    rules = fs::path(path, 'rules', '.rule-lock.json')
   )
-  invisible(fs::path(path, lock_file))
+
+  migrated <- character()
+  for (section in names(old_files)) {
+    old_file <- old_files[[section]]
+    if (!fs::file_exists(old_file)) next
+    entries <- jsonlite::read_json(old_file)
+    if (length(entries) == 0) next
+    write_lock(fs::path(path, section), entries, section)
+    migrated <- c(migrated, section)
+    cli::cli_inform(
+      'Migrated {length(entries)} {section} entr{?y/ies} from {.path {old_file}}.'
+    )
+  }
+
+  if (length(migrated) == 0) {
+    cli::cli_inform('No legacy lock files found.')
+  }
+
+  invisible(migrated)
 }
 
 # Download a repo from GitHub; returns path to the extracted root directory.

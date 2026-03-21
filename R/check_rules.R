@@ -25,5 +25,5 @@
 #' check_rules(tempfile())
 check_rules <- function(path = NULL) {
   path <- resolve_rule_path(path)
-  check_lock_items(read_lock(path, rule_lock_file))
+  check_lock_items(read_lock(path, rule_lock_section))
 }

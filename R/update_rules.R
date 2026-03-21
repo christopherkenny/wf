@@ -28,7 +28,7 @@ update_rules <- function(path = NULL) {
     return(invisible(character()))
   }
 
-  lock <- read_lock(path, rule_lock_file)
+  lock <- read_lock(path, rule_lock_section)
   for (name in to_update) {
     source <- lock[[name]]$source
     add_rule(source, path = path, overwrite = TRUE)

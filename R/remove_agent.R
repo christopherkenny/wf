@@ -49,9 +49,9 @@ remove_agent <- function(name, path = NULL, force = FALSE) {
 
   fs::file_delete(agent_file)
 
-  lock <- read_lock(path, agent_lock_file)
+  lock <- read_lock(path, agent_lock_section)
   lock[[name]] <- NULL
-  write_lock(path, lock, agent_lock_file)
+  write_lock(path, lock, agent_lock_section)
 
   cli::cli_inform('Removed agent {.val {name}} from {.path {path}}.')
   invisible(name)

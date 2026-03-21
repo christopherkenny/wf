@@ -40,7 +40,7 @@ list_agents <- function(path = NULL) {
     return(empty)
   }
 
-  lock <- read_lock(path, agent_lock_file)
+  lock <- read_lock(path, agent_lock_section)
 
   rows <- lapply(files, function(f) {
     meta <- tryCatch(read_md_meta(f), error = function(e) list())

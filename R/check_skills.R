@@ -25,5 +25,5 @@
 #' check_skills(tempfile())
 check_skills <- function(path = NULL) {
   path <- resolve_skill_path(path)
-  check_lock_items(read_lock(path, skill_lock_file))
+  check_lock_items(read_lock(path, skill_lock_section))
 }

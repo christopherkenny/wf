@@ -50,9 +50,9 @@ remove_skill <- function(name, path = NULL, force = FALSE) {
 
   fs::dir_delete(skill_dir)
 
-  lock <- read_lock(path, skill_lock_file)
+  lock <- read_lock(path, skill_lock_section)
   lock[[name]] <- NULL
-  write_lock(path, lock, skill_lock_file)
+  write_lock(path, lock, skill_lock_section)
 
   cli::cli_inform('Removed skill {.val {name}} from {.path {path}}.')
   invisible(name)

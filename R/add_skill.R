@@ -85,7 +85,7 @@ add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
   fs::dir_create(path, recurse = TRUE)
   fs::dir_copy(skill_dir, dest)
 
-  lock <- read_lock(path, skill_lock_file)
+  lock <- read_lock(path, skill_lock_section)
   entry <- list(
     source = lock_source,
     type = type,
@@ -95,7 +95,7 @@ add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
     entry$sha <- sha
   }
   lock[[name]] <- entry
-  write_lock(path, lock, skill_lock_file)
+  write_lock(path, lock, skill_lock_section)
 
   cli::cli_inform('Installed skill {.val {name}} to {.path {dest}}.')
   invisible(dest)

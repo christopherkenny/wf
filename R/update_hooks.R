@@ -31,7 +31,7 @@ update_hooks <- function(path = NULL, settings = NULL) {
     return(invisible(character()))
   }
 
-  lock <- read_lock(path, hook_lock_file)
+  lock <- read_lock(path, hook_lock_section)
   for (name in to_update) {
     entry <- lock[[name]]
     add_hook(

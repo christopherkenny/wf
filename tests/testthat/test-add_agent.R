@@ -37,7 +37,7 @@ test_that('add_agent writes lock file', {
 
   add_agent(fixture, path = dest_dir)
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.agent-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$agents
   expect_identical(names(lock), 'my-agent')
   expect_identical(lock[['my-agent']]$type, 'local')
 })
@@ -98,7 +98,7 @@ test_that('add_agent agent arg resolves to agents/ subdirectory', {
 
   add_agent('owner/repo', agent = 'my-agent', path = dest_dir)
 
-  lock <- jsonlite::read_json(fs::path(dest_dir, '.agent-lock.json'))
+  lock <- jsonlite::read_json(fs::path(tmp, '.wf-lock.json'))$agents
   expect_identical(
     lock[['my-agent']]$source,
     'https://github.com/owner/repo/tree/HEAD/agents/my-agent.md'

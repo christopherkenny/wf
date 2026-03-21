@@ -42,8 +42,9 @@ test_that('list_hooks file column is NA when no path given', {
 test_that('list_hooks file column populated for add_hook-installed hooks', {
   src <- withr::local_tempfile(fileext = '.sh')
   writeLines(c('#!/bin/bash', 'echo hello'), src)
-  tmp <- withr::local_tempdir()
-  settings_file <- fs::path(tmp, 'settings.json')
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
+  settings_file <- fs::path(tmp_root, 'settings.json')
 
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
 

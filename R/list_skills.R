@@ -40,7 +40,7 @@ list_skills <- function(path = NULL) {
     return(empty)
   }
 
-  lock <- read_lock(path, skill_lock_file)
+  lock <- read_lock(path, skill_lock_section)
 
   rows <- lapply(dirs, function(d) {
     meta <- tryCatch(read_skill_meta(d), error = function(e) list())

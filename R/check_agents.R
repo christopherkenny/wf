@@ -25,5 +25,5 @@
 #' check_agents(tempfile())
 check_agents <- function(path = NULL) {
   path <- resolve_agent_path(path)
-  check_lock_items(read_lock(path, agent_lock_file))
+  check_lock_items(read_lock(path, agent_lock_section))
 }

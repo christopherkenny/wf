@@ -15,9 +15,7 @@
 #' @export
 #'
 #' @examplesIf tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)
-#' \donttest{
 #' find_hook('linting')
-#' }
 find_hook <- function(query) {
   find_gh_items(query, hook_topics)
 }

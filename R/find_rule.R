@@ -15,9 +15,7 @@
 #' @export
 #'
 #' @examplesIf tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)
-#' \donttest{
 #' find_rule('testing')
-#' }
 find_rule <- function(query) {
   find_gh_items(query, rule_topics)
 }

@@ -26,8 +26,6 @@ a keyword query. Searches across all supported agent topic conventions
 }
 \examples{
 \dontshow{if (tryCatch(gh::gh('/rate_limit')$resources$search$remaining > 0L, error = function(e) FALSE)) withAutoprint(\{ # examplesIf}
-\donttest{
 find_skill('rstats')
-}
 \dontshow{\}) # examplesIf}
 }

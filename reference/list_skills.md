@@ -13,11 +13,11 @@ list_skills(path = NULL)
 
 - path:
 
-  The skills directory to inspect. Can be one of:
+  The skills directory. Can be one of:
 
-  - A known agent name such as `"claude_code"`, `"cursor"`, or
-    `"github_copilot"` (see
-    [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+  - A known coding agent name such as `'claude_code'`, `'cursor'`, or
+    `'github_copilot'` (see
+    [`skill_path()`](https://christophertkenny.com/wf/reference/skill_path.md)
     for the full list) to use that agent's conventional project-scope
     path.
 
@@ -32,9 +32,9 @@ list_skills(path = NULL)
 
 A data frame with columns:
 
-- `name`: skill name from `SKILL.md` frontmatter.
+- `name`: skill name from frontmatter (or filename stem).
 
-- `description`: skill description from `SKILL.md` frontmatter.
+- `description`: skill description from frontmatter.
 
 - `source`: the source URL or local path the skill was installed from.
 

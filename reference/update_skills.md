@@ -17,7 +17,7 @@ update_skills(path = NULL)
 
   - A known agent name such as `"claude_code"`, `"cursor"`, or
     `"github_copilot"` (see
-    [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+    [`skill_path()`](https://christophertkenny.com/wf/reference/skill_path.md)
     for the full list) to use that agent's conventional project-scope
     path.
 

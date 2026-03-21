@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/christopherkenny/wf/blob/main/DESCRIPTION)
 
 Kenny C (2026). *wf: Artificial Intelligence Workflow Tools*. R package
-version 0.0.1, <https://christophertkenny.com/wf/>.
+version 0.1.0, <https://christophertkenny.com/wf/>.
 
     @Manual{,
       title = {wf: Artificial Intelligence Workflow Tools},
       author = {Christopher T. Kenny},
       year = {2026},
-      note = {R package version 0.0.1},
+      note = {R package version 0.1.0},
       url = {https://christophertkenny.com/wf/},
     }

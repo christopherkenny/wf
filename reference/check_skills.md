@@ -13,11 +13,11 @@ check_skills(path = NULL)
 
 - path:
 
-  The skills directory to check. Can be one of:
+  The skills directory. Can be one of:
 
-  - A known agent name such as `"claude_code"`, `"cursor"`, or
-    `"github_copilot"` (see
-    [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+  - A known coding agent name such as `'claude_code'`, `'cursor'`, or
+    `'github_copilot'` (see
+    [`skill_path()`](https://christophertkenny.com/wf/reference/skill_path.md)
     for the full list) to use that agent's conventional project-scope
     path.
 
@@ -45,6 +45,6 @@ A data frame with columns:
 
 ``` r
 check_skills(tempfile())
-#> [1] name             installed_sha    latest_sha       update_available
-#> <0 rows> (or 0-length row.names)
+#>      name installed_sha latest_sha update_available
+#> 1 example          <NA>       <NA>            FALSE
 ```

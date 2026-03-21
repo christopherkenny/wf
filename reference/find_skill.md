@@ -33,9 +33,8 @@ A data frame with columns:
 ## Examples
 
 ``` r
-# \donttest{
-  find_skill('rstats')
-#> [1] name        description owner       url         stars      
-#> <0 rows> (or 0-length row.names)
-# }
+if (FALSE) { # \dontrun{
+# Requires GitHub API access; may fail due to rate limiting
+find_skill('rstats')
+} # }
 ```

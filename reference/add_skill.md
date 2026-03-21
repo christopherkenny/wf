@@ -35,11 +35,11 @@ add_skill(source, skill = NULL, path = NULL, overwrite = FALSE)
 
 - path:
 
-  The skills directory to install into. Can be one of:
+  The skills directory. Can be one of:
 
-  - A known agent name such as `"claude_code"`, `"cursor"`, or
-    `"github_copilot"` (see
-    [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+  - A known coding agent name such as `'claude_code'`, `'cursor'`, or
+    `'github_copilot'` (see
+    [`skill_path()`](https://christophertkenny.com/wf/reference/skill_path.md)
     for the full list) to use that agent's conventional project-scope
     path.
 
@@ -69,5 +69,5 @@ writeLines(
   file.path(src, 'SKILL.md')
 )
 add_skill(src, path = tempfile())
-#> Installed skill "example" to /tmp/RtmpOIwr0u/file1c514f232cf1/example.
+#> Installed skill "example" to /tmp/Rtmp1p0v0x/file1be56a2584cc/example.
 ```

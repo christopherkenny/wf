@@ -13,7 +13,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Artificial Intelligence Workflow Tools">
 <meta name="description" content="Manage skills for large language model coding agents. Supports installing skills from GitHub or local directories, tracking versions in a lock file, and keeping installations current. Installations can be scoped to a single project or shared globally across projects.">
 <meta property="og:description" content="Manage skills for large language model coding agents. Supports installing skills from GitHub or local directories, tracking versions in a lock file, and keeping installations current. Installations can be scoped to a single project or shared globally across projects.">
-<meta property="og:image" content="https://christopherkenny.github.io/wf/logo.png">
+<meta property="og:image" content="https://christophertkenny.com/wf/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">wf</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,11 +55,49 @@
 </div>
 <!-- badges: start -->
 
-<p><code>wf</code> manages skills for AI coding agents. Skills are reusable instruction sets that extend what an agent can do. They live in a conventional directory for each agent (e.g., <code>.claude/skills/</code> for Claude Code) and can be installed from GitHub or a local path.</p>
+<p><code>wf</code> manages the building blocks of AI coding agents: skills, agents, rules, and hooks. Each type lives in a conventional directory (e.g. <code>.claude/skills/</code> for Claude Code skills) and can be installed from GitHub or a local path, then tracked and updated through a lock file.</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Type</th>
+<th>Directory</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Skills</td>
+<td><code>.claude/skills/</code></td>
+<td>Reusable instruction sets that extend what an agent can do</td>
+</tr>
+<tr class="even">
+<td>Agents</td>
+<td><code>.claude/agents/</code></td>
+<td>Custom subagent definitions with their own system prompts</td>
+</tr>
+<tr class="odd">
+<td>Rules</td>
+<td><code>.claude/rules/</code></td>
+<td>Coding guidelines applied automatically to every session</td>
+</tr>
+<tr class="even">
+<td>Hooks</td>
+<td><code>.claude/hooks/</code></td>
+<td>Lifecycle scripts that run on agent events (e.g. pre-tool-use)</td>
+</tr>
+</tbody>
+</table>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<p>To install the stable version on CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">install.package</span><span class="op">(</span><span class="st">'wf'</span><span class="op">)</span></span></code></pre></div>
+<p>To install the development version:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages('pak')</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">'christopherkenny/wf'</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -67,34 +105,37 @@
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
 <p>Set <code>WF_AGENT</code> in your <code>.Renviron</code> so every <code>wf</code> function knows which agent you use:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">edit_r_environ</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Add a line like:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">WF_AGENT</span><span class="op">=</span><span class="st">'claude_code'</span></span></code></pre></div>
 <p>Supported agents: <code>'claude_code'</code> (alias: <code>'claude'</code>), <code>'openclaw'</code>, <code>'codex'</code>, <code>'cursor'</code>, <code>'gemini_cli'</code>, <code>'github_copilot'</code> (alias: <code>'copilot'</code>), <code>'posit_ai'</code> (alias: <code>'posit'</code>).</p>
-<p>Skills can be scoped to a project (<code>.agent/skills/</code>) or installed globally (<code>~/.agent/skills/</code>):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://christophertkenny.com/wf/" class="external-link">wf</a></span><span class="op">)</span></span>
+<p>Each type has its own <code>*_path()</code> function for looking up the conventional directory:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://christophertkenny.com/wf/">wf</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/skill_path.html">skill_path</a></span><span class="op">(</span><span class="st">'claude_code'</span>, <span class="st">'project'</span><span class="op">)</span> <span class="co"># project-local</span></span>
+<span><span class="fu"><a href="reference/skill_path.html">skill_path</a></span><span class="op">(</span><span class="st">'claude_code'</span>, <span class="st">'project'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] ".claude/skills"</span></span>
-<span><span class="fu"><a href="reference/skill_path.html">skill_path</a></span><span class="op">(</span><span class="st">'claude_code'</span>, <span class="st">'global'</span><span class="op">)</span> <span class="co"># user-global</span></span>
-<span><span class="co">#&gt; [1] "~/.claude/skills"</span></span>
-<span><span class="fu"><a href="reference/skill_path.html">skill_path</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># auto-detected from WF_AGENT or directory</span></span>
-<span><span class="co">#&gt; [1] ".claude/skills"</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/agent_path.html">agent_path</a></span><span class="op">(</span><span class="st">'claude_code'</span>, <span class="st">'project'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] ".claude/agents"</span></span>
+<span><span class="fu"><a href="reference/rule_path.html">rule_path</a></span><span class="op">(</span><span class="st">'claude_code'</span>, <span class="st">'project'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] ".claude/rules"</span></span>
+<span><span class="fu"><a href="reference/hook_path.html">hook_path</a></span><span class="op">(</span><span class="st">'claude_code'</span>, <span class="st">'project'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] ".claude/hooks"</span></span></code></pre></div>
+<p>All path functions also accept <code>scope = 'global'</code> for user-wide installation, and auto-detect the agent from <code>WF_AGENT</code> when called without arguments.</p>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="skills">Skills<a class="anchor" aria-label="anchor" href="#skills"></a>
 </h2>
 <p>Install a skill from GitHub using its <code>owner/repo</code> shorthand or a full URL:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/add_skill.html">add_skill</a></span><span class="op">(</span><span class="st">'some-user/some-skill'</span><span class="op">)</span></span></code></pre></div>
-<p>For repos that bundle multiple skills, use the <code>skill</code> argument:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/add_skill.html">add_skill</a></span><span class="op">(</span><span class="st">'some-user/some-skill'</span><span class="op">)</span></span></code></pre></div>
+<p>For repos that bundle multiple skills under a <code>skills/</code> subdirectory, use the <code>skill</code> argument:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/add_skill.html">add_skill</a></span><span class="op">(</span><span class="st">'some-user/skills'</span>, skill <span class="op">=</span> <span class="st">'proofread'</span><span class="op">)</span></span></code></pre></div>
 <p>List, check, and update installed skills:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/list_skills.html">list_skills</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                                                           name</span></span>
 <span><span class="co">#&gt; .claude/skills/cran-extrachecks               cran-extrachecks</span></span>
@@ -119,23 +160,69 @@
 <span><span class="co">#&gt; 1 bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5            FALSE</span></span>
 <span><span class="fu"><a href="reference/update_skills.html">update_skills</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; All skills are up to date.</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="finding-and-creating-skills">Finding and creating skills<a class="anchor" aria-label="anchor" href="#finding-and-creating-skills"></a>
-</h2>
-<p>Search GitHub for community skills tagged with <code>claude-skill</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>Search GitHub for community skills or scaffold a new one:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/find_skill.html">find_skill</a></span><span class="op">(</span><span class="st">'quarto'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     name                                  description            owner</span></span>
 <span><span class="co">#&gt; 1 skills [WIP] Claude Skills for Political Scientists christopherkenny</span></span>
 <span><span class="co">#&gt;                                          url stars</span></span>
-<span><span class="co">#&gt; 1 https://github.com/christopherkenny/skills     3</span></span></code></pre></div>
-<p>Scaffold a new skill with a template <code>SKILL.md</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 1 https://github.com/christopherkenny/skills     3</span></span>
+<span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/init_skill.html">init_skill</a></span><span class="op">(</span><span class="st">'my-skill'</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created skill "my-skill" at</span></span>
-<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpgfUC99/file69c48977e8/my-skill'.</span></span></code></pre></div>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c824a4155b/my-skill'.</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="agents">Agents<a class="anchor" aria-label="anchor" href="#agents"></a>
+</h2>
+<p>Custom subagents are single <code>.md</code> files with YAML frontmatter. Install one from GitHub:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/add_agent.html">add_agent</a></span><span class="op">(</span><span class="st">'some-user/some-agent'</span><span class="op">)</span></span></code></pre></div>
+<p>For multi-agent repos, use the <code>agent</code> argument:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/add_agent.html">add_agent</a></span><span class="op">(</span><span class="st">'some-user/agents'</span>, agent <span class="op">=</span> <span class="st">'code-reviewer'</span><span class="op">)</span></span></code></pre></div>
+<p>Create a local template to get started:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/init_agent.html">init_agent</a></span><span class="op">(</span><span class="st">'my-agent'</span>, <span class="va">tmp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Created agent "my-agent" at</span></span>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c84f5d7173/my-agent.md'.</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="rules">Rules<a class="anchor" aria-label="anchor" href="#rules"></a>
+</h2>
+<p>Rules are Markdown files that set coding guidelines for every session. Install from GitHub:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/add_rule.html">add_rule</a></span><span class="op">(</span><span class="st">'some-user/some-rule'</span><span class="op">)</span></span></code></pre></div>
+<p>Create a local template:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/init_rule.html">init_rule</a></span><span class="op">(</span><span class="st">'my-rule'</span>, <span class="va">tmp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Created rule "my-rule" at</span></span>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c8416e70da/my-rule.md'.</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="hooks">Hooks<a class="anchor" aria-label="anchor" href="#hooks"></a>
+</h2>
+<p>Hooks are executable scripts (<code>.sh</code>, <code>.R</code>, etc.) that run on agent lifecycle events. Installing a hook copies the script to <code>.claude/hooks/</code> and registers it in <code>settings.json</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/add_hook.html">add_hook</a></span><span class="op">(</span><span class="st">'some-user/some-hook'</span>, event <span class="op">=</span> <span class="st">'PreToolUse'</span><span class="op">)</span></span></code></pre></div>
+<p>To register a bare command without installing a script file:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/register_hook.html">register_hook</a></span><span class="op">(</span><span class="st">'PreToolUse'</span>, <span class="st">'echo hello'</span><span class="op">)</span></span></code></pre></div>
+<p>List registered hooks or create a new script template:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/list_hooks.html">list_hooks</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] event   matcher command file   </span></span>
+<span><span class="co">#&gt; &lt;0 rows&gt; (or 0-length row.names)</span></span>
+<span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/init_hook.html">init_hook</a></span><span class="op">(</span><span class="st">'my-hook'</span>, <span class="va">tmp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Created hook "my-hook" at</span></span>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c866845bcc/my-hook.sh'.</span></span>
+<span><span class="co">#&gt; ℹ Register it with `register_hook(event, command =</span></span>
+<span><span class="co">#&gt;   "C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c866845bcc/my-hook.sh")`</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

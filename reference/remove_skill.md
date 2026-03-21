@@ -17,11 +17,11 @@ remove_skill(name, path = NULL, force = FALSE)
 
 - path:
 
-  The skills directory where the skill is installed. Can be one of:
+  The skills directory. Can be one of:
 
-  - A known agent name such as `"claude_code"`, `"cursor"`, or
-    `"github_copilot"` (see
-    [`skill_path()`](https://christopherkenny.github.io/wf/reference/skill_path.md)
+  - A known coding agent name such as `'claude_code'`, `'cursor'`, or
+    `'github_copilot'` (see
+    [`skill_path()`](https://christophertkenny.com/wf/reference/skill_path.md)
     for the full list) to use that agent's conventional project-scope
     path.
 
@@ -52,7 +52,7 @@ writeLines(
 )
 tmp <- tempfile()
 add_skill(src, path = tmp)
-#> Installed skill "example" to /tmp/RtmpOIwr0u/file1c512672e778/example.
+#> Installed skill "example" to /tmp/Rtmp1p0v0x/file1be540f7de83/example.
 remove_skill('example', tmp, force = TRUE)
-#> Removed skill "example" from /tmp/RtmpOIwr0u/file1c512672e778.
+#> Removed skill "example" from /tmp/Rtmp1p0v0x/file1be540f7de83.
 ```

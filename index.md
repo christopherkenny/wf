@@ -6,24 +6,26 @@ rules, and hooks. Each type lives in a conventional directory
 from GitHub or a local path, then tracked and updated through a lock
 file.
 
-| Type   | Directory         | Description                                                    |
-|--------|-------------------|----------------------------------------------------------------|
-| Skills | `.claude/skills/` | Reusable instruction sets that extend what an agent can do     |
-| Agents | `.claude/agents/` | Custom subagent definitions with their own system prompts      |
-| Rules  | `.claude/rules/`  | Coding guidelines applied automatically to every session       |
-| Hooks  | `.claude/hooks/`  | Lifecycle scripts that run on agent events (e.g. pre-tool-use) |
+| Type | Directory | Description |
+|----|----|----|
+| Skills | `.claude/skills/` | Reusable instruction sets that extend what an agent can do |
+| Agents | `.claude/agents/` | Custom subagent definitions with their own system prompts |
+| Rules | `.claude/rules/` | Coding guidelines applied automatically to every session |
+| Hooks | `.claude/hooks/` | Lifecycle scripts that run on agent events (e.g. pre-tool-use) |
 
 ## Installation
 
 To install the stable version on CRAN:
 
 ``` r
+
 install.package('wf')
 ```
 
 To install the development version:
 
 ``` r
+
 # install.packages('pak')
 pak::pak('christopherkenny/wf')
 ```
@@ -34,12 +36,14 @@ Set `WF_AGENT` in your `.Renviron` so every `wf` function knows which
 agent you use:
 
 ``` r
+
 usethis::edit_r_environ()
 ```
 
 Add a line like:
 
 ``` r
+
 WF_AGENT='claude_code'
 ```
 
@@ -51,6 +55,7 @@ Each type has its own `*_path()` function for looking up the
 conventional directory:
 
 ``` r
+
 library(wf)
 
 skill_path('claude_code', 'project')
@@ -73,6 +78,7 @@ Install a skill from GitHub using its `owner/repo` shorthand or a full
 URL:
 
 ``` r
+
 add_skill('some-user/some-skill')
 ```
 
@@ -80,12 +86,14 @@ For repos that bundle multiple skills under a `skills/` subdirectory,
 use the `skill` argument:
 
 ``` r
+
 add_skill('some-user/skills', skill = 'proofread')
 ```
 
 List, check, and update installed skills:
 
 ``` r
+
 list_skills()
 #>                                                           name
 #> .claude/skills/cran-extrachecks               cran-extrachecks
@@ -115,6 +123,7 @@ update_skills()
 Search GitHub for community skills or scaffold a new one:
 
 ``` r
+
 find_skill('quarto')
 #>     name                                  description            owner
 #> 1 skills [WIP] Claude Skills for Political Scientists christopherkenny
@@ -133,18 +142,21 @@ Custom subagents are single `.md` files with YAML frontmatter. Install
 one from GitHub:
 
 ``` r
+
 add_agent('some-user/some-agent')
 ```
 
 For multi-agent repos, use the `agent` argument:
 
 ``` r
+
 add_agent('some-user/agents', agent = 'code-reviewer')
 ```
 
 Create a local template to get started:
 
 ``` r
+
 tmp <- tempfile()
 init_agent('my-agent', tmp)
 #> Created agent "my-agent" at
@@ -157,12 +169,14 @@ Rules are Markdown files that set coding guidelines for every session.
 Install from GitHub:
 
 ``` r
+
 add_rule('some-user/some-rule')
 ```
 
 Create a local template:
 
 ``` r
+
 tmp <- tempfile()
 init_rule('my-rule', tmp)
 #> Created rule "my-rule" at
@@ -176,18 +190,21 @@ lifecycle events. Installing a hook copies the script to
 `.claude/hooks/` and registers it in `settings.json`.
 
 ``` r
+
 add_hook('some-user/some-hook', event = 'PreToolUse')
 ```
 
 To register a bare command without installing a script file:
 
 ``` r
+
 register_hook('PreToolUse', 'echo hello')
 ```
 
 List registered hooks or create a new script template:
 
 ``` r
+
 list_hooks()
 #> [1] event   matcher command file   
 #> <0 rows> (or 0-length row.names)

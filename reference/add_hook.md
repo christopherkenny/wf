@@ -106,7 +106,7 @@ add_hook(tmp_hook,
   event = 'PreToolUse', path = tmp_dir,
   settings = tmp_settings
 )
-#> Registered PreToolUse hook in /tmp/Rtmp1p0v0x/file1be560b6bb66.json.
-#> Installed hook "file1be52472354c" to
-#> /tmp/Rtmp1p0v0x/file1be568d31454/file1be52472354c.sh.
+#> Registered PreToolUse hook in /tmp/RtmpXANtVc/file1a65705739cc.json.
+#> Installed hook "file1a65385ab59b" to
+#> /tmp/RtmpXANtVc/file1a65e464bec/file1a65385ab59b.sh.
 ```

@@ -65,5 +65,5 @@ The path to the modified settings file, invisibly.
 ``` r
 tmp <- tempfile(fileext = '.json')
 register_hook('PreToolUse', 'echo hello', path = tmp)
-#> Registered PreToolUse hook in /tmp/RtmpXANtVc/file1a657837c1e4.json.
+#> Registered PreToolUse hook in /tmp/RtmpOtvgtC/file1aa56fc390bf.json.
 ```

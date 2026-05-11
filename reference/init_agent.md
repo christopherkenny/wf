@@ -43,5 +43,5 @@ The path to the new agent file, invisibly.
 
 ``` r
 init_agent('my-agent', tempfile())
-#> Created agent "my-agent" at /tmp/RtmpXANtVc/file1a6555cfc89b/my-agent.md.
+#> Created agent "my-agent" at /tmp/RtmpOtvgtC/file1aa5147de71f/my-agent.md.
 ```

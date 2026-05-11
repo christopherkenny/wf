@@ -9,7 +9,10 @@ test_that('remove_hook deletes the script file', {
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
   remove_hook(name, path = tmp, settings = settings_file, force = TRUE)
 
-  expect_false(any(fs::file_exists(fs::dir_ls(tmp, glob = paste0('*/', name, '.*')))))
+  expect_false(any(fs::file_exists(fs::dir_ls(
+    tmp,
+    glob = paste0('*/', name, '.*')
+  ))))
 })
 
 test_that('remove_hook removes the settings.json registration', {
@@ -38,7 +41,7 @@ test_that('remove_hook updates lock file', {
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
   remove_hook(name, path = tmp, settings = settings_file, force = TRUE)
 
-  lock <- wf:::read_lock(tmp, 'hooks')
+  lock <- read_lock(tmp, 'hooks')
   expect_null(lock[[name]])
 })
 

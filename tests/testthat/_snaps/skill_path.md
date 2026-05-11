@@ -27,11 +27,10 @@
 # resolve_skill_path aborts when path is NULL and no env var set
 
     Code
-      wf:::resolve_skill_path(NULL)
+      resolve_skill_path(NULL)
     Condition
       Error in `resolve_path()`:
       ! Cannot determine a skills directory.
       i Set `WF_AGENT` to one of "claude_code", "openclaw", "codex", "cursor", "gemini_cli", "github_copilot", or "posit_ai".
       i Use `usethis::edit_r_environ()` to open '.Renviron'.
       i Or supply `path` directly.
-

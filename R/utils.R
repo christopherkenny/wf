@@ -16,24 +16,32 @@ agent_indicators <- c(
 
 # Generate {project = '<pfx>/<sub>', global = '~/<pfx>/<sub>'} for all agents
 make_scope_paths <- function(subdir) {
-  lapply(agent_indicators, \(pfx) list(
-    project = paste0(pfx, '/', subdir),
-    global = paste0('~/', pfx, '/', subdir)
-  ))
+  lapply(agent_indicators, \(pfx) {
+    list(
+      project = paste0(pfx, '/', subdir),
+      global = paste0('~/', pfx, '/', subdir)
+    )
+  })
 }
 
 # Generate {project, local, global} settings paths for all agents
 make_settings_paths <- function() {
-  lapply(agent_indicators, \(pfx) list(
-    project = paste0(pfx, '/settings.json'),
-    local = paste0(pfx, '/settings.local.json'),
-    global = paste0('~/', pfx, '/settings.json')
-  ))
+  lapply(agent_indicators, \(pfx) {
+    list(
+      project = paste0(pfx, '/settings.json'),
+      local = paste0(pfx, '/settings.local.json'),
+      global = paste0('~/', pfx, '/settings.json')
+    )
+  })
 }
 
 # Generate GitHub topic tags for an item type
 make_topics <- function(type) {
-  paste0(c('claude', 'cursor', 'codex', 'gemini', 'copilot', 'ai-coding'), '-', type)
+  paste0(
+    c('claude', 'cursor', 'codex', 'gemini', 'copilot', 'ai-coding'),
+    '-',
+    type
+  )
 }
 
 detect_agent <- function() {
@@ -107,7 +115,7 @@ resolve_path <- function(path, paths, type) {
 
 # Classify a source as "github" or "local"
 parse_source <- function(source) {
-  if (grepl('^https?://github\\.com/|^https?://gitlab\\.com/', source)) {
+  if (grepl('^https?://github\\.com/', source)) {
     'github'
   } else if (grepl('^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$', source)) {
     'github'
@@ -377,8 +385,12 @@ make_gh_lock_source <- function(gh) {
     paste0('https://github.com/', gh$owner, '/', gh$repo)
   } else {
     paste0(
-      'https://github.com/', gh$owner, '/', gh$repo,
-      '/tree/HEAD/', gh$path
+      'https://github.com/',
+      gh$owner,
+      '/',
+      gh$repo,
+      '/tree/HEAD/',
+      gh$path
     )
   }
 }

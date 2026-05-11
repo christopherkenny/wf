@@ -60,29 +60,8 @@ remove_hook <- function(name, path = NULL, settings = NULL, force = FALSE) {
   command <- entry$command
   event <- entry$event
   settings_path <- settings %||% default_settings_for_hook_dir(path)
-  hook_settings <- read_settings(settings_path)
 
-  if (
-    !is.null(event) &&
-      !is.null(hook_settings$hooks) &&
-      !is.null(hook_settings$hooks[[event]])
-  ) {
-    groups <- hook_settings$hooks[[event]]
-    new_groups <- list()
-    for (group in groups) {
-      filtered <- Filter(\(h) !identical(h$command, command), group$hooks)
-      if (length(filtered) > 0) {
-        group$hooks <- filtered
-        new_groups <- c(new_groups, list(group))
-      }
-    }
-    if (length(new_groups) == 0) {
-      hook_settings$hooks[[event]] <- NULL
-    } else {
-      hook_settings$hooks[[event]] <- new_groups
-    }
-    write_settings(settings_path, hook_settings)
-  }
+  unregister_hook_command(settings_path, command, event)
 
   lock[[name]] <- NULL
   write_lock(path, lock, hook_lock_section)

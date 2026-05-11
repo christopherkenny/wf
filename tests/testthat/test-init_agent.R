@@ -10,7 +10,7 @@ test_that('init_agent file contains required frontmatter', {
   tmp <- withr::local_tempdir()
   init_agent('my-agent', tmp)
 
-  meta <- wf:::read_md_meta(fs::path(tmp, 'my-agent.md'))
+  meta <- read_md_meta(fs::path(tmp, 'my-agent.md'))
   expect_identical(meta$name, 'my-agent')
   expect_false(is.null(meta$description))
 })

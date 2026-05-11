@@ -10,7 +10,7 @@ test_that('init_rule file contains name in frontmatter', {
   tmp <- withr::local_tempdir()
   init_rule('my-rule', tmp)
 
-  meta <- wf:::read_md_meta(fs::path(tmp, 'my-rule.md'))
+  meta <- read_md_meta(fs::path(tmp, 'my-rule.md'))
   expect_identical(meta$name, 'my-rule')
 })
 

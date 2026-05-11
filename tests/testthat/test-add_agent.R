@@ -1,4 +1,8 @@
-make_fixture_agent <- function(dir, name = 'my-agent', description = 'A test agent.') {
+make_fixture_agent <- function(
+  dir,
+  name = 'my-agent',
+  description = 'A test agent.'
+) {
   fs::dir_create(dir)
   file <- fs::path(dir, paste0(name, '.md'))
   writeLines(

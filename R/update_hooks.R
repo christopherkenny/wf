@@ -37,9 +37,13 @@ update_hooks <- function(path = NULL, settings = NULL) {
     add_hook(
       source = entry$source,
       event = entry$event,
+      hook = entry$hook,
+      matcher = entry$matcher,
       path = path,
       settings = settings,
-      overwrite = TRUE
+      overwrite = TRUE,
+      timeout = entry$timeout,
+      async = isTRUE(entry$async)
     )
   }
 

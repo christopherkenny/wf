@@ -5,7 +5,12 @@ test_that('add_hook installs a local script file', {
   tmp <- fs::path(tmp_root, 'hooks')
   settings_file <- fs::path(tmp_root, 'settings.json')
 
-  dest <- add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
+  dest <- add_hook(
+    src,
+    event = 'PreToolUse',
+    path = tmp,
+    settings = settings_file
+  )
 
   expect_true(fs::file_exists(dest))
 })
@@ -32,7 +37,7 @@ test_that('add_hook writes lock file entry', {
 
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
 
-  lock <- wf:::read_lock(tmp, 'hooks')
+  lock <- read_lock(tmp, 'hooks')
   name <- fs::path_ext_remove(fs::path_file(src))
   expect_false(is.null(lock[[name]]))
   expect_identical(lock[[name]]$event, 'PreToolUse')
@@ -64,11 +69,34 @@ test_that('add_hook overwrite = TRUE replaces existing', {
   add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
   dest <- add_hook(
     src,
-    event = 'PreToolUse', path = tmp,
-    settings = settings_file, overwrite = TRUE
+    event = 'PreToolUse',
+    path = tmp,
+    settings = settings_file,
+    overwrite = TRUE
   )
 
   expect_true(fs::file_exists(dest))
+})
+
+test_that('add_hook overwrite = TRUE replaces settings registration', {
+  src <- withr::local_tempfile(fileext = '.sh')
+  writeLines(c('#!/bin/bash', 'echo hello'), src)
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
+  settings_file <- fs::path(tmp_root, 'settings.json')
+
+  add_hook(src, event = 'PreToolUse', path = tmp, settings = settings_file)
+  add_hook(
+    src,
+    event = 'PreToolUse',
+    path = tmp,
+    settings = settings_file,
+    overwrite = TRUE
+  )
+
+  settings <- jsonlite::read_json(settings_file)
+  expect_identical(length(settings$hooks$PreToolUse), 1L)
+  expect_identical(length(settings$hooks$PreToolUse[[1]]$hooks), 1L)
 })
 
 test_that('add_hook errors on local source that does not exist', {
@@ -76,8 +104,10 @@ test_that('add_hook errors on local source that does not exist', {
   tmp <- fs::path(tmp_root, 'hooks')
   settings_file <- fs::path(tmp_root, 'settings.json')
   expect_snapshot(
-    add_hook('/no/such/hook.sh',
-      event = 'PreToolUse', path = tmp,
+    add_hook(
+      '/no/such/hook.sh',
+      event = 'PreToolUse',
+      path = tmp,
       settings = settings_file
     ),
     error = TRUE
@@ -113,11 +143,38 @@ test_that('add_hook with GitHub source uses gh_download mock', {
 
   add_hook(
     'owner/repo',
-    event = 'PreToolUse', hook = 'my-hook',
-    path = tmp, settings = settings_file
+    event = 'PreToolUse',
+    hook = 'my-hook',
+    path = tmp,
+    settings = settings_file
   )
 
-  lock <- wf:::read_lock(tmp, 'hooks')
+  lock <- read_lock(tmp, 'hooks')
   expect_false(is.null(lock[['my-hook']]))
   expect_identical(lock[['my-hook']]$sha, 'abc123')
+  expect_identical(lock[['my-hook']]$hook, 'my-hook')
+})
+
+test_that('add_hook records registration metadata in lock file', {
+  src <- withr::local_tempfile(fileext = '.sh')
+  writeLines(c('#!/bin/bash', 'echo hello'), src)
+  tmp_root <- withr::local_tempdir()
+  tmp <- fs::path(tmp_root, 'hooks')
+  settings_file <- fs::path(tmp_root, 'settings.json')
+
+  add_hook(
+    src,
+    event = 'PreToolUse',
+    matcher = 'Bash',
+    path = tmp,
+    settings = settings_file,
+    timeout = 30,
+    async = TRUE
+  )
+
+  lock <- read_lock(tmp, 'hooks')
+  name <- fs::path_ext_remove(fs::path_file(src))
+  expect_identical(lock[[name]]$matcher, 'Bash')
+  expect_identical(lock[[name]]$timeout, 30L)
+  expect_true(lock[[name]]$async)
 })

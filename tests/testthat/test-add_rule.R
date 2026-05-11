@@ -1,4 +1,8 @@
-make_fixture_rule <- function(dir, name = 'my-rule', description = 'A test rule.') {
+make_fixture_rule <- function(
+  dir,
+  name = 'my-rule',
+  description = 'A test rule.'
+) {
   fs::dir_create(dir)
   file <- fs::path(dir, paste0(name, '.md'))
   writeLines(

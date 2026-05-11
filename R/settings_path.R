@@ -27,7 +27,10 @@
 #' settings_path('claude_code', 'project')
 #' settings_path('claude', 'local') # alias for claude_code
 #' settings_path('cursor', 'global')
-settings_path <- function(agent = NULL, scope = c('project', 'local', 'global')) {
+settings_path <- function(
+  agent = NULL,
+  scope = c('project', 'local', 'global')
+) {
   scope <- rlang::arg_match(scope)
   resolve_hook_settings_path(NULL, agent, scope)
 }

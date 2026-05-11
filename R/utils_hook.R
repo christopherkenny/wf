@@ -5,10 +5,19 @@ hook_paths <- make_scope_paths('hooks')
 hook_lock_section <- 'hooks'
 
 hook_events <- c(
-  'PreToolUse', 'PostToolUse', 'UserPromptSubmit', 'Stop', 'SubagentStop'
+  'PreToolUse',
+  'PostToolUse',
+  'UserPromptSubmit',
+  'Stop',
+  'SubagentStop'
 )
 
-hook_topics <- c('claude-hook', 'cursor-hook', 'ai-coding-hook', 'claude-code-hook')
+hook_topics <- c(
+  'claude-hook',
+  'cursor-hook',
+  'ai-coding-hook',
+  'claude-code-hook'
+)
 
 # Resolve to a concrete settings.json path (supports project/local/global scope).
 resolve_hook_settings_path <- function(path, agent, scope) {
@@ -55,4 +64,46 @@ write_settings <- function(path, settings) {
   fs::dir_create(fs::path_dir(path), recurse = TRUE)
   jsonlite::write_json(settings, path, auto_unbox = TRUE, pretty = TRUE)
   invisible(path)
+}
+
+# Remove hook registrations for a command from settings.json.
+unregister_hook_command <- function(path, command, event = NULL) {
+  if (is.null(command)) {
+    return(invisible(FALSE))
+  }
+
+  settings <- read_settings(path)
+  if (is.null(settings$hooks) || length(settings$hooks) == 0) {
+    return(invisible(FALSE))
+  }
+
+  events <- event %||% names(settings$hooks)
+  changed <- FALSE
+
+  for (evt in events) {
+    groups <- settings$hooks[[evt]]
+    if (is.null(groups)) {
+      next
+    }
+
+    new_groups <- list()
+    for (group in groups) {
+      filtered <- Filter(\(h) !identical(h$command, command), group$hooks)
+      if (length(filtered) != length(group$hooks)) {
+        changed <- TRUE
+      }
+      if (length(filtered) > 0) {
+        group$hooks <- filtered
+        new_groups <- c(new_groups, list(group))
+      }
+    }
+
+    settings$hooks[[evt]] <- if (length(new_groups) == 0) NULL else new_groups
+  }
+
+  if (changed) {
+    write_settings(path, settings)
+  }
+
+  invisible(changed)
 }

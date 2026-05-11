@@ -112,21 +112,21 @@ test_that('add_skill accepts agent name shorthand as path', {
 })
 
 test_that('parse_gh_source extracts owner and repo from shorthand', {
-  result <- wf:::parse_gh_source('owner/repo')
+  result <- parse_gh_source('owner/repo')
   expect_identical(result$owner, 'owner')
   expect_identical(result$repo, 'repo')
   expect_null(result$path)
 })
 
 test_that('parse_gh_source extracts owner and repo from full URL', {
-  result <- wf:::parse_gh_source('https://github.com/owner/repo')
+  result <- parse_gh_source('https://github.com/owner/repo')
   expect_identical(result$owner, 'owner')
   expect_identical(result$repo, 'repo')
   expect_null(result$path)
 })
 
 test_that('parse_gh_source extracts path from subdirectory URL', {
-  result <- wf:::parse_gh_source(
+  result <- parse_gh_source(
     'https://github.com/owner/skills/tree/main/skills/proofread'
   )
   expect_identical(result$owner, 'owner')
@@ -135,12 +135,18 @@ test_that('parse_gh_source extracts path from subdirectory URL', {
 })
 
 test_that('parse_gh_source extracts path from direct repo URL with path', {
-  result <- wf:::parse_gh_source(
+  result <- parse_gh_source(
     'https://github.com/posit-dev/skills/r-lib/cran-extrachecks'
   )
   expect_identical(result$owner, 'posit-dev')
   expect_identical(result$repo, 'skills')
   expect_identical(result$path, 'r-lib/cran-extrachecks')
+})
+
+test_that('parse_source only treats GitHub URLs and shorthands as GitHub', {
+  expect_identical(parse_source('https://github.com/owner/repo'), 'github')
+  expect_identical(parse_source('owner/repo'), 'github')
+  expect_identical(parse_source('https://gitlab.com/owner/repo'), 'local')
 })
 
 test_that('add_skill skill arg resolves to skills/ subdirectory', {

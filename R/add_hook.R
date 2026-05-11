@@ -76,6 +76,8 @@ add_hook <- function(
   ext <- fs::path_ext(hook_file)
   dest_name <- if (nzchar(ext)) paste0(name, '.', ext) else name
   dest <- fs::path(path, dest_name)
+  settings_path <- settings %||% default_settings_for_hook_dir(path)
+  lock <- read_lock(path, hook_lock_section)
 
   if (fs::file_exists(dest)) {
     if (!overwrite) {
@@ -86,13 +88,15 @@ add_hook <- function(
         )
       )
     }
+    old_entry <- lock[[name]]
+    old_command <- old_entry$command %||% as.character(dest)
+    unregister_hook_command(settings_path, old_command, old_entry$event)
     fs::file_delete(dest)
   }
 
   fs::dir_create(path, recurse = TRUE)
   fs::file_copy(hook_file, dest)
 
-  settings_path <- settings %||% default_settings_for_hook_dir(path)
   register_hook(
     event = event,
     command = dest,
@@ -102,7 +106,6 @@ add_hook <- function(
     path = settings_path
   )
 
-  lock <- read_lock(path, hook_lock_section)
   entry <- list(
     source = lock_source,
     type = type,
@@ -112,6 +115,18 @@ add_hook <- function(
   )
   if (!is.null(sha)) {
     entry$sha <- sha
+  }
+  if (!is.null(hook)) {
+    entry$hook <- hook
+  }
+  if (!is.null(matcher)) {
+    entry$matcher <- matcher
+  }
+  if (!is.null(timeout)) {
+    entry$timeout <- timeout
+  }
+  if (isTRUE(async)) {
+    entry$async <- TRUE
   }
   lock[[name]] <- entry
   write_lock(path, lock, hook_lock_section)
@@ -133,9 +148,15 @@ find_hook_file <- function(repo_root, hook, gh_path) {
   }
 
   if (!is.null(hook)) {
-    matches <- fs::dir_ls(fs::path(repo_root, 'hooks'), glob = paste0('*/', hook, '.*'))
+    matches <- fs::dir_ls(
+      fs::path(repo_root, 'hooks'),
+      glob = paste0('*/', hook, '.*')
+    )
     if (length(matches) == 0) {
-      matches <- fs::dir_ls(fs::path(repo_root, 'hooks'), glob = paste0('*/', hook))
+      matches <- fs::dir_ls(
+        fs::path(repo_root, 'hooks'),
+        glob = paste0('*/', hook)
+      )
     }
     if (length(matches) > 0) {
       return(matches[[1]])

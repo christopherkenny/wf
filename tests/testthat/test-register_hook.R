@@ -16,7 +16,12 @@ test_that('register_hook respects matcher', {
   tmp <- withr::local_tempdir()
   settings_file <- fs::path(tmp, 'settings.json')
 
-  register_hook('PreToolUse', 'echo hello', matcher = 'Bash', path = settings_file)
+  register_hook(
+    'PreToolUse',
+    'echo hello',
+    matcher = 'Bash',
+    path = settings_file
+  )
 
   settings <- jsonlite::read_json(settings_file)
   expect_identical(settings$hooks$PreToolUse[[1]]$matcher, 'Bash')
@@ -26,8 +31,18 @@ test_that('register_hook appends to existing group with same matcher', {
   tmp <- withr::local_tempdir()
   settings_file <- fs::path(tmp, 'settings.json')
 
-  register_hook('PreToolUse', 'echo one', matcher = 'Bash', path = settings_file)
-  register_hook('PreToolUse', 'echo two', matcher = 'Bash', path = settings_file)
+  register_hook(
+    'PreToolUse',
+    'echo one',
+    matcher = 'Bash',
+    path = settings_file
+  )
+  register_hook(
+    'PreToolUse',
+    'echo two',
+    matcher = 'Bash',
+    path = settings_file
+  )
 
   settings <- jsonlite::read_json(settings_file)
   expect_identical(length(settings$hooks$PreToolUse), 1L)
@@ -38,8 +53,18 @@ test_that('register_hook creates new group for different matcher', {
   tmp <- withr::local_tempdir()
   settings_file <- fs::path(tmp, 'settings.json')
 
-  register_hook('PreToolUse', 'echo one', matcher = 'Bash', path = settings_file)
-  register_hook('PreToolUse', 'echo two', matcher = 'Edit', path = settings_file)
+  register_hook(
+    'PreToolUse',
+    'echo one',
+    matcher = 'Bash',
+    path = settings_file
+  )
+  register_hook(
+    'PreToolUse',
+    'echo two',
+    matcher = 'Edit',
+    path = settings_file
+  )
 
   settings <- jsonlite::read_json(settings_file)
   expect_identical(length(settings$hooks$PreToolUse), 2L)

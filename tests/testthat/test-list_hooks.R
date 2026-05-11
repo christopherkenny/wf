@@ -23,7 +23,12 @@ test_that('list_hooks includes matcher column', {
   tmp <- withr::local_tempdir()
   settings_file <- fs::path(tmp, 'settings.json')
 
-  register_hook('PreToolUse', 'echo hello', matcher = 'Bash', path = settings_file)
+  register_hook(
+    'PreToolUse',
+    'echo hello',
+    matcher = 'Bash',
+    path = settings_file
+  )
 
   result <- list_hooks(settings = settings_file)
   expect_identical(result$matcher[[1]], 'Bash')

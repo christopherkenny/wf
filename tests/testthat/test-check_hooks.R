@@ -2,7 +2,10 @@ test_that('check_hooks returns empty data frame for empty dir', {
   tmp_root <- withr::local_tempdir()
   result <- check_hooks(fs::path(tmp_root, 'hooks'))
   expect_s3_class(result, 'data.frame')
-  expect_named(result, c('name', 'installed_sha', 'latest_sha', 'update_available'))
+  expect_named(
+    result,
+    c('name', 'installed_sha', 'latest_sha', 'update_available')
+  )
   expect_identical(nrow(result), 0L)
 })
 

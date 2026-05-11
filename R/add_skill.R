@@ -40,7 +40,9 @@ add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
     skill_dir <- if (!is.null(gh$path)) {
       inner <- fs::path(repo_root, gh$path)
       if (!fs::dir_exists(inner)) {
-        cli::cli_abort('Path {.path {gh$path}} not found in {gh$owner}/{gh$repo}.')
+        cli::cli_abort(
+          'Path {.path {gh$path}} not found in {gh$owner}/{gh$repo}.'
+        )
       }
       inner
     } else {

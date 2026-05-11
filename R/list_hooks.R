@@ -68,13 +68,16 @@ list_hooks <- function(
         if (!is.na(cmd) && cmd %in% tracked_commands) {
           file_val <- cmd
         }
-        rows <- c(rows, list(data.frame(
-          event = event,
-          matcher = as.character(matcher_val),
-          command = cmd,
-          file = file_val,
-          stringsAsFactors = FALSE
-        )))
+        rows <- c(
+          rows,
+          list(data.frame(
+            event = event,
+            matcher = as.character(matcher_val),
+            command = cmd,
+            file = file_val,
+            stringsAsFactors = FALSE
+          ))
+        )
       }
     }
   }

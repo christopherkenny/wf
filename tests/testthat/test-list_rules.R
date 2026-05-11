@@ -10,7 +10,12 @@ test_that('list_rules returns one row per installed rule', {
   src <- withr::local_tempdir()
   for (nm in c('rule-a', 'rule-b')) {
     writeLines(
-      c('---', paste0('name: ', nm), paste0('description: Rule ', nm, '.'), '---'),
+      c(
+        '---',
+        paste0('name: ', nm),
+        paste0('description: Rule ', nm, '.'),
+        '---'
+      ),
       fs::path(src, paste0(nm, '.md'))
     )
     add_rule(fs::path(src, paste0(nm, '.md')), path = tmp)

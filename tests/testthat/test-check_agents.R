@@ -1,7 +1,10 @@
 test_that('check_agents returns empty data frame for empty directory', {
   result <- check_agents(tempfile())
   expect_s3_class(result, 'data.frame')
-  expect_named(result, c('name', 'installed_sha', 'latest_sha', 'update_available'))
+  expect_named(
+    result,
+    c('name', 'installed_sha', 'latest_sha', 'update_available')
+  )
   expect_identical(nrow(result), 0L)
 })
 

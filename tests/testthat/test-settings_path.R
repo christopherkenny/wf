@@ -1,5 +1,8 @@
 test_that('settings_path returns project settings path', {
-  expect_identical(settings_path('claude_code', 'project'), '.claude/settings.json')
+  expect_identical(
+    settings_path('claude_code', 'project'),
+    '.claude/settings.json'
+  )
   expect_identical(settings_path('cursor', 'project'), '.cursor/settings.json')
 })
 

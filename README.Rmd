@@ -35,7 +35,7 @@ Each type lives in a conventional directory (e.g. `.claude/skills/` for Claude C
 To install the stable version on CRAN:
 
 ```r
-install.package('wf')
+install.packages('wf')
 ```
 
 To install the development version:

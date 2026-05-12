@@ -69,5 +69,5 @@ writeLines(
   src
 )
 add_agent(src, path = tempfile())
-#> Installed agent "example" to /tmp/RtmpOtvgtC/file1aa54be07c29/example.md.
+#> Installed agent "example" to /tmp/RtmpT9tEjk/file19db32dc3a5d/example.md.
 ```

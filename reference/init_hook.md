@@ -47,7 +47,7 @@ The path to the new hook file, invisibly.
 
 ``` r
 init_hook('my-hook', tempfile())
-#> Created hook "my-hook" at /tmp/RtmpOtvgtC/file1aa52d999c1f/my-hook.sh.
+#> Created hook "my-hook" at /tmp/RtmpT9tEjk/file19db5be86bd2/my-hook.sh.
 #> ℹ Register it with `register_hook(event, command =
-#>   "/tmp/RtmpOtvgtC/file1aa52d999c1f/my-hook.sh")`
+#>   "/tmp/RtmpT9tEjk/file19db5be86bd2/my-hook.sh")`
 ```

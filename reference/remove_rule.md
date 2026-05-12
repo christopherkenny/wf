@@ -51,7 +51,7 @@ writeLines(
 )
 tmp <- tempfile()
 add_rule(src, path = tmp)
-#> Installed rule "example" to /tmp/RtmpOtvgtC/file1aa557f5ef6/example.md.
+#> Installed rule "example" to /tmp/RtmpT9tEjk/file19db5cc09fe1/example.md.
 remove_rule('example', tmp, force = TRUE)
-#> Removed rule "example" from /tmp/RtmpOtvgtC/file1aa557f5ef6.
+#> Removed rule "example" from /tmp/RtmpT9tEjk/file19db5cc09fe1.
 ```

@@ -19,7 +19,7 @@ To install the stable version on CRAN:
 
 ``` r
 
-install.package('wf')
+install.packages('wf')
 ```
 
 To install the development version:
@@ -115,9 +115,9 @@ check_skills()
 #>               name                            installed_sha
 #> 1 cran-extrachecks bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5
 #>                                 latest_sha update_available
-#> 1 bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5            FALSE
+#> 1 87093f6e8a2ad2aed15eda84f88ca01eedbcfd7a             TRUE
 update_skills()
-#> All skills are up to date.
+#> Installed skill "cran-extrachecks" to '.claude/skills/cran-extrachecks'.
 ```
 
 Search GitHub for community skills or scaffold a new one:
@@ -128,12 +128,12 @@ find_skill('quarto')
 #>     name                                  description            owner
 #> 1 skills [WIP] Claude Skills for Political Scientists christopherkenny
 #>                                          url stars
-#> 1 https://github.com/christopherkenny/skills     3
+#> 1 https://github.com/christopherkenny/skills     7
 
 tmp <- tempfile()
 init_skill('my-skill', tmp)
 #> Created skill "my-skill" at
-#> 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c824a4155b/my-skill'.
+#> 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c58d84d95/my-skill'.
 ```
 
 ## Agents
@@ -160,7 +160,7 @@ Create a local template to get started:
 tmp <- tempfile()
 init_agent('my-agent', tmp)
 #> Created agent "my-agent" at
-#> 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c84f5d7173/my-agent.md'.
+#> 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c5d4a7a/my-agent.md'.
 ```
 
 ## Rules
@@ -180,7 +180,7 @@ Create a local template:
 tmp <- tempfile()
 init_rule('my-rule', tmp)
 #> Created rule "my-rule" at
-#> 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c8416e70da/my-rule.md'.
+#> 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c28277af9/my-rule.md'.
 ```
 
 ## Hooks
@@ -212,9 +212,9 @@ list_hooks()
 tmp <- tempfile()
 init_hook('my-hook', tmp)
 #> Created hook "my-hook" at
-#> 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c866845bcc/my-hook.sh'.
+#> 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c102173a3/my-hook.sh'.
 #> ℹ Register it with `register_hook(event, command =
-#>   "C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c866845bcc/my-hook.sh")`
+#>   "C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c102173a3/my-hook.sh")`
 ```
 
 # Package index

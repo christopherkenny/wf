@@ -70,5 +70,5 @@ writeLines(
   src
 )
 add_rule(src, path = tempfile())
-#> Installed rule "example" to /tmp/RtmpOtvgtC/file1aa534ff6027/example.md.
+#> Installed rule "example" to /tmp/RtmpT9tEjk/file19db6df3eec3/example.md.
 ```

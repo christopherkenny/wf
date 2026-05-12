@@ -99,7 +99,7 @@
 </h2>
 <p>To install the stable version on CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.package</span><span class="op">(</span><span class="st">'wf'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'wf'</span><span class="op">)</span></span></code></pre></div>
 <p>To install the development version:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages('pak')</span></span>
@@ -161,21 +161,21 @@
 <span><span class="co">#&gt;               name                            installed_sha</span></span>
 <span><span class="co">#&gt; 1 cran-extrachecks bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5</span></span>
 <span><span class="co">#&gt;                                 latest_sha update_available</span></span>
-<span><span class="co">#&gt; 1 bf0fc0d480209a2f5f7fdf32eabb9c7546e53ee5            FALSE</span></span>
+<span><span class="co">#&gt; 1 87093f6e8a2ad2aed15eda84f88ca01eedbcfd7a             TRUE</span></span>
 <span><span class="fu"><a href="reference/update_skills.html">update_skills</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; All skills are up to date.</span></span></code></pre></div>
+<span><span class="co">#&gt; Installed skill "cran-extrachecks" to '.claude/skills/cran-extrachecks'.</span></span></code></pre></div>
 <p>Search GitHub for community skills or scaffold a new one:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/find_skill.html">find_skill</a></span><span class="op">(</span><span class="st">'quarto'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     name                                  description            owner</span></span>
 <span><span class="co">#&gt; 1 skills [WIP] Claude Skills for Political Scientists christopherkenny</span></span>
 <span><span class="co">#&gt;                                          url stars</span></span>
-<span><span class="co">#&gt; 1 https://github.com/christopherkenny/skills     3</span></span>
+<span><span class="co">#&gt; 1 https://github.com/christopherkenny/skills     7</span></span>
 <span></span>
 <span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/init_skill.html">init_skill</a></span><span class="op">(</span><span class="st">'my-skill'</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created skill "my-skill" at</span></span>
-<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c824a4155b/my-skill'.</span></span></code></pre></div>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c58d84d95/my-skill'.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="agents">Agents<a class="anchor" aria-label="anchor" href="#agents"></a>
@@ -191,7 +191,7 @@
 <code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/init_agent.html">init_agent</a></span><span class="op">(</span><span class="st">'my-agent'</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created agent "my-agent" at</span></span>
-<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c84f5d7173/my-agent.md'.</span></span></code></pre></div>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c5d4a7a/my-agent.md'.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="rules">Rules<a class="anchor" aria-label="anchor" href="#rules"></a>
@@ -204,7 +204,7 @@
 <code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/init_rule.html">init_rule</a></span><span class="op">(</span><span class="st">'my-rule'</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created rule "my-rule" at</span></span>
-<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c8416e70da/my-rule.md'.</span></span></code></pre></div>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c28277af9/my-rule.md'.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="hooks">Hooks<a class="anchor" aria-label="anchor" href="#hooks"></a>
@@ -224,9 +224,9 @@
 <span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/init_hook.html">init_hook</a></span><span class="op">(</span><span class="st">'my-hook'</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Created hook "my-hook" at</span></span>
-<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c866845bcc/my-hook.sh'.</span></span>
+<span><span class="co">#&gt; 'C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c102173a3/my-hook.sh'.</span></span>
 <span><span class="co">#&gt; ℹ Register it with `register_hook(event, command =</span></span>
-<span><span class="co">#&gt;   "C:/Users/chris/AppData/Local/Temp/RtmpScozzt/file39c866845bcc/my-hook.sh")`</span></span></code></pre></div>
+<span><span class="co">#&gt;   "C:/Users/chris/AppData/Local/Temp/RtmpwJJUid/file2c0c102173a3/my-hook.sh")`</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

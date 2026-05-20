@@ -143,6 +143,31 @@ test_that('parse_gh_source extracts path from direct repo URL with path', {
   expect_identical(result$path, 'r-lib/cran-extrachecks')
 })
 
+test_that('parse_gh_source extracts path from blob URL, stripping filename', {
+  result <- parse_gh_source(
+    'https://github.com/posit-dev/skills/blob/main/r-lib/mirai/SKILL.md'
+  )
+  expect_identical(result$owner, 'posit-dev')
+  expect_identical(result$repo, 'skills')
+  expect_identical(result$path, 'r-lib/mirai')
+})
+
+test_that('parse_gh_source strips filename from tree URL', {
+  result <- parse_gh_source(
+    'https://github.com/owner/repo/tree/main/some/path/SKILL.md'
+  )
+  expect_identical(result$path, 'some/path')
+})
+
+test_that('parse_gh_source returns NULL path for blob URL pointing to repo root file', {
+  result <- parse_gh_source(
+    'https://github.com/owner/repo/blob/main/SKILL.md'
+  )
+  expect_identical(result$owner, 'owner')
+  expect_identical(result$repo, 'repo')
+  expect_null(result$path)
+})
+
 test_that('parse_source only treats GitHub URLs and shorthands as GitHub', {
   expect_identical(parse_source('https://github.com/owner/repo'), 'github')
   expect_identical(parse_source('owner/repo'), 'github')

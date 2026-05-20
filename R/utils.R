@@ -130,15 +130,22 @@ parse_source <- function(source) {
 #   "https://github.com/owner/repo"
 #   "https://github.com/owner/repo.git"
 #   "https://github.com/owner/repo/tree/branch/path/to/item"
+#   "https://github.com/owner/repo/blob/branch/path/to/SKILL.md"
 parse_gh_source <- function(source) {
   source <- sub('\\.git$', '', source)
   if (grepl('^https?://github\\.com/', source)) {
     parts <- strsplit(sub('^https?://github\\.com/', '', source), '/')[[1]]
     owner <- parts[[1]]
     repo <- parts[[2]]
-    # /tree/{branch}/{path...} -> extract path
-    if (length(parts) >= 5 && parts[[3]] == 'tree') {
-      path <- paste(parts[5:length(parts)], collapse = '/')
+    # /tree/{branch}/{path...} or /blob/{branch}/{path...} -> extract path
+    if (length(parts) >= 5 && parts[[3]] %in% c('tree', 'blob')) {
+      path_parts <- parts[5:length(parts)]
+      # Strip trailing filename (e.g. SKILL.md, AGENT.md)
+      last <- path_parts[length(path_parts)]
+      if (length(path_parts) > 0 && grepl('\\.', last)) {
+        path_parts <- path_parts[-length(path_parts)]
+      }
+      path <- if (length(path_parts) > 0) paste(path_parts, collapse = '/') else NULL
     } else if (length(parts) > 2) {
       path <- paste(parts[3:length(parts)], collapse = '/')
     } else {

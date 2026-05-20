@@ -27,11 +27,18 @@ add_skill(source, skill = NULL, path = NULL, overwrite = FALSE)
 
 - skill:
 
-  For multi-skill repositories that store skills under a `skills/`
-  subdirectory, the name of the skill to install, e.g.
-  `skill = "proofread"`. When supplied, the skill is read from
-  `skills/<skill>` within the repository. Ignored when `source` already
-  points to a specific subdirectory via `/tree/...`.
+  The skill to install. One of:
+
+  - A bare skill name, e.g. `"proofread"`. The skill is read from
+    `skills/<skill>` within the repository.
+
+  - A path to the skill directory, e.g. `"r-lib/mirai"` or
+    `"r-lib/mirai/"`. Used directly as the subdirectory path.
+
+  - A path to the `SKILL.md` file, e.g. `"r-lib/mirai/SKILL.md"`. The
+    filename is stripped and the containing directory is used. Ignored
+    when `source` already points to a specific subdirectory via
+    `/tree/...` or `/blob/...`.
 
 - path:
 
@@ -69,5 +76,5 @@ writeLines(
   file.path(src, 'SKILL.md')
 )
 add_skill(src, path = tempfile())
-#> Installed skill "example" to /tmp/Rtmpm4323o/file197b27312454/example.
+#> Installed skill "example" to /tmp/Rtmplehrfy/file196d3ad8c1eb/example.
 ```

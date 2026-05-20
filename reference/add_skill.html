@@ -58,11 +58,15 @@ directory.</p>
 
 
 <dt id="arg-skill">skill<a class="anchor" aria-label="anchor" href="#arg-skill"></a></dt>
-<dd><p>For multi-skill repositories that store skills under a
-<code>skills/</code> subdirectory, the name of the skill to install, e.g.
-<code>skill = "proofread"</code>. When supplied, the skill is read from
-<code>skills/&lt;skill&gt;</code> within the repository. Ignored when <code>source</code> already
-points to a specific subdirectory via <code>/tree/...</code>.</p></dd>
+<dd><p>The skill to install. One of:</p><ul><li><p>A bare skill name, e.g. <code>"proofread"</code>. The skill is read from
+<code>skills/&lt;skill&gt;</code> within the repository.</p></li>
+<li><p>A path to the skill directory, e.g. <code>"r-lib/mirai"</code> or
+<code>"r-lib/mirai/"</code>. Used directly as the subdirectory path.</p></li>
+<li><p>A path to the <code>SKILL.md</code> file, e.g. <code>"r-lib/mirai/SKILL.md"</code>. The
+filename is stripped and the containing directory is used.
+Ignored when <code>source</code> already points to a specific subdirectory via
+<code>/tree/...</code> or <code>/blob/...</code>.</p></li>
+</ul></dd>
 
 
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
@@ -95,7 +99,7 @@ sessions. Set <code>WF_AGENT</code> in your <code>.Renviron</code> (e.g. with
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">src</span>, <span class="st">'SKILL.md'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">add_skill</span><span class="op">(</span><span class="va">src</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed skill <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/Rtmpm4323o/file197b27312454/example</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed skill <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/Rtmplehrfy/file196d3ad8c1eb/example</span>.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

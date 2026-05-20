@@ -29,11 +29,15 @@ add_rule(source, rule = NULL, path = NULL, overwrite = FALSE)
 
 - rule:
 
-  For multi-rule repositories that store rules under a `rules/`
-  subdirectory, the name of the rule to install (without the `.md`
-  extension), e.g. `rule = "testing"`. When supplied, the rule is read
-  from `rules/<rule>.md` within the repository. Ignored when `source`
-  already points to a specific path via `/tree/...`.
+  The rule to install. One of:
+
+  - A bare rule name (without `.md`), e.g. `"testing"`. The rule is read
+    from `rules/<rule>.md` within the repository.
+
+  - A path to the rule file, e.g. `"r-lib/testing/testing.md"` or
+    `"r-lib/testing/"`. Used directly as the path within the repository.
+    Ignored when `source` already points to a specific path via
+    `/tree/...` or `/blob/...`.
 
 - path:
 
@@ -70,5 +74,5 @@ writeLines(
   src
 )
 add_rule(src, path = tempfile())
-#> Installed rule "example" to /tmp/Rtmpm4323o/file197b411680e2/example.md.
+#> Installed rule "example" to /tmp/Rtmplehrfy/file196d31038873/example.md.
 ```

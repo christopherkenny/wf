@@ -61,11 +61,13 @@ specifying at minimum a <code>name</code> and <code>description</code>.</p>
 
 
 <dt id="arg-agent">agent<a class="anchor" aria-label="anchor" href="#arg-agent"></a></dt>
-<dd><p>For multi-agent repositories that store agents under an
-<code>agents/</code> subdirectory, the name of the agent to install (without the
-<code>.md</code> extension), e.g. <code>agent = "code-reviewer"</code>. When supplied, the
-agent is read from <code>agents/&lt;agent&gt;.md</code> within the repository. Ignored
-when <code>source</code> already points to a specific path via <code>/tree/...</code>.</p></dd>
+<dd><p>The agent to install. One of:</p><ul><li><p>A bare agent name (without <code>.md</code>), e.g. <code>"code-reviewer"</code>. The agent
+is read from <code>agents/&lt;agent&gt;.md</code> within the repository.</p></li>
+<li><p>A path to the agent file, e.g. <code>"r-lib/mirai/AGENT.md"</code> or
+<code>"r-lib/mirai/"</code>. Used directly as the path within the repository.
+Ignored when <code>source</code> already points to a specific path via <code>/tree/...</code>
+or <code>/blob/...</code>.</p></li>
+</ul></dd>
 
 
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
@@ -97,7 +99,7 @@ sessions. Set <code>WF_AGENT</code> in your <code>.Renviron</code> (e.g. with
 <span class="r-in"><span>  <span class="va">src</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">add_agent</span><span class="op">(</span><span class="va">src</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed agent <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/Rtmpm4323o/file197b763e09b4/example.md</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed agent <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/Rtmplehrfy/file196d52a3ff90/example.md</span>.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

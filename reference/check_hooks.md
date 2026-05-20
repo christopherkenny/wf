@@ -46,5 +46,5 @@ A data frame with columns:
 ``` r
 check_hooks(tempfile())
 #>               name installed_sha latest_sha update_available
-#> 1 file197b6cb41a60          <NA>       <NA>            FALSE
+#> 1 file196d36ada25b          <NA>       <NA>            FALSE
 ```

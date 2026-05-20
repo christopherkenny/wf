@@ -28,11 +28,15 @@ add_agent(source, agent = NULL, path = NULL, overwrite = FALSE)
 
 - agent:
 
-  For multi-agent repositories that store agents under an `agents/`
-  subdirectory, the name of the agent to install (without the `.md`
-  extension), e.g. `agent = "code-reviewer"`. When supplied, the agent
-  is read from `agents/<agent>.md` within the repository. Ignored when
-  `source` already points to a specific path via `/tree/...`.
+  The agent to install. One of:
+
+  - A bare agent name (without `.md`), e.g. `"code-reviewer"`. The agent
+    is read from `agents/<agent>.md` within the repository.
+
+  - A path to the agent file, e.g. `"r-lib/mirai/AGENT.md"` or
+    `"r-lib/mirai/"`. Used directly as the path within the repository.
+    Ignored when `source` already points to a specific path via
+    `/tree/...` or `/blob/...`.
 
 - path:
 
@@ -69,5 +73,5 @@ writeLines(
   src
 )
 add_agent(src, path = tempfile())
-#> Installed agent "example" to /tmp/Rtmpm4323o/file197b763e09b4/example.md.
+#> Installed agent "example" to /tmp/Rtmplehrfy/file196d52a3ff90/example.md.
 ```

@@ -64,11 +64,13 @@ filename stem.</p>
 
 
 <dt id="arg-rule">rule<a class="anchor" aria-label="anchor" href="#arg-rule"></a></dt>
-<dd><p>For multi-rule repositories that store rules under a <code>rules/</code>
-subdirectory, the name of the rule to install (without the <code>.md</code>
-extension), e.g. <code>rule = "testing"</code>. When supplied, the rule is read
-from <code>rules/&lt;rule&gt;.md</code> within the repository. Ignored when <code>source</code>
-already points to a specific path via <code>/tree/...</code>.</p></dd>
+<dd><p>The rule to install. One of:</p><ul><li><p>A bare rule name (without <code>.md</code>), e.g. <code>"testing"</code>. The rule is read
+from <code>rules/&lt;rule&gt;.md</code> within the repository.</p></li>
+<li><p>A path to the rule file, e.g. <code>"r-lib/testing/testing.md"</code> or
+<code>"r-lib/testing/"</code>. Used directly as the path within the repository.
+Ignored when <code>source</code> already points to a specific path via <code>/tree/...</code>
+or <code>/blob/...</code>.</p></li>
+</ul></dd>
 
 
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
@@ -100,7 +102,7 @@ sessions. Set <code>WF_AGENT</code> in your <code>.Renviron</code> (e.g. with
 <span class="r-in"><span>  <span class="va">src</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">add_rule</span><span class="op">(</span><span class="va">src</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed rule <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/Rtmpm4323o/file197b411680e2/example.md</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Installed rule <span style="color: #0000BB;">"example"</span> to <span style="color: #0000BB;">/tmp/Rtmplehrfy/file196d31038873/example.md</span>.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

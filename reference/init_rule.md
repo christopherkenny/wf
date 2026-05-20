@@ -42,5 +42,5 @@ The path to the new rule file, invisibly.
 
 ``` r
 init_rule('my-rule', tempfile())
-#> Created rule "my-rule" at /tmp/Rtmpm4323o/file197b3fb2362b/my-rule.md.
+#> Created rule "my-rule" at /tmp/Rtmplehrfy/file196d51e36239/my-rule.md.
 ```

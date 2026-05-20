@@ -51,7 +51,7 @@ writeLines(
 )
 tmp <- tempfile()
 add_agent(src, path = tmp)
-#> Installed agent "example" to /tmp/RtmpT9tEjk/file19db1705ee3/example.md.
+#> Installed agent "example" to /tmp/Rtmpm4323o/file197b76dd514d/example.md.
 remove_agent('example', tmp, force = TRUE)
-#> Removed agent "example" from /tmp/RtmpT9tEjk/file19db1705ee3.
+#> Removed agent "example" from /tmp/Rtmpm4323o/file197b76dd514d.
 ```

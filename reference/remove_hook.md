@@ -59,11 +59,11 @@ add_hook(tmp_hook,
   event = 'PreToolUse', path = tmp_dir,
   settings = tmp_settings
 )
-#> Registered PreToolUse hook in /tmp/RtmpT9tEjk/file19db41035bc0.json.
-#> Installed hook "file19db6c74ccaf" to
-#> /tmp/RtmpT9tEjk/file19db4e0221ff/file19db6c74ccaf.sh.
+#> Registered PreToolUse hook in /tmp/Rtmpm4323o/file197b54fabb91.json.
+#> Installed hook "file197b12c31e59" to
+#> /tmp/Rtmpm4323o/file197b784ee103/file197b12c31e59.sh.
 remove_hook(fs::path_ext_remove(basename(tmp_hook)), tmp_dir,
   settings = tmp_settings, force = TRUE
 )
-#> Removed hook "file19db6c74ccaf" from /tmp/RtmpT9tEjk/file19db4e0221ff.
+#> Removed hook "file197b12c31e59" from /tmp/Rtmpm4323o/file197b784ee103.
 ```

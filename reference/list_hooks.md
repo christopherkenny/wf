@@ -62,7 +62,7 @@ A data frame with columns:
 ``` r
 tmp <- tempfile(fileext = '.json')
 register_hook('PreToolUse', 'echo hello', path = tmp)
-#> Registered PreToolUse hook in /tmp/RtmpT9tEjk/file19db292b14c3.json.
+#> Registered PreToolUse hook in /tmp/Rtmpm4323o/file197b7b03d6a6.json.
 list_hooks(settings = tmp)
 #>        event matcher    command file
 #> 1 PreToolUse    <NA> echo hello <NA>

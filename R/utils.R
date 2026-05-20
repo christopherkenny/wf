@@ -113,6 +113,24 @@ resolve_path <- function(path, paths, type) {
   )
 }
 
+# Normalize a user-supplied path hint for a GitHub sub-item.
+# If hint contains '/', treat as a direct path (strip trailing slashes and,
+# when strip_filename = TRUE, any trailing filename component). Returns the
+# normalized path, or NULL if hint is a bare name (no '/').
+normalize_item_path <- function(hint, strip_filename = FALSE) {
+  if (!grepl('/', hint)) {
+    return(NULL)
+  }
+  hint <- sub('/+$', '', hint)
+  if (strip_filename) {
+    last <- sub('.*/([^/]*)$', '\\1', hint)
+    if (grepl('\\.', last)) {
+      hint <- sub('/[^/]+$', '', hint)
+    }
+  }
+  hint
+}
+
 # Classify a source as "github" or "local"
 parse_source <- function(source) {
   if (grepl('^https?://github\\.com/', source)) {

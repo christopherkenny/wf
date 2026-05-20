@@ -16,11 +16,15 @@ add_rule(source, rule = NULL, path = NULL, overwrite = FALSE)
 \item A local file path pointing to a Markdown file.
 }}
 
-\item{rule}{For multi-rule repositories that store rules under a \verb{rules/}
-subdirectory, the name of the rule to install (without the \code{.md}
-extension), e.g. \code{rule = "testing"}. When supplied, the rule is read
-from \verb{rules/<rule>.md} within the repository. Ignored when \code{source}
-already points to a specific path via \verb{/tree/...}.}
+\item{rule}{The rule to install. One of:
+\itemize{
+\item A bare rule name (without \code{.md}), e.g. \code{"testing"}. The rule is read
+from \verb{rules/<rule>.md} within the repository.
+\item A path to the rule file, e.g. \code{"r-lib/testing/testing.md"} or
+\code{"r-lib/testing/"}. Used directly as the path within the repository.
+Ignored when \code{source} already points to a specific path via \verb{/tree/...}
+or \verb{/blob/...}.
+}}
 
 \item{path}{The rules directory. Can be one of:
 \itemize{

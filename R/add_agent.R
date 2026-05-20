@@ -10,11 +10,13 @@
 #'     `"https://github.com/owner/repo/tree/main/path/to/agent.md"`.
 #'   - A GitHub shorthand, e.g. `"owner/repo"`.
 #'   - A local file path pointing to a Markdown file.
-#' @param agent For multi-agent repositories that store agents under an
-#'   `agents/` subdirectory, the name of the agent to install (without the
-#'   `.md` extension), e.g. `agent = "code-reviewer"`. When supplied, the
-#'   agent is read from `agents/<agent>.md` within the repository. Ignored
-#'   when `source` already points to a specific path via `/tree/...`.
+#' @param agent The agent to install. One of:
+#'   - A bare agent name (without `.md`), e.g. `"code-reviewer"`. The agent
+#'     is read from `agents/<agent>.md` within the repository.
+#'   - A path to the agent file, e.g. `"r-lib/mirai/AGENT.md"` or
+#'     `"r-lib/mirai/"`. Used directly as the path within the repository.
+#'   Ignored when `source` already points to a specific path via `/tree/...`
+#'   or `/blob/...`.
 #' @param path `r roxy_path('agent', 'agent_path')`
 #' @param overwrite `r roxy_overwrite('agent')`
 #'
@@ -34,7 +36,8 @@ add_agent <- function(source, agent = NULL, path = NULL, overwrite = FALSE) {
   if (type == 'github') {
     gh <- parse_gh_source(source)
     if (!is.null(agent) && is.null(gh$path)) {
-      gh$path <- paste0('agents/', agent, '.md')
+      normalized <- normalize_item_path(agent, strip_filename = FALSE)
+      gh$path <- normalized %||% paste0('agents/', agent, '.md')
     }
     repo_root <- gh_download(gh$owner, gh$repo)
     agent_file <- if (!is.null(gh$path)) {

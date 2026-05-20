@@ -11,11 +11,13 @@
 #'     `"https://github.com/owner/repo/tree/main/path/to/rule.md"`.
 #'   - A GitHub shorthand, e.g. `"owner/repo"`.
 #'   - A local file path pointing to a Markdown file.
-#' @param rule For multi-rule repositories that store rules under a `rules/`
-#'   subdirectory, the name of the rule to install (without the `.md`
-#'   extension), e.g. `rule = "testing"`. When supplied, the rule is read
-#'   from `rules/<rule>.md` within the repository. Ignored when `source`
-#'   already points to a specific path via `/tree/...`.
+#' @param rule The rule to install. One of:
+#'   - A bare rule name (without `.md`), e.g. `"testing"`. The rule is read
+#'     from `rules/<rule>.md` within the repository.
+#'   - A path to the rule file, e.g. `"r-lib/testing/testing.md"` or
+#'     `"r-lib/testing/"`. Used directly as the path within the repository.
+#'   Ignored when `source` already points to a specific path via `/tree/...`
+#'   or `/blob/...`.
 #' @param path `r roxy_path('rule', 'rule_path')`
 #' @param overwrite `r roxy_overwrite('rule')`
 #'
@@ -35,7 +37,8 @@ add_rule <- function(source, rule = NULL, path = NULL, overwrite = FALSE) {
   if (type == 'github') {
     gh <- parse_gh_source(source)
     if (!is.null(rule) && is.null(gh$path)) {
-      gh$path <- paste0('rules/', rule, '.md')
+      normalized <- normalize_item_path(rule, strip_filename = FALSE)
+      gh$path <- normalized %||% paste0('rules/', rule, '.md')
     }
     repo_root <- gh_download(gh$owner, gh$repo)
     rule_file <- if (!is.null(gh$path)) {

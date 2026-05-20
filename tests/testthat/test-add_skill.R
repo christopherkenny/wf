@@ -168,6 +168,59 @@ test_that('parse_gh_source returns NULL path for blob URL pointing to repo root 
   expect_null(result$path)
 })
 
+test_that('normalize_item_path returns NULL for bare names', {
+  expect_null(normalize_item_path('proofread'))
+  expect_null(normalize_item_path('my-skill'))
+})
+
+test_that('normalize_item_path strips trailing slash from path', {
+  expect_identical(normalize_item_path('r-lib/mirai/'), 'r-lib/mirai')
+})
+
+test_that('normalize_item_path strips filename when strip_filename = TRUE', {
+  expect_identical(
+    normalize_item_path('r-lib/mirai/SKILL.md', strip_filename = TRUE),
+    'r-lib/mirai'
+  )
+})
+
+test_that('normalize_item_path keeps filename when strip_filename = FALSE', {
+  expect_identical(
+    normalize_item_path('r-lib/mirai/AGENT.md', strip_filename = FALSE),
+    'r-lib/mirai/AGENT.md'
+  )
+})
+
+test_that('add_skill skill arg accepts a SKILL.md file path', {
+  tmp <- withr::local_tempdir()
+  src <- withr::local_tempdir()
+  make_fixture_skill(fs::path(src, 'r-lib'))
+  dest_dir <- fs::path(tmp, 'skills')
+
+  local_mocked_bindings(
+    gh_download = function(owner, repo) src,
+    gh_latest_sha = function(owner, repo) 'abc123'
+  )
+
+  add_skill('owner/repo', skill = 'r-lib/my-skill/SKILL.md', path = dest_dir)
+  expect_true(fs::dir_exists(fs::path(dest_dir, 'my-skill')))
+})
+
+test_that('add_skill skill arg accepts a directory path with trailing slash', {
+  tmp <- withr::local_tempdir()
+  src <- withr::local_tempdir()
+  make_fixture_skill(fs::path(src, 'r-lib'))
+  dest_dir <- fs::path(tmp, 'skills')
+
+  local_mocked_bindings(
+    gh_download = function(owner, repo) src,
+    gh_latest_sha = function(owner, repo) 'abc123'
+  )
+
+  add_skill('owner/repo', skill = 'r-lib/my-skill/', path = dest_dir)
+  expect_true(fs::dir_exists(fs::path(dest_dir, 'my-skill')))
+})
+
 test_that('parse_source only treats GitHub URLs and shorthands as GitHub', {
   expect_identical(parse_source('https://github.com/owner/repo'), 'github')
   expect_identical(parse_source('owner/repo'), 'github')

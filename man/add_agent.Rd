@@ -16,11 +16,15 @@ add_agent(source, agent = NULL, path = NULL, overwrite = FALSE)
 \item A local file path pointing to a Markdown file.
 }}
 
-\item{agent}{For multi-agent repositories that store agents under an
-\verb{agents/} subdirectory, the name of the agent to install (without the
-\code{.md} extension), e.g. \code{agent = "code-reviewer"}. When supplied, the
-agent is read from \verb{agents/<agent>.md} within the repository. Ignored
-when \code{source} already points to a specific path via \verb{/tree/...}.}
+\item{agent}{The agent to install. One of:
+\itemize{
+\item A bare agent name (without \code{.md}), e.g. \code{"code-reviewer"}. The agent
+is read from \verb{agents/<agent>.md} within the repository.
+\item A path to the agent file, e.g. \code{"r-lib/mirai/AGENT.md"} or
+\code{"r-lib/mirai/"}. Used directly as the path within the repository.
+Ignored when \code{source} already points to a specific path via \verb{/tree/...}
+or \verb{/blob/...}.
+}}
 
 \item{path}{The agents directory. Can be one of:
 \itemize{

@@ -16,11 +16,17 @@ add_skill(source, skill = NULL, path = NULL, overwrite = FALSE)
 \item A local directory path containing a \code{SKILL.md} file.
 }}
 
-\item{skill}{For multi-skill repositories that store skills under a
-\verb{skills/} subdirectory, the name of the skill to install, e.g.
-\code{skill = "proofread"}. When supplied, the skill is read from
-\verb{skills/<skill>} within the repository. Ignored when \code{source} already
-points to a specific subdirectory via \verb{/tree/...}.}
+\item{skill}{The skill to install. One of:
+\itemize{
+\item A bare skill name, e.g. \code{"proofread"}. The skill is read from
+\verb{skills/<skill>} within the repository.
+\item A path to the skill directory, e.g. \code{"r-lib/mirai"} or
+\code{"r-lib/mirai/"}. Used directly as the subdirectory path.
+\item A path to the \code{SKILL.md} file, e.g. \code{"r-lib/mirai/SKILL.md"}. The
+filename is stripped and the containing directory is used.
+Ignored when \code{source} already points to a specific subdirectory via
+\verb{/tree/...} or \verb{/blob/...}.
+}}
 
 \item{path}{The skills directory. Can be one of:
 \itemize{

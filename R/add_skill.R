@@ -9,11 +9,15 @@
 #'     `"https://github.com/owner/repo/tree/main/path/to/skill"`.
 #'   - A GitHub shorthand, e.g. `"owner/repo"`.
 #'   - A local directory path containing a `SKILL.md` file.
-#' @param skill For multi-skill repositories that store skills under a
-#'   `skills/` subdirectory, the name of the skill to install, e.g.
-#'   `skill = "proofread"`. When supplied, the skill is read from
-#'   `skills/<skill>` within the repository. Ignored when `source` already
-#'   points to a specific subdirectory via `/tree/...`.
+#' @param skill The skill to install. One of:
+#'   - A bare skill name, e.g. `"proofread"`. The skill is read from
+#'     `skills/<skill>` within the repository.
+#'   - A path to the skill directory, e.g. `"r-lib/mirai"` or
+#'     `"r-lib/mirai/"`. Used directly as the subdirectory path.
+#'   - A path to the `SKILL.md` file, e.g. `"r-lib/mirai/SKILL.md"`. The
+#'     filename is stripped and the containing directory is used.
+#'   Ignored when `source` already points to a specific subdirectory via
+#'   `/tree/...` or `/blob/...`.
 #' @param path `r roxy_path('skill', 'skill_path')`
 #' @param overwrite `r roxy_overwrite('skill')`
 #'
@@ -34,7 +38,8 @@ add_skill <- function(source, skill = NULL, path = NULL, overwrite = FALSE) {
   if (type == 'github') {
     gh <- parse_gh_source(source)
     if (!is.null(skill) && is.null(gh$path)) {
-      gh$path <- paste0('skills/', skill)
+      normalized <- normalize_item_path(skill, strip_filename = TRUE)
+      gh$path <- normalized %||% paste0('skills/', skill)
     }
     repo_root <- gh_download(gh$owner, gh$repo)
     skill_dir <- if (!is.null(gh$path)) {
